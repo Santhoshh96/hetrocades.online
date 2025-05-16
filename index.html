@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hetrocades - We Are Your Best Solution</title>
   <style>
-    /* Reset & basic */
     * {
       box-sizing: border-box;
       margin: 0; padding: 0;
@@ -43,6 +42,10 @@
       margin-left: 1.5rem;
       font-weight: 600;
       font-size: 1rem;
+      color: white;
+    }
+    nav a:hover {
+      text-decoration: underline;
     }
     nav a:first-child {
       margin-left: 0;
@@ -62,6 +65,7 @@
     }
     section {
       margin-bottom: 3rem;
+      padding: 1rem;
     }
     h2.section-title {
       font-size: 1.6rem;
@@ -71,16 +75,32 @@
       display: inline-block;
       padding-bottom: 0.25rem;
     }
+    h3.sub-service-title {
+      font-size: 1.3rem;
+      color: #1565c0;
+      margin: 1.5rem 0 0.5rem 0;
+    }
     ul.services-list {
       list-style-type: disc;
-      padding-left: 1.2rem;
-      max-width: 600px;
-      margin: 0 auto;
+      padding-left: 1.5rem;
       font-size: 1.1rem;
       color: #333;
     }
     ul.services-list li {
       margin-bottom: 0.7rem;
+    }
+    .service-category {
+      background: #e3f2fd;
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 1.5rem;
+    }
+    .service-highlight {
+      background: #e8f5e9;
+      padding: 15px;
+      border-left: 4px solid #2e7d32;
+      margin: 10px 0;
+      font-style: italic;
     }
     .contact-info {
       max-width: 600px;
@@ -99,7 +119,9 @@
       padding: 1rem 2rem;
       font-size: 0.9rem;
     }
-    /* Responsive */
+    html {
+      scroll-behavior: smooth;
+    }
     @media (max-width: 600px) {
       header {
         justify-content: center;
@@ -125,39 +147,122 @@
 <header>
   <h1>Hetrocades</h1>
   <nav>
-    <a href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-    <a href="#">Blog</a>
-    <a href="#">Shop</a>
-    <a href="#">Login</a>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="#blog">Blog</a>
+    <a href="#shop">Shop</a>
+    <a href="#login">Login</a>
   </nav>
 </header>
 
 <main>
-  <div class="tagline">We Are Your Best Solution</div>
-
-  <section>
-    <h2 class="section-title">Industrial Compliances</h2>
-    <ul class="services-list">
-      <li>EPFO Registrations</li>
-      <li>DSC (Digital Signature Certificates)</li>
-      <li>eSign Activation</li>
-      <li>Professional Tax (PT) Law</li>
-      <li>Gratuity Law</li>
-      <li>Employee State Insurance (ESI)</li>
-      <li>CLRA (Contract Labour Regulation & Abolition Act)</li>
-      <li>Shops & Establishment (S&E)</li>
-      <li>Payroll Processing</li>
-      <li>All Industrial Relations & Labour Law Compliances</li>
-    </ul>
+  <section id="home">
+    <div class="tagline">We Are Your Best Solution</div>
   </section>
 
-  <section>
+  <section id="services">
+    <h2 class="section-title">Our Services</h2>
+    
+    <!-- Labour & Industrial Law -->
+    <div class="service-category">
+      <h3 class="sub-service-title">Labour & Industrial Law Services</h3>
+      <ul class="services-list">
+        <li>EPFO Registrations</li>
+        <li>DSC (Digital Signature Certificates)</li>
+        <li>eSign Activation</li>
+        <li>Professional Tax (PT) Law</li>
+        <li>Gratuity Law</li>
+        <li>Employee State Insurance (ESI)</li>
+        <li>CLRA (Contract Labour Regulation & Abolition Act)</li>
+        <li>Shops & Establishment (S&E)</li>
+        <li>Payroll Processing</li>
+        <li>All Industrial Relations & Labour Law Compliances</li>
+      </ul>
+    </div>
+
+    <!-- Interior Design Services -->
+    <div class="service-category">
+      <h3 class="sub-service-title">Interior Design Services</h3>
+      <ul class="services-list">
+        <li>Residential Space Planning</li>
+        <li>Commercial Interior Design</li>
+        <li>3D Visualization</li>
+        <li>Material Selection Assistance</li>
+        <li>Project Management</li>
+      </ul>
+      <div class="service-highlight">
+        Complete turnkey solutions from concept to execution
+      </div>
+    </div>
+
+    <!-- Investment Advisory -->
+    <div class="service-category">
+      <h3 class="sub-service-title">Investment Advisory Services</h3>
+      <ul class="services-list">
+        <li>SEBI Registered Investment Advice</li>
+        <li>Portfolio Management</li>
+        <li>Retirement Planning</li>
+        <li>Tax-Saving Investment Strategies</li>
+        <li>Wealth Management</li>
+      </ul>
+      <div class="service-highlight">
+        Certified SEBI Advisor for personalized financial solutions
+      </div>
+    </div>
+
+    <!-- Bank Loan Assistance -->
+    <div class="service-category">
+      <h3 class="sub-service-title">Bank Loan Assistance</h3>
+      <ul class="services-list">
+        <li>Home Loan Processing</li>
+        <li>Business Loan Facilitation</li>
+        <li>Documentation Assistance</li>
+        <li>Loan Eligibility Assessment</li>
+        <li>Quick Approval Process</li>
+      </ul>
+      <div class="service-highlight">
+        Fast-track processing with 90%+ approval rate
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 class="section-title">About Us</h2>
+    <p>Hetrocades is a professional services firm specializing in industrial compliance, financial advisory, and business support services. Our mission is to simplify complex regulatory processes for businesses while providing strategic solutions for growth and operational efficiency.</p>
+  </section>
+
+  <section id="contact">
     <h2 class="section-title">Contact</h2>
     <div class="contact-info">
       <p>Email: <a href="mailto:santhosh_kumar_b@icloud.com">santhosh_kumar_b@icloud.com</a></p>
+      <p>Phone: <a href="tel:+918374500905">+91 83745 00905</a></p>
       <p>LinkedIn: <a href="https://www.linkedin.com/in/santhosh-kumar-bagathi-56a2b6116" target="_blank" rel="noopener">Santhosh Kumar Bagathi</a></p>
+    </div>
+  </section>
+
+  <section id="blog">
+    <h2 class="section-title">Blog</h2>
+    <p>Visit our blog for latest updates on compliance changes, investment tips, and business insights.</p>
+    <div class="service-highlight">
+      Coming Soon - Subscribe for updates!
+    </div>
+  </section>
+
+  <section id="shop">
+    <h2 class="section-title">Shop</h2>
+    <p>Explore our digital products and business tools:</p>
+    <ul class="services-list">
+      <li>Compliance Checklist Packages</li>
+      <li>Business Template Kits</li>
+      <li>Investment Planning Tools</li>
+    </ul>
+  </section>
+
+  <section id="login">
+    <h2 class="section-title">Login</h2>
+    <div class="service-highlight">
+      Client portal login will be available soon
     </div>
   </section>
 </main>
