@@ -1,242 +1,661 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Previous head content remains the same -->
-  <!-- Add this new animation CSS -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hetrocades - Your Trusted Business Solutions Partner</title>
   <style>
-    /* Add this to your existing CSS */
-    .service-section {
-      padding: 60px 0;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease-out;
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    
-    .service-section.active {
-      opacity: 1;
+    body {
+      background: #f9fafb;
+      color: #222;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    header {
+      background: #0d47a1;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      transition: transform 0.3s;
+    }
+    header h1:hover {
+      transform: scale(1.05);
+    }
+    nav a {
+      margin-left: 1.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      color: white;
+      padding: 0.5rem;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.2);
+      text-decoration: none;
+    }
+    nav a.active-nav {
+      background: rgba(255,255,255,0.3);
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .tagline {
+      text-align: center;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #0d47a1;
+      margin-bottom: 2rem;
+      animation: fadeIn 1s ease;
+    }
+    section {
+      margin-bottom: 1rem;
+    }
+    .section-header {
+      background: #0d47a1;
+      color: white;
+      padding: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s;
+    }
+    .section-header:hover {
+      background: #1565c0;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h2.section-title {
+      font-size: 1.4rem;
+      margin: 0;
+    }
+    .toggle-icon {
+      font-size: 1.5rem;
+      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+    .section-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+      padding: 0 1rem;
+    }
+    .section-content.active {
+      max-height: 2000px;
+      padding: 1rem;
+      animation: fadeIn 0.5s ease;
+    }
+    .toggle-icon.active {
+      transform: rotate(45deg);
+    }
+    .service-category {
+      background: #e3f2fd;
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      transition: all 0.3s;
+    }
+    .service-category:hover {
+      transform: translateX(5px);
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    }
+    h3.sub-service-title {
+      font-size: 1.3rem;
+      color: #1565c0;
+      margin: 0 0 1rem 0;
+    }
+    ul.services-list {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+      font-size: 1.1rem;
+      color: #333;
+    }
+    ul.services-list li {
+      margin-bottom: 0.7rem;
+      transition: all 0.3s;
+    }
+    ul.services-list li:hover {
+      color: #0d47a1;
+      transform: translateX(5px);
+    }
+    .service-highlight {
+      background: #e8f5e9;
+      padding: 15px;
+      border-left: 4px solid #2e7d32;
+      margin: 10px 0;
+      font-style: italic;
+      border-radius: 0 4px 4px 0;
+      animation: pulse 2s infinite;
+    }
+    .contact-info {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: #222;
+    }
+    .contact-info a {
+      color: #0d47a1;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .contact-info a:hover {
+      color: #1565c0;
+      text-decoration: underline;
+    }
+    footer {
+      background: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 1rem 2rem;
+      font-size: 0.9rem;
+      animation: fadeIn 1s ease;
+    }
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 1rem;
+      background: #f5f5f5;
+      border-radius: 5px;
+      animation: slideUp 0.5s ease;
+    }
+    form div {
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: #0d47a1;
+      box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.2);
+      outline: none;
+    }
+    button {
+      background: #0d47a1;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    button:hover {
+      background: #1565c0;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    button:active {
       transform: translateY(0);
     }
-    
-    .service-card {
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    .success-message {
+      display: none;
+      background: #e8f5e9;
+      padding: 1rem;
+      border-left: 4px solid #2e7d32;
+      margin: 1rem 0;
+      border-radius: 0 4px 4px 0;
+      animation: fadeIn 0.5s ease;
     }
-    
-    .service-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    .confirmation-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
     }
-    
-    /* Pulse animation for service icons */
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 500px;
+      text-align: center;
+      animation: slideUp 0.3s ease;
+    }
+    .modal-content h3 {
+      color: #0d47a1;
+      margin-bottom: 1rem;
+    }
+    .modal-content p {
+      margin-bottom: 1.5rem;
+    }
+    .modal-close {
+      background: #0d47a1;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { 
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
     @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
+      0% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(46, 125, 50, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0); }
     }
-    
-    .service-icon {
-      animation: pulse 2s infinite;
+    html {
+      scroll-behavior: smooth;
+    }
+    @media (max-width: 600px) {
+      header {
+        justify-content: center;
+        text-align: center;
+      }
+      nav {
+        margin-top: 0.5rem;
+        width: 100%;
+      }
+      nav a {
+        margin-left: 0.8rem;
+        font-size: 0.9rem;
+      }
+      main {
+        margin: 1rem;
+        padding: 0 0.5rem;
+      }
+      .modal-content {
+        width: 90%;
+        padding: 1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Previous header content remains the same -->
-
-  <!-- ======= Services Section ======= -->
-  <section id="services" class="services section-bg">
-    <div class="container">
-      <div class="section-title">
-        <h2>Our Services</h2>
-        <p>We offer comprehensive business solutions tailored to your specific needs</p>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="icon-box service-card" onclick="scrollToService('compliances')" style="cursor: pointer;">
-            <div class="icon service-icon"><i class="bi bi-file-earmark-check"></i></div>
-            <h4 class="title">Labour & Industrial Compliances</h4>
-            <p class="description">
-              EPFO Registrations, DSC, eSign Activation, Professional Tax, Gratuity Law, ESI, CLRA, S&E Compliance, Payroll Processing
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="icon-box service-card" onclick="scrollToService('interior-design')" style="cursor: pointer;">
-            <div class="icon service-icon"><i class="bi bi-house-door"></i></div>
-            <h4 class="title">Interior Design Services</h4>
-            <p class="description">
-              Residential Space Planning, Commercial Interior Design, 3D Visualization, Material Selection, Project Management
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="icon-box service-card" onclick="scrollToService('investment-advisory')" style="cursor: pointer;">
-            <div class="icon service-icon"><i class="bi bi-graph-up"></i></div>
-            <h4 class="title">Investment Advisory</h4>
-            <p class="description">
-              SEBI Registered Advice, Portfolio Management, Retirement Planning, Tax-Saving Strategies, Wealth Management
-            </p>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="icon-box service-card" onclick="scrollToService('bank-loan')" style="cursor: pointer;">
-            <div class="icon service-icon"><i class="bi bi-bank"></i></div>
-            <h4 class="title">Bank Loan Assistance</h4>
-            <p class="description">
-              Home Loan Processing, Business Loan Facilitation, Documentation Assistance, Eligibility Assessment, Quick Approval
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section><!-- End Services Section -->
-
-  <!-- ======= Service Details Sections ======= -->
-  <section id="compliances" class="service-section">
-    <div class="container">
-      <div class="section-title">
-        <h2>Labour & Industrial Compliances</h2>
-      </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="service-card p-4">
-            <h3>Full Compliance Solutions</h3>
-            <ul>
-              <li>EPFO Registrations</li>
-              <li>DSC (Digital Signature Certificates)</li>
-              <li>eSign Activation</li>
-              <li>Professional Tax (PT) Law</li>
-              <li>Gratuity Law Compliance</li>
-              <li>Employee State Insurance (ESI)</li>
-              <li>CLRA (Contract Labour Regulation & Abolition Act)</li>
-              <li>Shops & Establishment (S&E) Compliance</li>
-              <li>Payroll Processing</li>
-            </ul>
-            <div class="highlight-box mt-4 p-3">
-              <p>Comprehensive compliance solutions tailored to your business needs</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="interior-design" class="service-section">
-    <div class="container">
-      <div class="section-title">
-        <h2>Interior Design Services</h2>
-      </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="service-card p-4">
-            <h3>Complete Design Solutions</h3>
-            <ul>
-              <li>Residential Space Planning</li>
-              <li>Commercial Interior Design</li>
-              <li>3D Visualization</li>
-              <li>Material Selection Assistance</li>
-              <li>Project Management</li>
-            </ul>
-            <div class="highlight-box mt-4 p-3">
-              <p>Turnkey solutions from concept to execution</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="investment-advisory" class="service-section">
-    <div class="container">
-      <div class="section-title">
-        <h2>Investment Advisory Services</h2>
-      </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="service-card p-4">
-            <h3>Financial Planning Services</h3>
-            <ul>
-              <li>SEBI Registered Investment Advice</li>
-              <li>Portfolio Management</li>
-              <li>Retirement Planning</li>
-              <li>Tax-Saving Investment Strategies</li>
-              <li>Wealth Management</li>
-            </ul>
-            <div class="highlight-box mt-4 p-3">
-              <p>Certified SEBI Advisor for personalized financial solutions</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="bank-loan" class="service-section">
-    <div class="container">
-      <div class="section-title">
-        <h2>Bank Loan Assistance</h2>
-      </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="service-card p-4">
-            <h3>Loan Facilitation Services</h3>
-            <ul>
-              <li>Home Loan Processing</li>
-              <li>Business Loan Facilitation</li>
-              <li>Documentation Assistance</li>
-              <li>Loan Eligibility Assessment</li>
-              <li>Quick Approval Process</li>
-            </ul>
-            <div class="highlight-box mt-4 p-3">
-              <p>Fast-track processing with high approval rates</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Previous other sections remain the same -->
-
-  <!-- Add this JavaScript -->
   <script>
-    // Scroll to service with animation
-    function scrollToService(serviceId) {
-      const element = document.getElementById(serviceId);
-      element.scrollIntoView({ behavior: 'smooth' });
-      
-      // Add active class to trigger animation
-      element.classList.add('active');
-      
-      // Update URL hash without jumping
-      history.pushState(null, null, '#' + serviceId);
+    if (window.location.pathname === '/' && !window.location.hash) {
+      window.location.href = '/#home';
     }
+  </script>
 
-    // Intersection Observer for service sections
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
+<header>
+  <h1>Hetrocades</h1>
+  <nav>
+    <a href="#compliances" class="nav-link">Compliances</a>
+    <a href="#interior-design" class="nav-link">Interior Design</a>
+    <a href="#investment-advisory" class="nav-link">Investment Advisory</a>
+    <a href="#bank-loan" class="nav-link">Bank Loan</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#contact" class="nav-link">Contact</a>
+    <a href="#enquiry" class="nav-link">Enquiry</a>
+  </nav>
+</header>
+
+<main>
+  <section id="home">
+    <div class="tagline">Your Trusted Business Solutions Partner</div>
+  </section>
+
+  <!-- Compliances Section -->
+  <section>
+    <div class="section-header" onclick="toggleSection(this)" id="compliances-header">
+      <h2 class="section-title">Labour & Industrial Compliances</h2>
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="section-content" id="compliances">
+      <div class="service-category">
+        <h3 class="sub-service-title">Full Compliance Solutions</h3>
+        <ul class="services-list">
+          <li>EPFO Registrations</li>
+          <li>DSC (Digital Signature Certificates)</li>
+          <li>eSign Activation</li>
+          <li>Professional Tax (PT) Law</li>
+          <li>Gratuity Law Compliance</li>
+          <li>Employee State Insurance (ESI)</li>
+          <li>CLRA (Contract Labour Regulation & Abolition Act)</li>
+          <li>Shops & Establishment (S&E) Compliance</li>
+          <li>Payroll Processing</li>
+        </ul>
+        <div class="service-highlight">
+          Comprehensive compliance solutions tailored to your business needs
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interior Design Section -->
+  <section>
+    <div class="section-header" onclick="toggleSection(this)" id="interior-design-header">
+      <h2 class="section-title">Interior Design Services</h2>
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="section-content" id="interior-design">
+      <div class="service-category">
+        <h3 class="sub-service-title">Complete Design Solutions</h3>
+        <ul class="services-list">
+          <li>Residential Space Planning</li>
+          <li>Commercial Interior Design</li>
+          <li>3D Visualization</li>
+          <li>Material Selection Assistance</li>
+          <li>Project Management</li>
+        </ul>
+        <div class="service-highlight">
+          Turnkey solutions from concept to execution
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Investment Advisory Section -->
+  <section>
+    <div class="section-header" onclick="toggleSection(this)" id="investment-advisory-header">
+      <h2 class="section-title">Investment Advisory Services</h2>
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="section-content" id="investment-advisory">
+      <div class="service-category">
+        <h3 class="sub-service-title">Financial Planning Services</h3>
+        <ul class="services-list">
+          <li>SEBI Registered Investment Advice</li>
+          <li>Portfolio Management</li>
+          <li>Retirement Planning</li>
+          <li>Tax-Saving Investment Strategies</li>
+          <li>Wealth Management</li>
+        </ul>
+        <div class="service-highlight">
+          Certified SEBI Advisor for personalized financial solutions
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bank Loan Section -->
+  <section>
+    <div class="section-header" onclick="toggleSection(this)" id="bank-loan-header">
+      <h2 class="section-title">Bank Loan Assistance</h2>
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="section-content" id="bank-loan">
+      <div class="service-category">
+        <h3 class="sub-service-title">Loan Facilitation Services</h3>
+        <ul class="services-list">
+          <li>Home Loan Processing</li>
+          <li>Business Loan Facilitation</li>
+          <li>Documentation Assistance</li>
+          <li>Loan Eligibility Assessment</li>
+          <li>Quick Approval Process</li>
+        </ul>
+        <div class="service-highlight">
+          Fast-track processing with high approval rates
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section>
+    <div class="section-header" onclick="toggleSection(this)" id="about-header">
+      <h2 class="section-title">About Us</h2>
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="section-content" id="about">
+      <p>Hetrocades is a professional services firm specializing in business compliance, financial advisory, and design solutions. Our team of experts is committed to delivering comprehensive services tailored to your specific needs.</p>
+      <p>With years of experience across multiple industries, we provide reliable and efficient solutions to help your business thrive in today's competitive environment.</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section>
+    <div class="section-header" onclick="toggleSection(this)" id="contact-header">
+      <h2 class="section-title">Contact Information</h2>
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="section-content" id="contact">
+      <div class="contact-info">
+        <p>Email: <a href="mailto:santhosh_kumar_b@icloud.com">santhosh_kumar_b@icloud.com</a></p>
+        <p>Phone: <a href="tel:+918374500905">+91 83745 00905</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/santhosh-kumar-bagathi-56a2b6116" target="_blank" rel="noopener">Santhosh Kumar Bagathi</a></p>
+        <p>Office Hours: Monday to Friday, 9:00 AM to 6:00 PM</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enquiry Section -->
+  <section>
+    <div class="section-header" onclick="toggleSection(this)" id="enquiry-header">
+      <h2 class="section-title">Business Enquiry</h2>
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="section-content" id="enquiry">
+      <!-- FormSubmit.co Form - Replace YOUR_EMAIL below -->
+      <form action="https://formsubmit.co/santhosh_kumar_b@icloud.com" method="POST" id="enquiryForm">
+        <input type="hidden" name="_subject" value="New Enquiry from Hetrocades">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://hetrocades.online/#enquiry">
+        <input type="hidden" name="_captcha" value="false">
+        
+        <div>
+          <label for="name">Full Name*</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+          <label for="email">Email Address*</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+          <label for="phone">Contact Number*</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div>
+          <label for="service">Service Interested In*</label>
+          <select id="service" name="service" required>
+            <option value="">Select a service</option>
+            <option value="Compliances">Labour & Industrial Compliances</option>
+            <option value="Interior Design">Interior Design Services</option>
+            <option value="Investment Advisory">Investment Advisory</option>
+            <option value="Bank Loan">Bank Loan Assistance</option>
+            <option value="Other">Other Services</option>
+          </select>
+        </div>
+        <div>
+          <label for="message">Your Enquiry*</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+        </div>
+        <button type="submit">Submit Enquiry</button>
+      </form>
+      
+      <div id="successMessage" class="success-message">
+        Thank you for your enquiry. We have received your details and will contact you shortly.
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Confirmation Modal -->
+<div id="confirmationModal" class="confirmation-modal">
+  <div class="modal-content">
+    <h3>Enquiry Submitted Successfully</h3>
+    <p>Thank you for contacting Hetrocades. We have received your enquiry and our team will get back to you within 24 hours.</p>
+    <p>For urgent matters, please call us at <a href="tel:+918374500905">+91 83745 00905</a>.</p>
+    <button class="modal-close" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 Hetrocades. All rights reserved.</p>
+  <p>Your Trusted Partner for Business Solutions</p>
+</footer>
+
+<script>
+  // Enhanced toggle function
+  function toggleSection(element, smooth = true) {
+    const targetId = element.nextElementSibling.id;
+    const content = element.nextElementSibling;
+    const icon = element.querySelector('.toggle-icon');
+    
+    // Toggle active class
+    content.classList.toggle('active');
+    icon.classList.toggle('active');
+    icon.textContent = content.classList.contains('active') ? '−' : '+';
+    
+    // Update URL hash
+    if(content.classList.contains('active')) {
+      history.pushState(null, null, `#${targetId}`);
+    }
+    
+    // Update active nav link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.classList.remove('active-nav');
+      if(link.getAttribute('href') === `#${targetId}`) {
+        link.classList.add('active-nav');
+      }
+    });
+    
+    // Smooth scroll if not triggered by nav click
+    if(smooth && content.classList.contains('active')) {
+      content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  // Handle nav link clicks
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const header = document.getElementById(`${targetId}-header`);
+      
+      // Close all sections first
+      document.querySelectorAll('.section-content').forEach(section => {
+        if(section.id !== targetId && section.classList.contains('active')) {
+          const parentHeader = section.previousElementSibling;
+          toggleSection(parentHeader, false);
         }
       });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.service-section').forEach(section => {
-      observer.observe(section);
-    });
-
-    // Handle initial hash URL
-    document.addEventListener('DOMContentLoaded', function() {
-      if (window.location.hash) {
-        const target = document.querySelector(window.location.hash);
-        if (target) {
-          setTimeout(() => {
-            target.scrollIntoView({ behavior: 'smooth' });
-            target.classList.add('active');
-          }, 300);
+      
+      // Open target section
+      if(header) {
+        const content = header.nextElementSibling;
+        if(!content.classList.contains('active')) {
+          toggleSection(header, true);
+        } else {
+          content.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
     });
-  </script>
+  });
+
+  // Form submission handler
+  document.getElementById('enquiryForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Show confirmation modal immediately
+    document.getElementById('confirmationModal').style.display = 'flex';
+    
+    // Submit the form data
+    const formData = new FormData(this);
+    fetch(this.action, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if(response.ok) {
+        // Show success message
+        document.getElementById('successMessage').style.display = 'block';
+        this.reset();
+      } else {
+        throw new Error('Form submission failed');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('There was an error submitting your enquiry. Please try again or contact us directly at +91 83745 00905.');
+    });
+  });
+
+  function closeModal() {
+    document.getElementById('confirmationModal').style.display = 'none';
+  }
+
+  // Check URL hash on load
+  document.addEventListener('DOMContentLoaded', function() {
+    // Open home section by default
+    if(!window.location.hash || window.location.hash === '#home') {
+      document.querySelector('.section-header').click();
+    }
+    
+    // Open section based on URL hash
+    if(window.location.hash && window.location.hash !== '#home') {
+      const targetId = window.location.hash.substring(1);
+      const header = document.getElementById(`${targetId}-header`);
+      if(header) {
+        toggleSection(header, false);
+      }
+    }
+    
+    // Highlight active nav link
+    const currentHash = window.location.hash || '#compliances';
+    document.querySelectorAll('.nav-link').forEach(link => {
+      if(link.getAttribute('href') === currentHash) {
+        link.classList.add('active-nav');
+      }
+    });
+  });
+
+  // Close modal when clicking outside
+  window.onclick = function(event) {
+    const modal = document.getElementById('confirmationModal');
+    if(event.target == modal) {
+      modal.style.display = 'none';
+    }
+  }
+</script>
+
 </body>
-</html>
+</html> 
