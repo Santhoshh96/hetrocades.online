@@ -64,59 +64,55 @@
       margin-bottom: 2rem;
     }
     section {
-      margin-bottom: 3rem;
+      margin-bottom: 1rem;
+    }
+    .section-header {
+      background: #0d47a1;
+      color: white;
       padding: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     h2.section-title {
-      font-size: 1.6rem;
-      color: #0d47a1;
-      margin-bottom: 1rem;
-      border-bottom: 3px solid #0d47a1;
-      display: inline-block;
-      padding-bottom: 0.25rem;
+      font-size: 1.4rem;
+      margin: 0;
+    }
+    .toggle-icon {
+      font-size: 1.5rem;
+      transition: transform 0.3s;
+    }
+    .section-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 1rem;
+    }
+    .section-content.active {
+      max-height: 2000px;
+      padding: 1rem;
+    }
+    .toggle-icon.active {
+      transform: rotate(45deg);
     }
     .service-category {
       background: #e3f2fd;
       padding: 1rem;
       border-radius: 5px;
       margin-bottom: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .service-category:hover {
-      background: #bbdefb;
-    }
-    .service-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
     }
     h3.sub-service-title {
       font-size: 1.3rem;
       color: #1565c0;
-      margin: 0;
-    }
-    .toggle-icon {
-      font-size: 1.5rem;
-      transition: transform 0.3s ease;
-    }
-    .service-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-    .service-content.active {
-      max-height: 1000px; /* Adjust based on your content */
-    }
-    .toggle-icon.active {
-      transform: rotate(45deg);
+      margin: 0 0 1rem 0;
     }
     ul.services-list {
       list-style-type: disc;
       padding-left: 1.5rem;
       font-size: 1.1rem;
       color: #333;
-      margin-top: 1rem;
     }
     ul.services-list li {
       margin-bottom: 0.7rem;
@@ -145,6 +141,46 @@
       padding: 1rem 2rem;
       font-size: 0.9rem;
     }
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 1rem;
+      background: #f5f5f5;
+      border-radius: 5px;
+    }
+    form div {
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      background: #0d47a1;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover {
+      background: #1565c0;
+    }
+    .success-message {
+      display: none;
+      background: #e8f5e9;
+      padding: 1rem;
+      border-left: 4px solid #2e7d32;
+      margin: 1rem 0;
+    }
     html {
       scroll-behavior: smooth;
     }
@@ -169,6 +205,11 @@
   </style>
 </head>
 <body>
+  <script>
+    if (window.location.pathname === '/' && !window.location.hash) {
+      window.location.href = '/#home';
+    }
+  </script>
 
 <header>
   <h1>Hetrocades</h1>
@@ -178,7 +219,7 @@
     <a href="#contact">Contact</a>
     <a href="#blog">Blog</a>
     <a href="#shop">Shop</a>
-    <a href="#login">Login</a>
+    <a href="#enquiry">Enquiry</a>
   </nav>
 </header>
 
@@ -187,16 +228,14 @@
     <div class="tagline">We Are Your Best Solution</div>
   </section>
 
-  <section id="services">
-    <h2 class="section-title">Our Services</h2>
-    
-    <!-- Labour & Industrial Law -->
-    <div class="service-category" onclick="toggleService(this)">
-      <div class="service-header">
+  <section>
+    <div class="section-header" onclick="toggleSection(this)">
+      <h2 class="section-title">Our Services</h2>
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="section-content" id="services">
+      <div class="service-category">
         <h3 class="sub-service-title">Labour & Industrial Law Services</h3>
-        <span class="toggle-icon">+</span>
-      </div>
-      <div class="service-content">
         <ul class="services-list">
           <li>EPFO Registrations</li>
           <li>DSC (Digital Signature Certificates)</li>
@@ -209,15 +248,9 @@
           <li>Payroll Processing</li>
         </ul>
       </div>
-    </div>
 
-    <!-- Interior Design Services -->
-    <div class="service-category" onclick="toggleService(this)">
-      <div class="service-header">
+      <div class="service-category">
         <h3 class="sub-service-title">Interior Design Services</h3>
-        <span class="toggle-icon">+</span>
-      </div>
-      <div class="service-content">
         <ul class="services-list">
           <li>Residential Space Planning</li>
           <li>Commercial Interior Design</li>
@@ -229,15 +262,9 @@
           Complete turnkey solutions from concept to execution
         </div>
       </div>
-    </div>
 
-    <!-- Investment Advisory -->
-    <div class="service-category" onclick="toggleService(this)">
-      <div class="service-header">
+      <div class="service-category">
         <h3 class="sub-service-title">Investment Advisory Services</h3>
-        <span class="toggle-icon">+</span>
-      </div>
-      <div class="service-content">
         <ul class="services-list">
           <li>SEBI Registered Investment Advice</li>
           <li>Portfolio Management</li>
@@ -249,15 +276,9 @@
           Certified SEBI Advisor for personalized financial solutions
         </div>
       </div>
-    </div>
 
-    <!-- Bank Loan Assistance -->
-    <div class="service-category" onclick="toggleService(this)">
-      <div class="service-header">
+      <div class="service-category">
         <h3 class="sub-service-title">Bank Loan Assistance</h3>
-        <span class="toggle-icon">+</span>
-      </div>
-      <div class="service-content">
         <ul class="services-list">
           <li>Home Loan Processing</li>
           <li>Business Loan Facilitation</li>
@@ -272,33 +293,103 @@
     </div>
   </section>
 
-  <section id="about">
-    <h2 class="section-title">About Us</h2>
-    <p>Hetrocades is a professional services firm specializing in industrial compliance, financial advisory, and business support services.</p>
-  </section>
-
-  <section id="contact">
-    <h2 class="section-title">Contact</h2>
-    <div class="contact-info">
-      <p>Email: <a href="mailto:santhosh_kumar_b@icloud.com">santhosh_kumar_b@icloud.com</a></p>
-      <p>Phone: <a href="tel:+918374500905">+91 83745 00905</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/santhosh-kumar-bagathi-56a2b6116" target="_blank" rel="noopener">Santhosh Kumar Bagathi</a></p>
+  <section>
+    <div class="section-header" onclick="toggleSection(this)">
+      <h2 class="section-title">About Us</h2>
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="section-content" id="about">
+      <p>Hetrocades is a professional services firm specializing in industrial compliance, financial advisory, and business support services. Our team of experts is dedicated to providing comprehensive solutions tailored to your business needs.</p>
     </div>
   </section>
 
-  <section id="blog">
-    <h2 class="section-title">Blog</h2>
-    <p>Updates and articles coming soon!</p>
+  <section>
+    <div class="section-header" onclick="toggleSection(this)">
+      <h2 class="section-title">Contact</h2>
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="section-content" id="contact">
+      <div class="contact-info">
+        <p>Email: <a href="mailto:santhosh_kumar_b@icloud.com">santhosh_kumar_b@icloud.com</a></p>
+        <p>Phone: <a href="tel:+918374500905">+91 83745 00905</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/santhosh-kumar-bagathi-56a2b6116" target="_blank" rel="noopener">Santhosh Kumar Bagathi</a></p>
+      </div>
+    </div>
   </section>
 
-  <section id="shop">
-    <h2 class="section-title">Shop</h2>
-    <p>Products/services will be listed here.</p>
+  <section>
+    <div class="section-header" onclick="toggleSection(this)">
+      <h2 class="section-title">Blog</h2>
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="section-content" id="blog">
+      <p>Visit our blog for latest updates on compliance changes, investment tips, and business insights.</p>
+      <div class="service-highlight">
+        Coming Soon - Subscribe for updates!
+      </div>
+    </div>
   </section>
 
-  <section id="login">
-    <h2 class="section-title">Login</h2>
-    <p>Login form will be added here later.</p>
+  <section>
+    <div class="section-header" onclick="toggleSection(this)">
+      <h2 class="section-title">Shop</h2>
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="section-content" id="shop">
+      <p>Explore our digital products and business tools:</p>
+      <ul class="services-list">
+        <li>Compliance Checklist Packages</li>
+        <li>Business Template Kits</li>
+        <li>Investment Planning Tools</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header" onclick="toggleSection(this)">
+      <h2 class="section-title">Enquiry Form</h2>
+      <span class="toggle-icon">+</span>
+    </div>
+    <div class="section-content" id="enquiry">
+      <!-- FormSubmit.co Form - REPLACE YOUR EMAIL BELOW -->
+      <form action="https://formsubmit.co/santhosh_kumar_b@icloud.com" method="POST">
+        <input type="hidden" name="_subject" value="New Enquiry from Hetrocades Website">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://hetrocades.online/#enquiry">
+        
+        <div>
+          <label for="name">Full Name*</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+          <label for="email">Email*</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+          <label for="phone">Phone Number*</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div>
+          <label for="service">Service Interested In</label>
+          <select id="service" name="service">
+            <option value="">Select a service</option>
+            <option value="Labour Law">Labour & Industrial Law</option>
+            <option value="Interior Design">Interior Design</option>
+            <option value="Investment Advisory">Investment Advisory</option>
+            <option value="Bank Loan">Bank Loan Assistance</option>
+          </select>
+        </div>
+        <div>
+          <label for="message">Your Message*</label>
+          <textarea id="message" name="message" rows="4" required></textarea>
+        </div>
+        <button type="submit">Submit Enquiry</button>
+      </form>
+      
+      <div id="successMessage" class="success-message">
+        Thank you! Your enquiry has been submitted. We'll contact you soon.
+      </div>
+    </div>
   </section>
 </main>
 
@@ -307,8 +398,9 @@
 </footer>
 
 <script>
-  function toggleService(element) {
-    const content = element.querySelector('.service-content');
+  // Toggle sections
+  function toggleSection(element) {
+    const content = element.nextElementSibling;
     const icon = element.querySelector('.toggle-icon');
     
     content.classList.toggle('active');
@@ -316,11 +408,15 @@
     icon.textContent = content.classList.contains('active') ? '−' : '+';
   }
 
-  // Optional: Open first service by default
+  // Check for success message in URL (after form submission)
   document.addEventListener('DOMContentLoaded', function() {
-    const firstService = document.querySelector('.service-category');
-    if (firstService) {
-      toggleService(firstService);
+    // Open first section by default
+    document.querySelector('.section-header').click();
+    
+    // Show success message if URL has #success
+    if(window.location.hash === '#success') {
+      document.getElementById('successMessage').style.display = 'block';
+      document.querySelector('[href="#enquiry"]').click();
     }
   });
 </script>
