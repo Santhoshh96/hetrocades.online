@@ -46,6 +46,10 @@
     header h1:hover {
       transform: scale(1.05);
     }
+    nav {
+      display: flex;
+      align-items: center;
+    }
     nav a {
       margin-left: 1.5rem;
       font-weight: 600;
@@ -61,6 +65,50 @@
     }
     nav a.active-nav {
       background: rgba(255,255,255,0.3);
+    }
+    /* Services Dropdown Styles */
+    .services-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .services-toggle {
+      background: none;
+      border: none;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.5rem;
+      margin-left: 1.5rem;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+    .services-toggle:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    .services-menu {
+      display: none;
+      position: absolute;
+      background: white;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      border-radius: 4px;
+      z-index: 1;
+      top: 100%;
+      left: 0;
+    }
+    .services-menu a {
+      color: #222;
+      padding: 0.75rem 1rem;
+      display: block;
+      transition: all 0.2s;
+    }
+    .services-menu a:hover {
+      background: #e3f2fd;
+      color: #0d47a1;
+    }
+    .services-dropdown:hover .services-menu {
+      display: block;
     }
     main {
       flex: 1;
@@ -299,10 +347,20 @@
       nav {
         margin-top: 0.5rem;
         width: 100%;
+        flex-direction: column;
       }
-      nav a {
-        margin-left: 0.8rem;
-        font-size: 0.9rem;
+      .services-dropdown {
+        width: 100%;
+        margin: 0.5rem 0;
+      }
+      .services-menu {
+        position: static;
+        width: 100%;
+      }
+      nav a, .services-toggle {
+        margin: 0.3rem 0;
+        width: 100%;
+        text-align: center;
       }
       main {
         margin: 1rem;
@@ -325,11 +383,16 @@
 <header>
   <h1>Hetrocades</h1>
   <nav>
-    <a href="#compliances" class="nav-link">Compliances</a>
-    <a href="#interior-design" class="nav-link">Interior Design</a>
-    <a href="#investment-advisory" class="nav-link">Investment Advisory</a>
-    <a href="#bank-loan" class="nav-link">Bank Loan</a>
     <a href="#about" class="nav-link">About</a>
+    <div class="services-dropdown">
+      <button class="services-toggle">Services</button>
+      <div class="services-menu">
+        <a href="#compliances" class="nav-link">Compliances</a>
+        <a href="#interior-design" class="nav-link">Interior Design</a>
+        <a href="#investment-advisory" class="nav-link">Investment Advisory</a>
+        <a href="#bank-loan" class="nav-link">Bank Loan</a>
+      </div>
+    </div>
     <a href="#contact" class="nav-link">Contact</a>
     <a href="#enquiry" class="nav-link">Enquiry</a>
   </nav>
