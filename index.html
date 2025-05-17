@@ -75,25 +75,51 @@
       display: inline-block;
       padding-bottom: 0.25rem;
     }
+    .service-category {
+      background: #e3f2fd;
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .service-category:hover {
+      background: #bbdefb;
+    }
+    .service-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
     h3.sub-service-title {
       font-size: 1.3rem;
       color: #1565c0;
-      margin: 1.5rem 0 0.5rem 0;
+      margin: 0;
+    }
+    .toggle-icon {
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    .service-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .service-content.active {
+      max-height: 1000px; /* Adjust based on your content */
+    }
+    .toggle-icon.active {
+      transform: rotate(45deg);
     }
     ul.services-list {
       list-style-type: disc;
       padding-left: 1.5rem;
       font-size: 1.1rem;
       color: #333;
+      margin-top: 1rem;
     }
     ul.services-list li {
       margin-bottom: 0.7rem;
-    }
-    .service-category {
-      background: #e3f2fd;
-      padding: 1rem;
-      border-radius: 5px;
-      margin-bottom: 1.5rem;
     }
     .service-highlight {
       background: #e8f5e9;
@@ -165,63 +191,83 @@
     <h2 class="section-title">Our Services</h2>
     
     <!-- Labour & Industrial Law -->
-    <div class="service-category">
-      <h3 class="sub-service-title">Labour & Industrial Law Services</h3>
-      <ul class="services-list">
-        <li>EPFO Registrations</li>
-        <li>DSC (Digital Signature Certificates)</li>
-        <li>eSign Activation</li>
-        <li>Professional Tax (PT) Law</li>
-        <li>Gratuity Law</li>
-        <li>Employee State Insurance (ESI)</li>
-        <li>CLRA (Contract Labour Regulation & Abolition Act)</li>
-        <li>Shops & Establishment (S&E)</li>
-        <li>Payroll Processing</li>
-      </ul>
+    <div class="service-category" onclick="toggleService(this)">
+      <div class="service-header">
+        <h3 class="sub-service-title">Labour & Industrial Law Services</h3>
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="service-content">
+        <ul class="services-list">
+          <li>EPFO Registrations</li>
+          <li>DSC (Digital Signature Certificates)</li>
+          <li>eSign Activation</li>
+          <li>Professional Tax (PT) Law</li>
+          <li>Gratuity Law</li>
+          <li>Employee State Insurance (ESI)</li>
+          <li>CLRA (Contract Labour Regulation & Abolition Act)</li>
+          <li>Shops & Establishment (S&E)</li>
+          <li>Payroll Processing</li>
+        </ul>
+      </div>
     </div>
 
     <!-- Interior Design Services -->
-    <div class="service-category">
-      <h3 class="sub-service-title">Interior Design Services</h3>
-      <ul class="services-list">
-        <li>Residential Space Planning</li>
-        <li>Commercial Interior Design</li>
-        <li>3D Visualization</li>
-        <li>Material Selection Assistance</li>
-        <li>Project Management</li>
-      </ul>
-      <div class="service-highlight">
-        Complete turnkey solutions from concept to execution
+    <div class="service-category" onclick="toggleService(this)">
+      <div class="service-header">
+        <h3 class="sub-service-title">Interior Design Services</h3>
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="service-content">
+        <ul class="services-list">
+          <li>Residential Space Planning</li>
+          <li>Commercial Interior Design</li>
+          <li>3D Visualization</li>
+          <li>Material Selection Assistance</li>
+          <li>Project Management</li>
+        </ul>
+        <div class="service-highlight">
+          Complete turnkey solutions from concept to execution
+        </div>
       </div>
     </div>
 
     <!-- Investment Advisory -->
-    <div class="service-category">
-      <h3 class="sub-service-title">Investment Advisory Services</h3>
-      <ul class="services-list">
-        <li>SEBI Registered Investment Advice</li>
-        <li>Portfolio Management</li>
-        <li>Retirement Planning</li>
-        <li>Tax-Saving Investment Strategies</li>
-        <li>Wealth Management</li>
-      </ul>
-      <div class="service-highlight">
-        Certified SEBI Advisor for personalized financial solutions
+    <div class="service-category" onclick="toggleService(this)">
+      <div class="service-header">
+        <h3 class="sub-service-title">Investment Advisory Services</h3>
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="service-content">
+        <ul class="services-list">
+          <li>SEBI Registered Investment Advice</li>
+          <li>Portfolio Management</li>
+          <li>Retirement Planning</li>
+          <li>Tax-Saving Investment Strategies</li>
+          <li>Wealth Management</li>
+        </ul>
+        <div class="service-highlight">
+          Certified SEBI Advisor for personalized financial solutions
+        </div>
       </div>
     </div>
 
     <!-- Bank Loan Assistance -->
-    <div class="service-category">
-      <h3 class="sub-service-title">Bank Loan Assistance</h3>
-      <ul class="services-list">
-        <li>Home Loan Processing</li>
-        <li>Business Loan Facilitation</li>
-        <li>Documentation Assistance</li>
-        <li>Loan Eligibility Assessment</li>
-        <li>Quick Approval Process</li>
-      </ul>
-      <div class="service-highlight">
-        Fast-track processing with 90%+ approval rate
+    <div class="service-category" onclick="toggleService(this)">
+      <div class="service-header">
+        <h3 class="sub-service-title">Bank Loan Assistance</h3>
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="service-content">
+        <ul class="services-list">
+          <li>Home Loan Processing</li>
+          <li>Business Loan Facilitation</li>
+          <li>Documentation Assistance</li>
+          <li>Loan Eligibility Assessment</li>
+          <li>Quick Approval Process</li>
+        </ul>
+        <div class="service-highlight">
+          Fast-track processing with 90%+ approval rate
+        </div>
       </div>
     </div>
   </section>
@@ -259,6 +305,25 @@
 <footer>
   &copy; 2025 Hetrocades. All rights reserved.
 </footer>
+
+<script>
+  function toggleService(element) {
+    const content = element.querySelector('.service-content');
+    const icon = element.querySelector('.toggle-icon');
+    
+    content.classList.toggle('active');
+    icon.classList.toggle('active');
+    icon.textContent = content.classList.contains('active') ? '−' : '+';
+  }
+
+  // Optional: Open first service by default
+  document.addEventListener('DOMContentLoaded', function() {
+    const firstService = document.querySelector('.service-category');
+    if (firstService) {
+      toggleService(firstService);
+    }
+  });
+</script>
 
 </body>
 </html>
