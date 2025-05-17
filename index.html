@@ -1,790 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Hetrocades - Your Trusted Business Solutions Partner</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
+  <!-- Previous head content remains the same -->
+  <!-- Add this new animation CSS -->
   <style>
-    :root {
-      --blue: #0d47a1;
-      --light-blue: #e3f2fd;
-      --dark-blue: #0b3d8a;
-      --white: #fff;
-      --light-gray: #f8f9fa;
-      --dark-gray: #343a40;
-    }
-    
-    body {
-      font-family: "Open Sans", sans-serif;
-      color: #444444;
-    }
-    
-    a {
-      color: var(--blue);
-      text-decoration: none;
-    }
-    
-    a:hover {
-      color: var(--dark-blue);
-      text-decoration: none;
-    }
-    
-    h1, h2, h3, h4, h5, h6 {
-      font-family: "Poppins", sans-serif;
-    }
-    
-    /*--------------------------------------------------------------
-    # Header
-    --------------------------------------------------------------*/
-    #header {
-      background: var(--white);
-      transition: all 0.5s;
-      z-index: 997;
-      padding: 15px 0;
-      box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-    }
-    
-    #header .logo {
-      font-size: 28px;
-      margin: 0;
-      padding: 0;
-      line-height: 1;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-    
-    #header .logo a {
-      color: #111;
-    }
-    
-    #header .logo img {
-      max-height: 40px;
-    }
-    
-    /*--------------------------------------------------------------
-    # Navigation Menu
-    --------------------------------------------------------------*/
-    .navbar {
-      padding: 0;
-    }
-    
-    .navbar ul {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      list-style: none;
-      align-items: center;
-    }
-    
-    .navbar li {
-      position: relative;
-    }
-    
-    .navbar a, .navbar a:focus {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 15px;
-      color: #111;
-      white-space: nowrap;
-      transition: 0.3s;
-      font-size: 14px;
-      font-weight: 500;
-    }
-    
-    .navbar a i, .navbar a:focus i {
-      font-size: 12px;
-      line-height: 0;
-      margin-left: 5px;
-    }
-    
-    .navbar a:hover, .navbar .active, .navbar .active:focus, .navbar li:hover>a {
-      color: var(--blue);
-    }
-    
-    .navbar .dropdown ul {
-      display: block;
-      position: absolute;
-      left: 14px;
-      top: calc(100% + 30px);
-      margin: 0;
-      padding: 10px 0;
-      z-index: 99;
-      opacity: 0;
-      visibility: hidden;
-      background: var(--white);
-      box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
-      transition: 0.3s;
-      border-radius: 4px;
-    }
-    
-    .navbar .dropdown ul li {
-      min-width: 200px;
-    }
-    
-    .navbar .dropdown ul a {
-      padding: 10px 20px;
-      text-transform: none;
-    }
-    
-    .navbar .dropdown ul a i {
-      font-size: 12px;
-    }
-    
-    .navbar .dropdown ul a:hover, .navbar .dropdown ul .active:hover, .navbar .dropdown ul li:hover>a {
-      color: var(--blue);
-    }
-    
-    .navbar .dropdown:hover>ul {
-      opacity: 1;
-      top: 100%;
-      visibility: visible;
-    }
-    
-    /*--------------------------------------------------------------
-    # Hero Section
-    --------------------------------------------------------------*/
-    #hero {
-      width: 100%;
-      height: 80vh;
-      background: url('assets/img/hero-bg.jpg') top center;
-      background-size: cover;
-      position: relative;
-      padding: 0;
-    }
-    
-    #hero:before {
-      content: "";
-      background: rgba(0, 0, 0, 0.6);
-      position: absolute;
-      bottom: 0;
-      top: 0;
-      left: 0;
-      right: 0;
-    }
-    
-    #hero .container {
-      padding-top: 110px;
-    }
-    
-    #hero h1 {
-      margin: 0;
-      font-size: 48px;
-      font-weight: 700;
-      line-height: 56px;
-      color: var(--white);
-      text-transform: uppercase;
-    }
-    
-    #hero h2 {
-      color: #eee;
-      margin: 10px 0 0 0;
-      font-size: 24px;
-    }
-    
-    #hero .btn-get-started {
-      font-family: "Roboto", sans-serif;
-      text-transform: uppercase;
-      font-weight: 500;
-      font-size: 14px;
-      letter-spacing: 1px;
-      display: inline-block;
-      padding: 10px 28px;
-      border-radius: 4px;
-      transition: 0.5s;
-      margin-top: 30px;
-      color: var(--white);
-      background: var(--blue);
-    }
-    
-    #hero .btn-get-started:hover {
-      background: var(--dark-blue);
-    }
-    
-    /*--------------------------------------------------------------
-    # Sections General
-    --------------------------------------------------------------*/
-    section {
+    /* Add this to your existing CSS */
+    .service-section {
       padding: 60px 0;
-      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
     }
     
-    .section-title {
-      text-align: center;
-      padding-bottom: 30px;
+    .service-section.active {
+      opacity: 1;
+      transform: translateY(0);
     }
     
-    .section-title h2 {
-      font-size: 32px;
-      font-weight: bold;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      padding-bottom: 20px;
-      position: relative;
-      color: #111;
+    .service-card {
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
     
-    .section-title h2::after {
-      content: '';
-      position: absolute;
-      display: block;
-      width: 50px;
-      height: 3px;
-      background: var(--blue);
-      bottom: 0;
-      left: calc(50% - 25px);
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
     }
     
-    /*--------------------------------------------------------------
-    # Services
-    --------------------------------------------------------------*/
-    .services .icon-box {
-      text-align: center;
-      border: 1px solid #e2eefd;
-      padding: 80px 20px;
-      transition: all ease-in-out 0.3s;
-      background: var(--white);
+    /* Pulse animation for service icons */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
     
-    .services .icon-box .icon {
-      margin: 0 auto;
-      width: 64px;
-      height: 64px;
-      background: #f1f6fe;
-      border-radius: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      transition: ease-in-out 0.3s;
-    }
-    
-    .services .icon-box .icon i {
-      color: var(--blue);
-      font-size: 28px;
-    }
-    
-    .services .icon-box h4 {
-      font-weight: 700;
-      margin-bottom: 15px;
-      font-size: 24px;
-    }
-    
-    .services .icon-box h4 a {
-      color: #111;
-      transition: ease-in-out 0.3s;
-    }
-    
-    .services .icon-box p {
-      line-height: 24px;
-      font-size: 14px;
-      margin-bottom: 0;
-    }
-    
-    .services .icon-box:hover {
-      border-color: var(--white);
-      box-shadow: 0px 0 25px 0 rgba(16, 110, 234, 0.1);
-    }
-    
-    .services .icon-box:hover h4 a {
-      color: var(--blue);
-    }
-    
-    /*--------------------------------------------------------------
-    # Contact
-    --------------------------------------------------------------*/
-    .contact .info {
-      width: 100%;
-      background: var(--white);
-    }
-    
-    .contact .info i {
-      font-size: 20px;
-      color: var(--blue);
-      float: left;
-      width: 44px;
-      height: 44px;
-      background: #e3f2fd;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50px;
-      transition: all 0.3s ease-in-out;
-    }
-    
-    .contact .info h4 {
-      padding: 0 0 0 60px;
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 5px;
-      color: #111;
-    }
-    
-    .contact .info p {
-      padding: 0 0 0 60px;
-      margin-bottom: 0;
-      font-size: 14px;
-      color: #444444;
-    }
-    
-    .contact .info .email, .contact .info .phone {
-      margin-top: 40px;
-    }
-    
-    .contact .php-email-form {
-      width: 100%;
-      background: var(--white);
-    }
-    
-    .contact .php-email-form .form-group {
-      padding-bottom: 8px;
-    }
-    
-    .contact .php-email-form .error-message {
-      display: none;
-      color: var(--white);
-      background: #ed3c0d;
-      text-align: left;
-      padding: 15px;
-      font-weight: 600;
-    }
-    
-    .contact .php-email-form .error-message br+br {
-      margin-top: 25px;
-    }
-    
-    .contact .php-email-form .sent-message {
-      display: none;
-      color: var(--white);
-      background: #18d26e;
-      text-align: center;
-      padding: 15px;
-      font-weight: 600;
-    }
-    
-    .contact .php-email-form .loading {
-      display: none;
-      background: var(--white);
-      text-align: center;
-      padding: 15px;
-    }
-    
-    .contact .php-email-form .loading:before {
-      content: "";
-      display: inline-block;
-      border-radius: 50%;
-      width: 24px;
-      height: 24px;
-      margin: 0 10px -6px 0;
-      border: 3px solid #18d26e;
-      border-top-color: #eee;
-      animation: animate-loading 1s linear infinite;
-    }
-    
-    .contact .php-email-form input, .contact .php-email-form textarea, .contact .php-email-form select {
-      border-radius: 0;
-      box-shadow: none;
-      font-size: 14px;
-      border-radius: 4px;
-    }
-    
-    .contact .php-email-form input:focus, .contact .php-email-form textarea:focus, .contact .php-email-form select:focus {
-      border-color: var(--blue);
-    }
-    
-    .contact .php-email-form input {
-      height: 44px;
-    }
-    
-    .contact .php-email-form textarea {
-      padding: 10px 12px;
-    }
-    
-    .contact .php-email-form button[type="submit"] {
-      background: var(--blue);
-      border: 0;
-      padding: 10px 30px;
-      color: var(--white);
-      transition: 0.4s;
-      border-radius: 4px;
-    }
-    
-    .contact .php-email-form button[type="submit"]:hover {
-      background: var(--dark-blue);
-    }
-    
-    /*--------------------------------------------------------------
-    # Footer
-    --------------------------------------------------------------*/
-    #footer {
-      background: #0d1935;
-      padding: 30px 0;
-      color: var(--white);
-      font-size: 14px;
-    }
-    
-    #footer .copyright {
-      text-align: center;
-    }
-    
-    #footer .credits {
-      padding-top: 10px;
-      text-align: center;
-      font-size: 13px;
-      color: #a8a8a8;
-    }
-    
-    /*--------------------------------------------------------------
-    # Modal
-    --------------------------------------------------------------*/
-    .modal-content {
-      border-radius: 10px;
-      border: none;
-    }
-    
-    .modal-header {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-    
-    .modal-body {
-      padding: 30px;
-    }
-    
-    .modal-footer {
-      border-top: none;
-      padding-top: 0;
-    }
-    
-    /*--------------------------------------------------------------
-    # Responsive
-    --------------------------------------------------------------*/
-    @media (max-width: 768px) {
-      #hero {
-        height: 100vh;
-      }
-      #hero .container {
-        padding-top: 60px;
-      }
-      #hero h1 {
-        font-size: 32px;
-        line-height: 36px;
-      }
-      #hero h2 {
-        font-size: 18px;
-        line-height: 24px;
-      }
+    .service-icon {
+      animation: pulse 2s infinite;
     }
   </style>
 </head>
-
 <body>
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
-      <h1 class="logo me-auto"><a href="index.html">Hetrocades</a></h1>
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#compliances">Compliances</a></li>
-              <li><a href="#interior-design">Interior Design</a></li>
-              <li><a href="#investment-advisory">Investment Advisory</a></li>
-              <li><a href="#bank-loan">Bank Loan</a></li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="nav-link scrollto" href="#enquiry">Enquiry</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav>
-    </div>
-  </header><!-- End Header -->
+  <!-- Previous header content remains the same -->
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero">
-    <div class="hero-container">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-            <h1>Your Trusted Business Solutions Partner</h1>
-            <h2>Comprehensive services for all your business needs</h2>
-            <div class="d-flex">
-              <a href="#enquiry" class="btn-get-started scrollto">Get Started</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section><!-- End Hero -->
-
-  <main id="main">
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services section-bg">
-      <div class="container">
-        <div class="section-title">
-          <h2>Our Services</h2>
-          <p>We offer comprehensive business solutions tailored to your specific needs</p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="icon-box">
-              <div class="icon"><i class="bi bi-file-earmark-check"></i></div>
-              <h4 class="title"><a href="#compliances">Labour & Industrial Compliances</a></h4>
-              <p class="description">
-                EPFO Registrations, DSC, eSign Activation, Professional Tax, Gratuity Law, ESI, CLRA, S&E Compliance, Payroll Processing
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="icon-box">
-              <div class="icon"><i class="bi bi-house-door"></i></div>
-              <h4 class="title"><a href="#interior-design">Interior Design Services</a></h4>
-              <p class="description">
-                Residential Space Planning, Commercial Interior Design, 3D Visualization, Material Selection, Project Management
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="icon-box">
-              <div class="icon"><i class="bi bi-graph-up"></i></div>
-              <h4 class="title"><a href="#investment-advisory">Investment Advisory</a></h4>
-              <p class="description">
-                SEBI Registered Advice, Portfolio Management, Retirement Planning, Tax-Saving Strategies, Wealth Management
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="icon-box">
-              <div class="icon"><i class="bi bi-bank"></i></div>
-              <h4 class="title"><a href="#bank-loan">Bank Loan Assistance</a></h4>
-              <p class="description">
-                Home Loan Processing, Business Loan Facilitation, Documentation Assistance, Eligibility Assessment, Quick Approval
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section><!-- End Services Section -->
-
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-      <div class="container">
-        <div class="section-title">
-          <h2>About Us</h2>
-        </div>
-
-        <div class="row content">
-          <div class="col-lg-12">
-            <p>
-              Hetrocades is a professional services firm specializing in business compliance, financial advisory, and design solutions. Our team of experts is committed to delivering comprehensive services tailored to your specific needs.
-            </p>
-            <p>
-              With years of experience across multiple industries, we provide reliable and efficient solutions to help your business thrive in today's competitive environment.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section><!-- End About Section -->
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact section-bg">
-      <div class="container">
-        <div class="section-title">
-          <h2>Contact</h2>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="info-box mb-4">
-              <i class="bi bi-envelope"></i>
-              <h3>Email Us</h3>
-              <p><a href="mailto:santhosh_kumar_b@icloud.com">santhosh_kumar_b@icloud.com</a></p>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="info-box mb-4">
-              <i class="bi bi-telephone"></i>
-              <h3>Call Us</h3>
-              <p><a href="tel:+918374500905">+91 83745 00905</a></p>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="info-box">
-              <i class="bi bi-linkedin"></i>
-              <h3>LinkedIn</h3>
-              <p><a href="https://www.linkedin.com/in/santhosh-kumar-bagathi-56a2b6116" target="_blank">Santhosh Kumar Bagathi</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section><!-- End Contact Section -->
-
-    <!-- ======= Enquiry Section ======= -->
-    <section id="enquiry" class="enquiry">
-      <div class="container">
-        <div class="section-title">
-          <h2>Business Enquiry</h2>
-          <p>Fill out the form below and our team will get back to you shortly</p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-12">
-            <form action="https://formsubmit.co/santhosh_kumar_b@icloud.com" method="POST" class="php-email-form">
-              <input type="hidden" name="_subject" value="New Enquiry from Hetrocades">
-              <input type="hidden" name="_template" value="table">
-              <input type="hidden" name="_next" value="https://hetrocades.online/#enquiry">
-              <input type="hidden" name="_captcha" value="false">
-              
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                </div>
-              </div>
-              <div class="form-group mt-3">
-                <input type="tel" class="form-control" name="phone" id="phone" placeholder="Contact Number" required>
-              </div>
-              <div class="form-group mt-3">
-                <select class="form-control" name="service" id="service" required>
-                  <option value="">Select a service</option>
-                  <option value="Compliances">Labour & Industrial Compliances</option>
-                  <option value="Interior Design">Interior Design Services</option>
-                  <option value="Investment Advisory">Investment Advisory</option>
-                  <option value="Bank Loan">Bank Loan Assistance</option>
-                  <option value="Other">Other Services</option>
-                </select>
-              </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Your Enquiry" required></textarea>
-              </div>
-              <div class="text-center mt-3">
-                <button type="submit">Submit Enquiry</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section><!-- End Enquiry Section -->
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
+  <!-- ======= Services Section ======= -->
+  <section id="services" class="services section-bg">
     <div class="container">
-      <div class="copyright">
-        &copy; 2025 <strong><span>Hetrocades</span></strong>. All Rights Reserved
+      <div class="section-title">
+        <h2>Our Services</h2>
+        <p>We offer comprehensive business solutions tailored to your specific needs</p>
       </div>
-      <div class="credits">
-        Your Trusted Partner for Business Solutions
+
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="icon-box service-card" onclick="scrollToService('compliances')" style="cursor: pointer;">
+            <div class="icon service-icon"><i class="bi bi-file-earmark-check"></i></div>
+            <h4 class="title">Labour & Industrial Compliances</h4>
+            <p class="description">
+              EPFO Registrations, DSC, eSign Activation, Professional Tax, Gratuity Law, ESI, CLRA, S&E Compliance, Payroll Processing
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="icon-box service-card" onclick="scrollToService('interior-design')" style="cursor: pointer;">
+            <div class="icon service-icon"><i class="bi bi-house-door"></i></div>
+            <h4 class="title">Interior Design Services</h4>
+            <p class="description">
+              Residential Space Planning, Commercial Interior Design, 3D Visualization, Material Selection, Project Management
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="icon-box service-card" onclick="scrollToService('investment-advisory')" style="cursor: pointer;">
+            <div class="icon service-icon"><i class="bi bi-graph-up"></i></div>
+            <h4 class="title">Investment Advisory</h4>
+            <p class="description">
+              SEBI Registered Advice, Portfolio Management, Retirement Planning, Tax-Saving Strategies, Wealth Management
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="icon-box service-card" onclick="scrollToService('bank-loan')" style="cursor: pointer;">
+            <div class="icon service-icon"><i class="bi bi-bank"></i></div>
+            <h4 class="title">Bank Loan Assistance</h4>
+            <p class="description">
+              Home Loan Processing, Business Loan Facilitation, Documentation Assistance, Eligibility Assessment, Quick Approval
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-  </footer><!-- End Footer -->
+  </section><!-- End Services Section -->
 
-  <!-- Success Modal -->
-  <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Enquiry Submitted Successfully</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Thank you for contacting Hetrocades. We have received your enquiry and our team will get back to you within 24 hours.</p>
-          <p>For urgent matters, please call us at <a href="tel:+918374500905">+91 83745 00905</a>.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+  <!-- ======= Service Details Sections ======= -->
+  <section id="compliances" class="service-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Labour & Industrial Compliances</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="service-card p-4">
+            <h3>Full Compliance Solutions</h3>
+            <ul>
+              <li>EPFO Registrations</li>
+              <li>DSC (Digital Signature Certificates)</li>
+              <li>eSign Activation</li>
+              <li>Professional Tax (PT) Law</li>
+              <li>Gratuity Law Compliance</li>
+              <li>Employee State Insurance (ESI)</li>
+              <li>CLRA (Contract Labour Regulation & Abolition Act)</li>
+              <li>Shops & Establishment (S&E) Compliance</li>
+              <li>Payroll Processing</li>
+            </ul>
+            <div class="highlight-box mt-4 p-3">
+              <p>Comprehensive compliance solutions tailored to your business needs</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Vendor JS Files -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <section id="interior-design" class="service-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Interior Design Services</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="service-card p-4">
+            <h3>Complete Design Solutions</h3>
+            <ul>
+              <li>Residential Space Planning</li>
+              <li>Commercial Interior Design</li>
+              <li>3D Visualization</li>
+              <li>Material Selection Assistance</li>
+              <li>Project Management</li>
+            </ul>
+            <div class="highlight-box mt-4 p-3">
+              <p>Turnkey solutions from concept to execution</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Template Main JS File -->
+  <section id="investment-advisory" class="service-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Investment Advisory Services</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="service-card p-4">
+            <h3>Financial Planning Services</h3>
+            <ul>
+              <li>SEBI Registered Investment Advice</li>
+              <li>Portfolio Management</li>
+              <li>Retirement Planning</li>
+              <li>Tax-Saving Investment Strategies</li>
+              <li>Wealth Management</li>
+            </ul>
+            <div class="highlight-box mt-4 p-3">
+              <p>Certified SEBI Advisor for personalized financial solutions</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bank-loan" class="service-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Bank Loan Assistance</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="service-card p-4">
+            <h3>Loan Facilitation Services</h3>
+            <ul>
+              <li>Home Loan Processing</li>
+              <li>Business Loan Facilitation</li>
+              <li>Documentation Assistance</li>
+              <li>Loan Eligibility Assessment</li>
+              <li>Quick Approval Process</li>
+            </ul>
+            <div class="highlight-box mt-4 p-3">
+              <p>Fast-track processing with high approval rates</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Previous other sections remain the same -->
+
+  <!-- Add this JavaScript -->
   <script>
-    // Mobile nav toggle
-    $(document).ready(function(){
-      $('.mobile-nav-toggle').click(function(){
-        $('#navbar').toggleClass('navbar-mobile');
-        $(this).toggleClass('bi-list bi-x');
-      });
+    // Scroll to service with animation
+    function scrollToService(serviceId) {
+      const element = document.getElementById(serviceId);
+      element.scrollIntoView({ behavior: 'smooth' });
       
-      // Smooth scrolling for navigation links
-      $('a.scrollto').on('click', function(e) {
-        if (this.hash !== "") {
-          e.preventDefault();
-          var hash = this.hash;
-          $('html, body').animate({
-            scrollTop: $(hash).offset().top - 70
-          }, 800, function(){
-            window.location.hash = hash;
-          });
+      // Add active class to trigger animation
+      element.classList.add('active');
+      
+      // Update URL hash without jumping
+      history.pushState(null, null, '#' + serviceId);
+    }
+
+    // Intersection Observer for service sections
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
         }
       });
-      
-      // Form submission handler
-      $('.php-email-form').submit(function(e){
-        e.preventDefault();
-        var form = $(this);
-        
-        // Show loading state
-        form.find('.loading').fadeIn();
-        form.find('.error-message').fadeOut();
-        
-        // Submit form via AJAX
-        $.ajax({
-          type: form.attr('method'),
-          url: form.attr('action'),
-          data: form.serialize(),
-          dataType: 'json',
-          success: function(data) {
-            form.find('.loading').fadeOut();
-            if(data.success) {
-              form.find('.sent-message').fadeIn();
-              form.trigger('reset');
-              
-              // Show success modal
-              var successModal = new bootstrap.Modal(document.getElementById('successModal'));
-              successModal.show();
-            } else {
-              form.find('.error-message').html(data.message).fadeIn();
-            }
-          },
-          error: function(xhr, status, error) {
-            form.find('.loading').fadeOut();
-            form.find('.error-message').html('There was an error submitting your enquiry. Please try again.').fadeIn();
-          }
-        });
-      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.service-section').forEach(section => {
+      observer.observe(section);
+    });
+
+    // Handle initial hash URL
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+          setTimeout(() => {
+            target.scrollIntoView({ behavior: 'smooth' });
+            target.classList.add('active');
+          }, 300);
+        }
+      }
     });
   </script>
 </body>
