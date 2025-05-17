@@ -1,239 +1,703 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
   <title>Hetrocades - Your Trusted Business Solutions Partner</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/swiper/8.0.7/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0; padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    :root {
+      --blue: #0d47a1;
+      --light-blue: #e3f2fd;
+      --white: #fff;
+      --dark: #222;
+      --light-gray: #f8f9fa;
+      --gray: #6c757d;
+      --dark-gray: #343a40;
+      --green: #2e7d32;
+      --light-green: #e8f5e9;
+      --primary-font: 'Poppins', sans-serif;
+      --secondary-font: 'Roboto', sans-serif;
     }
+
     body {
-      background: #f9fafb;
-      color: #222;
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      font-family: var(--primary-font);
+      color: var(--dark);
+      background-color: var(--white);
     }
+
     a {
-      color: #0077cc;
+      color: var(--blue);
       text-decoration: none;
     }
+
     a:hover {
-      text-decoration: underline;
-    }
-    header {
-      background: #0d47a1;
-      color: white;
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    header h1 {
-      font-size: 1.8rem;
-      letter-spacing: 2px;
-      transition: transform 0.3s;
-    }
-    header h1:hover {
-      transform: scale(1.05);
-    }
-    nav a {
-      margin-left: 1.5rem;
-      font-weight: 600;
-      font-size: 1rem;
-      color: white;
-      padding: 0.5rem;
-      border-radius: 4px;
-      transition: all 0.3s;
-    }
-    nav a:hover {
-      background: rgba(255,255,255,0.2);
+      color: #1565c0;
       text-decoration: none;
     }
-    nav a.active-nav {
-      background: rgba(255,255,255,0.3);
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--primary-font);
     }
-    main {
-      flex: 1;
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+
+    /*--------------------------------------------------------------
+    # Header
+    --------------------------------------------------------------*/
+    #header {
+      background: var(--white);
+      transition: all 0.5s;
+      z-index: 997;
+      padding: 15px 0;
+      box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
     }
-    .tagline {
-      text-align: center;
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: #0d47a1;
-      margin-bottom: 2rem;
-      animation: fadeIn 1s ease;
-    }
-    section {
-      margin-bottom: 1rem;
-    }
-    .section-header {
-      background: #0d47a1;
-      color: white;
-      padding: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.3s;
-    }
-    .section-header:hover {
-      background: #1565c0;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    h2.section-title {
-      font-size: 1.4rem;
+
+    #header .logo {
+      font-size: 28px;
       margin: 0;
+      padding: 0;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
-    .toggle-icon {
-      font-size: 1.5rem;
-      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+
+    #header .logo a {
+      color: var(--dark);
     }
-    .section-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s cubic-bezier(0.65, 0, 0.35, 1);
-      padding: 0 1rem;
+
+    #header .logo img {
+      max-height: 40px;
     }
-    .section-content.active {
-      max-height: 2000px;
-      padding: 1rem;
-      animation: fadeIn 0.5s ease;
+
+    /*--------------------------------------------------------------
+    # Navigation Menu
+    --------------------------------------------------------------*/
+    .navbar {
+      padding: 0;
     }
-    .toggle-icon.active {
-      transform: rotate(45deg);
+
+    .navbar ul {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      list-style: none;
+      align-items: center;
     }
-    .service-category {
-      background: #e3f2fd;
-      padding: 1rem;
-      border-radius: 5px;
-      margin-bottom: 1rem;
-      transition: all 0.3s;
+
+    .navbar li {
+      position: relative;
     }
-    .service-category:hover {
-      transform: translateX(5px);
-      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+
+    .navbar a,
+    .navbar a:focus {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 15px;
+      font-size: 15px;
+      color: var(--dark);
+      white-space: nowrap;
+      transition: 0.3s;
     }
-    h3.sub-service-title {
-      font-size: 1.3rem;
-      color: #1565c0;
-      margin: 0 0 1rem 0;
+
+    .navbar a i,
+    .navbar a:focus i {
+      font-size: 12px;
+      line-height: 0;
+      margin-left: 5px;
     }
-    ul.services-list {
-      list-style-type: disc;
-      padding-left: 1.5rem;
-      font-size: 1.1rem;
-      color: #333;
+
+    .navbar a:hover,
+    .navbar .active,
+    .navbar .active:focus,
+    .navbar li:hover>a {
+      color: var(--blue);
     }
-    ul.services-list li {
-      margin-bottom: 0.7rem;
-      transition: all 0.3s;
-    }
-    ul.services-list li:hover {
-      color: #0d47a1;
-      transform: translateX(5px);
-    }
-    .service-highlight {
-      background: #e8f5e9;
-      padding: 15px;
-      border-left: 4px solid #2e7d32;
-      margin: 10px 0;
-      font-style: italic;
-      border-radius: 0 4px 4px 0;
-      animation: pulse 2s infinite;
-    }
-    .contact-info {
-      max-width: 600px;
-      margin: 0 auto;
-      font-size: 1.1rem;
-      color: #222;
-    }
-    .contact-info a {
-      color: #0d47a1;
-      font-weight: 600;
-      transition: all 0.3s;
-    }
-    .contact-info a:hover {
-      color: #1565c0;
-      text-decoration: underline;
-    }
-    footer {
-      background: #0d47a1;
-      color: white;
-      text-align: center;
-      padding: 1rem 2rem;
-      font-size: 0.9rem;
-      animation: fadeIn 1s ease;
-    }
-    form {
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 1rem;
-      background: #f5f5f5;
-      border-radius: 5px;
-      animation: slideUp 0.5s ease;
-    }
-    form div {
-      margin-bottom: 1rem;
-    }
-    label {
+
+    .navbar .dropdown ul {
       display: block;
-      margin-bottom: 0.5rem;
+      position: absolute;
+      left: 14px;
+      top: calc(100% + 30px);
+      margin: 0;
+      padding: 10px 0;
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+      background: var(--white);
+      box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+      transition: 0.3s;
+      border-radius: 4px;
+    }
+
+    .navbar .dropdown ul li {
+      min-width: 200px;
+    }
+
+    .navbar .dropdown ul a {
+      padding: 10px 20px;
+      text-transform: none;
+    }
+
+    .navbar .dropdown ul a i {
+      font-size: 12px;
+    }
+
+    .navbar .dropdown ul a:hover,
+    .navbar .dropdown ul .active:hover,
+    .navbar .dropdown ul li:hover>a {
+      color: var(--blue);
+    }
+
+    .navbar .dropdown:hover>ul {
+      opacity: 1;
+      top: 100%;
+      visibility: visible;
+    }
+
+    .navbar .dropdown .dropdown ul {
+      top: 0;
+      left: calc(100% - 30px);
+      visibility: hidden;
+    }
+
+    .navbar .dropdown .dropdown:hover>ul {
+      opacity: 1;
+      top: 0;
+      left: 100%;
+      visibility: visible;
+    }
+
+    /* Mobile Navigation */
+    .mobile-nav-toggle {
+      color: var(--dark);
+      font-size: 28px;
+      cursor: pointer;
+      display: none;
+      line-height: 0;
+      transition: 0.5s;
+    }
+
+    @media (max-width: 991px) {
+      .mobile-nav-toggle {
+        display: block;
+      }
+
+      .navbar ul {
+        display: none;
+      }
+    }
+
+    .navbar-mobile {
+      position: fixed;
+      overflow: hidden;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.9);
+      transition: 0.3s;
+      z-index: 999;
+    }
+
+    .navbar-mobile .mobile-nav-toggle {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+    }
+
+    .navbar-mobile ul {
+      display: block;
+      position: absolute;
+      top: 55px;
+      right: 15px;
+      bottom: 15px;
+      left: 15px;
+      padding: 10px 0;
+      background-color: var(--white);
+      overflow-y: auto;
+      transition: 0.3s;
+    }
+
+    .navbar-mobile a,
+    .navbar-mobile a:focus {
+      padding: 10px 20px;
+      font-size: 15px;
+      color: var(--dark);
+    }
+
+    .navbar-mobile a:hover,
+    .navbar-mobile .active,
+    .navbar-mobile li:hover>a {
+      color: var(--blue);
+    }
+
+    .navbar-mobile .getstarted,
+    .navbar-mobile .getstarted:focus {
+      margin: 15px;
+    }
+
+    .navbar-mobile .dropdown ul {
+      position: static;
+      display: none;
+      margin: 10px 20px;
+      padding: 10px 0;
+      z-index: 99;
+      opacity: 1;
+      visibility: visible;
+      background: var(--white);
+      box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+    }
+
+    .navbar-mobile .dropdown ul li {
+      min-width: 200px;
+    }
+
+    .navbar-mobile .dropdown ul a {
+      padding: 10px 20px;
+    }
+
+    .navbar-mobile .dropdown ul a i {
+      font-size: 12px;
+    }
+
+    .navbar-mobile .dropdown ul a:hover,
+    .navbar-mobile .dropdown ul .active:hover,
+    .navbar-mobile .dropdown ul li:hover>a {
+      color: var(--blue);
+    }
+
+    .navbar-mobile .dropdown>.dropdown-active {
+      display: block;
+    }
+
+    /*--------------------------------------------------------------
+    # Hero Section
+    --------------------------------------------------------------*/
+    #hero {
+      width: 100%;
+      height: 80vh;
+      background: url('assets/img/hero-bg.jpg') top center;
+      background-size: cover;
+      position: relative;
+      padding: 0;
+    }
+
+    #hero:before {
+      content: "";
+      background: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      bottom: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+
+    #hero .container {
+      padding-top: 110px;
+    }
+
+    @media (max-width: 992px) {
+      #hero .container {
+        padding-top: 98px;
+      }
+    }
+
+    #hero h1 {
+      margin: 0;
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 56px;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    #hero h2 {
+      color: rgba(255, 255, 255, 0.9);
+      margin: 10px 0 0 0;
+      font-size: 22px;
+    }
+
+    #hero .btn-get-started {
+      font-family: var(--primary-font);
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 1px;
+      display: inline-block;
+      padding: 10px 28px;
+      border-radius: 4px;
+      transition: 0.5s;
+      margin-top: 30px;
+      color: var(--white);
+      background: var(--blue);
+      border: 2px solid var(--blue);
+    }
+
+    #hero .btn-get-started:hover {
+      background: transparent;
+      border-color: var(--white);
+    }
+
+    @media (min-width: 1024px) {
+      #hero {
+        background-attachment: fixed;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #hero {
+        height: 100vh;
+      }
+      #hero .container {
+        padding-top: 60px;
+      }
+      #hero h1 {
+        font-size: 32px;
+        line-height: 36px;
+      }
+      #hero h2 {
+        font-size: 18px;
+        line-height: 24px;
+      }
+    }
+
+    /*--------------------------------------------------------------
+    # Sections General
+    --------------------------------------------------------------*/
+    section {
+      padding: 60px 0;
+      overflow: hidden;
+    }
+
+    .section-title {
+      text-align: center;
+      padding-bottom: 30px;
+    }
+
+    .section-title h2 {
+      font-size: 32px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      position: relative;
+      color: var(--dark);
+    }
+
+    .section-title h2::before {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 120px;
+      height: 1px;
+      background: #ddd;
+      bottom: 1px;
+      left: calc(50% - 60px);
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 40px;
+      height: 3px;
+      background: var(--blue);
+      bottom: 0;
+      left: calc(50% - 20px);
+    }
+
+    .section-title p {
+      margin-bottom: 0;
+    }
+
+    /*--------------------------------------------------------------
+    # Services
+    --------------------------------------------------------------*/
+    .services .icon-box {
+      text-align: center;
+      border: 1px solid #ebebeb;
+      padding: 80px 20px;
+      transition: all ease-in-out 0.3s;
+      background: var(--white);
+    }
+
+    .services .icon-box .icon {
+      margin: 0 auto;
+      width: 64px;
+      height: 64px;
+      background: var(--light-blue);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      transition: 0.3s;
+    }
+
+    .services .icon-box .icon i {
+      color: var(--blue);
+      font-size: 28px;
+      transition: ease-in-out 0.3s;
+    }
+
+    .services .icon-box h4 {
+      font-weight: 700;
+      margin-bottom: 15px;
+      font-size: 24px;
+    }
+
+    .services .icon-box h4 a {
+      color: var(--dark);
+      transition: ease-in-out 0.3s;
+    }
+
+    .services .icon-box p {
+      line-height: 24px;
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+
+    .services .icon-box:hover {
+      border-color: var(--white);
+      box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .services .icon-box:hover h4 a,
+    .services .icon-box:hover .icon i {
+      color: var(--blue);
+    }
+
+    .services .icon-box:hover .icon {
+      background: var(--blue);
+    }
+
+    .services .icon-box:hover .icon i {
+      color: var(--white);
+    }
+
+    /* Service Details */
+    .service-details {
+      padding: 40px;
+      background: var(--white);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .service-details h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--dark);
+    }
+
+    .service-details ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .service-details ul li {
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .service-details ul i {
+      font-size: 20px;
+      margin-right: 8px;
+      color: var(--blue);
+    }
+
+    .service-highlight {
+      background: var(--light-green);
+      padding: 20px;
+      border-left: 4px solid var(--green);
+      margin: 20px 0;
+      font-style: italic;
+    }
+
+    /*--------------------------------------------------------------
+    # About
+    --------------------------------------------------------------*/
+    .about .content h3 {
+      font-weight: 700;
+      font-size: 26px;
+      color: var(--dark);
+    }
+
+    .about .content ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .about .content ul li {
+      padding-bottom: 10px;
+    }
+
+    .about .content ul i {
+      font-size: 20px;
+      padding-right: 2px;
+      color: var(--blue);
+    }
+
+    .about .content p:last-child {
+      margin-bottom: 0;
+    }
+
+    /*--------------------------------------------------------------
+    # Contact
+    --------------------------------------------------------------*/
+    .contact .info {
+      width: 100%;
+      background: var(--white);
+    }
+
+    .contact .info i {
+      font-size: 20px;
+      color: var(--blue);
+      float: left;
+      width: 44px;
+      height: 44px;
+      background: #e3f2fd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .contact .info h4 {
+      padding: 0 0 0 60px;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: var(--dark);
+    }
+
+    .contact .info p {
+      padding: 0 0 0 60px;
+      margin-bottom: 0;
+      font-size: 14px;
+      color: var(--gray);
+    }
+
+    .contact .info .email,
+    .contact .info .phone {
+      margin-top: 40px;
+    }
+
+    .contact .info .email:hover i,
+    .contact .info .address:hover i,
+    .contact .info .phone:hover i {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .contact .php-email-form {
+      width: 100%;
+      background: var(--white);
+    }
+
+    .contact .php-email-form .form-group {
+      padding-bottom: 8px;
+    }
+
+    .contact .php-email-form .error-message {
+      display: none;
+      color: var(--white);
+      background: #ed3c0d;
+      text-align: left;
+      padding: 15px;
       font-weight: 600;
     }
-    input, textarea, select {
-      width: 100%;
-      padding: 0.5rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      transition: all 0.3s;
+
+    .contact .php-email-form .error-message br+br {
+      margin-top: 25px;
     }
-    input:focus, textarea:focus, select:focus {
-      border-color: #0d47a1;
-      box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.2);
-      outline: none;
-    }
-    button {
-      background: #0d47a1;
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.3s;
-    }
-    button:hover {
-      background: #1565c0;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    button:active {
-      transform: translateY(0);
-    }
-    .success-message {
+
+    .contact .php-email-form .sent-message {
       display: none;
-      background: #e8f5e9;
-      padding: 1rem;
-      border-left: 4px solid #2e7d32;
-      margin: 1rem 0;
-      border-radius: 0 4px 4px 0;
-      animation: fadeIn 0.5s ease;
+      color: var(--white);
+      background: #18d26e;
+      text-align: center;
+      padding: 15px;
+      font-weight: 600;
     }
+
+    .contact .php-email-form .loading {
+      display: none;
+      background: var(--white);
+      text-align: center;
+      padding: 15px;
+    }
+
+    .contact .php-email-form .loading:before {
+      content: "";
+      display: inline-block;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      margin: 0 10px -6px 0;
+      border: 3px solid #18d26e;
+      border-top-color: #eee;
+      animation: animate-loading 1s linear infinite;
+    }
+
+    .contact .php-email-form input,
+    .contact .php-email-form textarea,
+    .contact .php-email-form select {
+      border-radius: 4px;
+      box-shadow: none;
+      font-size: 14px;
+    }
+
+    .contact .php-email-form input:focus,
+    .contact .php-email-form textarea:focus,
+    .contact .php-email-form select:focus {
+      border-color: var(--blue);
+    }
+
+    .contact .php-email-form input,
+    .contact .php-email-form select {
+      height: 44px;
+    }
+
+    .contact .php-email-form textarea {
+      padding: 10px 12px;
+    }
+
+    .contact .php-email-form button[type=submit] {
+      background: var(--blue);
+      border: 0;
+      padding: 10px 24px;
+      color: var(--white);
+      transition: 0.4s;
+      border-radius: 4px;
+    }
+
+    .contact .php-email-form button[type=submit]:hover {
+      background: #1565c0;
+    }
+
+    /* Success Modal */
     .confirmation-modal {
       display: none;
       position: fixed;
@@ -241,421 +705,387 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.5);
-      z-index: 1000;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
       justify-content: center;
       align-items: center;
     }
+
     .modal-content {
-      background: white;
-      padding: 2rem;
+      background: var(--white);
+      padding: 30px;
       border-radius: 8px;
       max-width: 500px;
       text-align: center;
-      animation: slideUp 0.3s ease;
+      animation: fadeIn 0.3s ease;
     }
+
     .modal-content h3 {
-      color: #0d47a1;
-      margin-bottom: 1rem;
+      color: var(--blue);
+      margin-bottom: 15px;
     }
+
     .modal-content p {
-      margin-bottom: 1.5rem;
+      margin-bottom: 20px;
     }
+
     .modal-close {
-      background: #0d47a1;
-      color: white;
+      background: var(--blue);
+      color: var(--white);
       border: none;
-      padding: 0.5rem 1rem;
+      padding: 8px 20px;
       border-radius: 4px;
       cursor: pointer;
+      transition: 0.3s;
     }
+
+    .modal-close:hover {
+      background: #1565c0;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
-    @keyframes slideUp {
-      from { 
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to { 
+
+    /*--------------------------------------------------------------
+    # Footer
+    --------------------------------------------------------------*/
+    #footer {
+      background: var(--dark);
+      color: var(--white);
+      font-size: 14px;
+      text-align: center;
+      padding: 30px 0;
+    }
+
+    #footer h3 {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--white);
+      position: relative;
+      padding: 0;
+      margin: 0 0 15px 0;
+    }
+
+    #footer p {
+      font-size: 15;
+      font-style: italic;
+      padding: 0;
+      margin: 0 0 40px 0;
+    }
+
+    #footer .copyright {
+      margin: 0 0 5px 0;
+    }
+
+    #footer .credits {
+      font-size: 13px;
+    }
+
+    /*--------------------------------------------------------------
+    # Responsive Media Queries
+    --------------------------------------------------------------*/
+    @media (max-width: 768px) {
+      .navbar-mobile .dropdown .dropdown ul {
+        position: static;
+        display: none;
+        margin: 10px 20px;
+        padding: 10px 0;
+        z-index: 99;
         opacity: 1;
-        transform: translateY(0);
+        visibility: visible;
+        background: var(--white);
+        box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
       }
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4); }
-      70% { box-shadow: 0 0 0 10px rgba(46, 125, 50, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0); }
-    }
-    html {
-      scroll-behavior: smooth;
-    }
-    @media (max-width: 600px) {
-      header {
-        justify-content: center;
-        text-align: center;
+
+      .navbar-mobile .dropdown .dropdown ul li {
+        min-width: 200px;
       }
-      nav {
-        margin-top: 0.5rem;
-        width: 100%;
+
+      .navbar-mobile .dropdown .dropdown ul a {
+        padding: 10px 20px;
       }
-      nav a {
-        margin-left: 0.8rem;
-        font-size: 0.9rem;
+
+      .navbar-mobile .dropdown .dropdown ul a i {
+        font-size: 12px;
       }
-      main {
-        margin: 1rem;
-        padding: 0 0.5rem;
+
+      .navbar-mobile .dropdown .dropdown ul a:hover,
+      .navbar-mobile .dropdown .dropdown ul .active:hover,
+      .navbar-mobile .dropdown .dropdown ul li:hover>a {
+        color: var(--blue);
       }
-      .modal-content {
-        width: 90%;
-        padding: 1rem;
+
+      .navbar-mobile .dropdown .dropdown>.dropdown-active {
+        display: block;
       }
     }
   </style>
 </head>
+
 <body>
-  <script>
-    if (window.location.pathname === '/' && !window.location.hash) {
-      window.location.href = '/#home';
-    }
-  </script>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+      <h1 class="logo me-auto"><a href="index.html">Hetrocades</a></h1>
 
-<header>
-  <h1>Hetrocades</h1>
-  <nav>
-    <a href="#compliances" class="nav-link">Compliances</a>
-    <a href="#interior-design" class="nav-link">Interior Design</a>
-    <a href="#investment-advisory" class="nav-link">Investment Advisory</a>
-    <a href="#bank-loan" class="nav-link">Bank Loan</a>
-    <a href="#about" class="nav-link">About</a>
-    <a href="#contact" class="nav-link">Contact</a>
-    <a href="#enquiry" class="nav-link">Enquiry</a>
-  </nav>
-</header>
-
-<main>
-  <section id="home">
-    <div class="tagline">Your Trusted Business Solutions Partner</div>
-  </section>
-
-  <!-- Compliances Section -->
-  <section>
-    <div class="section-header" onclick="toggleSection(this)" id="compliances-header">
-      <h2 class="section-title">Labour & Industrial Compliances</h2>
-      <span class="toggle-icon">+</span>
-    </div>
-    <div class="section-content" id="compliances">
-      <div class="service-category">
-        <h3 class="sub-service-title">Full Compliance Solutions</h3>
-        <ul class="services-list">
-          <li>EPFO Registrations</li>
-          <li>DSC (Digital Signature Certificates)</li>
-          <li>eSign Activation</li>
-          <li>Professional Tax (PT) Law</li>
-          <li>Gratuity Law Compliance</li>
-          <li>Employee State Insurance (ESI)</li>
-          <li>CLRA (Contract Labour Regulation & Abolition Act)</li>
-          <li>Shops & Establishment (S&E) Compliance</li>
-          <li>Payroll Processing</li>
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#compliances">Labour & Industrial Compliances</a></li>
+              <li><a href="#interior-design">Interior Design Services</a></li>
+              <li><a href="#investment-advisory">Investment Advisory</a></li>
+              <li><a href="#bank-loan">Bank Loan Assistance</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto" href="#enquiry">Enquiry</a></li>
         </ul>
-        <div class="service-highlight">
-          Comprehensive compliance solutions tailored to your business needs
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="hero-container">
+      <h1>Your Trusted Business Solutions Partner</h1>
+      <h2>Comprehensive services tailored to your business needs</h2>
+      <a href="#enquiry" class="btn-get-started scrollto">Get Started</a>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Our Services</h2>
+          <p>We offer comprehensive business solutions to help your company thrive</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon-box iconbox-blue" id="compliances">
+              <div class="icon">
+                <i class="bx bxs-briefcase"></i>
+              </div>
+              <h4><a href="">Labour & Industrial Compliances</a></h4>
+              <ul class="services-list">
+                <li><i class="bx bx-check"></i> EPFO Registrations</li>
+                <li><i class="bx bx-check"></i> DSC (Digital Signature Certificates)</li>
+                <li><i class="bx bx-check"></i> eSign Activation</li>
+                <li><i class="bx bx-check"></i> Professional Tax (PT) Law</li>
+                <li><i class="bx bx-check"></i> Gratuity Law Compliance</li>
+                <li><i class="bx bx-check"></i> Employee State Insurance (ESI)</li>
+                <li><i class="bx bx-check"></i> CLRA Compliance</li>
+                <li><i class="bx bx-check"></i> Shops & Establishment Compliance</li>
+                <li><i class="bx bx-check"></i> Payroll Processing</li>
+              </ul>
+              <div class="service-highlight">
+                Comprehensive compliance solutions tailored to your business needs
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon-box iconbox-orange" id="interior-design">
+              <div class="icon">
+                <i class="bx bxs-home"></i>
+              </div>
+              <h4><a href="">Interior Design Services</a></h4>
+              <ul class="services-list">
+                <li><i class="bx bx-check"></i> Residential Space Planning</li>
+                <li><i class="bx bx-check"></i> Commercial Interior Design</li>
+                <li><i class="bx bx-check"></i> 3D Visualization</li>
+                <li><i class="bx bx-check"></i> Material Selection Assistance</li>
+                <li><i class="bx bx-check"></i> Project Management</li>
+              </ul>
+              <div class="service-highlight">
+                Turnkey solutions from concept to execution
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon-box iconbox-pink" id="investment-advisory">
+              <div class="icon">
+                <i class="bx bxs-bar-chart-alt-2"></i>
+              </div>
+              <h4><a href="">Investment Advisory Services</a></h4>
+              <ul class="services-list">
+                <li><i class="bx bx-check"></i> SEBI Registered Investment Advice</li>
+                <li><i class="bx bx-check"></i> Portfolio Management</li>
+                <li><i class="bx bx-check"></i> Retirement Planning</li>
+                <li><i class="bx bx-check"></i> Tax-Saving Investment Strategies</li>
+                <li><i class="bx bx-check"></i> Wealth Management</li>
+              </ul>
+              <div class="service-highlight">
+                Certified SEBI Advisor for personalized financial solutions
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="400">
+            <div class="icon-box iconbox-teal" id="bank-loan">
+              <div class="icon">
+                <i class="bx bxs-bank"></i>
+              </div>
+              <h4><a href="">Bank Loan Assistance</a></h4>
+              <ul class="services-list">
+                <li><i class="bx bx-check"></i> Home Loan Processing</li>
+                <li><i class="bx bx-check"></i> Business Loan Facilitation</li>
+                <li><i class="bx bx-check"></i> Documentation Assistance</li>
+                <li><i class="bx bx-check"></i> Loan Eligibility Assessment</li>
+                <li><i class="bx bx-check"></i> Quick Approval Process</li>
+              </ul>
+              <div class="service-highlight">
+                Fast-track processing with high approval rates
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section><!-- End Services Section -->
 
-  <!-- Interior Design Section -->
-  <section>
-    <div class="section-header" onclick="toggleSection(this)" id="interior-design-header">
-      <h2 class="section-title">Interior Design Services</h2>
-      <span class="toggle-icon">+</span>
-    </div>
-    <div class="section-content" id="interior-design">
-      <div class="service-category">
-        <h3 class="sub-service-title">Complete Design Solutions</h3>
-        <ul class="services-list">
-          <li>Residential Space Planning</li>
-          <li>Commercial Interior Design</li>
-          <li>3D Visualization</li>
-          <li>Material Selection Assistance</li>
-          <li>Project Management</li>
-        </ul>
-        <div class="service-highlight">
-          Turnkey solutions from concept to execution
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>About Us</h2>
+        </div>
+
+        <div class="row content">
+          <div class="col-lg-12">
+            <p>
+              Hetrocades is a professional services firm specializing in business compliance, financial advisory, and design solutions. Our team of experts is committed to delivering comprehensive services tailored to your specific needs.
+            </p>
+            <p>
+              With years of experience across multiple industries, we provide reliable and efficient solutions to help your business thrive in today's competitive environment.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section><!-- End About Section -->
 
-  <!-- Investment Advisory Section -->
-  <section>
-    <div class="section-header" onclick="toggleSection(this)" id="investment-advisory-header">
-      <h2 class="section-title">Investment Advisory Services</h2>
-      <span class="toggle-icon">+</span>
-    </div>
-    <div class="section-content" id="investment-advisory">
-      <div class="service-category">
-        <h3 class="sub-service-title">Financial Planning Services</h3>
-        <ul class="services-list">
-          <li>SEBI Registered Investment Advice</li>
-          <li>Portfolio Management</li>
-          <li>Retirement Planning</li>
-          <li>Tax-Saving Investment Strategies</li>
-          <li>Wealth Management</li>
-        </ul>
-        <div class="service-highlight">
-          Certified SEBI Advisor for personalized financial solutions
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Contact Us</h2>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-5 d-flex align-items-stretch">
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Location:</h4>
+                <p>Bangalore, India</p>
+              </div>
+
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>santhosh_kumar_b@icloud.com</p>
+              </div>
+
+              <div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>Call:</h4>
+                <p>+91 83745 00905</p>
+              </div>
+
+              <div class="linkedin">
+                <i class="bi bi-linkedin"></i>
+                <h4>LinkedIn:</h4>
+                <p><a href="https://www.linkedin.com/in/santhosh-kumar-bagathi-56a2b6116" target="_blank">Santhosh Kumar Bagathi</a></p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section><!-- End Contact Section -->
 
-  <!-- Bank Loan Section -->
-  <section>
-    <div class="section-header" onclick="toggleSection(this)" id="bank-loan-header">
-      <h2 class="section-title">Bank Loan Assistance</h2>
-      <span class="toggle-icon">+</span>
-    </div>
-    <div class="section-content" id="bank-loan">
-      <div class="service-category">
-        <h3 class="sub-service-title">Loan Facilitation Services</h3>
-        <ul class="services-list">
-          <li>Home Loan Processing</li>
-          <li>Business Loan Facilitation</li>
-          <li>Documentation Assistance</li>
-          <li>Loan Eligibility Assessment</li>
-          <li>Quick Approval Process</li>
-        </ul>
-        <div class="service-highlight">
-          Fast-track processing with high approval rates
+    <!-- ======= Enquiry Section ======= -->
+    <section id="enquiry" class="enquiry">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Business Enquiry</h2>
+          <p>Fill out the form below and our team will get back to you shortly</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <form action="https://formsubmit.co/santhosh_kumar_b@icloud.com" method="POST" class="php-email-form">
+              <input type="hidden" name="_subject" value="New Enquiry from Hetrocades">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_next" value="https://hetrocades.online/#enquiry">
+              <input type="hidden" name="_captcha" value="false">
+              
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <input type="tel" class="form-control" name="phone" id="phone" placeholder="Contact Number" required>
+              </div>
+              <div class="form-group mt-3">
+                <select class="form-control" name="service" id="service" required>
+                  <option value="">Select a service</option>
+                  <option value="Compliances">Labour & Industrial Compliances</option>
+                  <option value="Interior Design">Interior Design Services</option>
+                  <option value="Investment Advisory">Investment Advisory</option>
+                  <option value="Bank Loan">Bank Loan Assistance</option>
+                  <option value="Other">Other Services</option>
+                </select>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="5" placeholder="Your Enquiry" required></textarea>
+              </div>
+              <div class="text-center mt-3"><button type="submit">Submit Enquiry</button></div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section><!-- End Enquiry Section -->
+  </main><!-- End #main -->
 
-  <!-- About Section -->
-  <section>
-    <div class="section-header" onclick="toggleSection(this)" id="about-header">
-      <h2 class="section-title">About Us</h2>
-      <span class="toggle-icon">+</span>
-    </div>
-    <div class="section-content" id="about">
-      <p>Hetrocades is a professional services firm specializing in business compliance, financial advisory, and design solutions. Our team of experts is committed to delivering comprehensive services tailored to your specific needs.</p>
-      <p>With years of experience across multiple industries, we provide reliable and efficient solutions to help your business thrive in today's competitive environment.</p>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section>
-    <div class="section-header" onclick="toggleSection(this)" id="contact-header">
-      <h2 class="section-title">Contact Information</h2>
-      <span class="toggle-icon">+</span>
-    </div>
-    <div class="section-content" id="contact">
-      <div class="contact-info">
-        <p>Email: <a href="mailto:santhosh_kumar_b@icloud.com">santhosh_kumar_b@icloud.com</a></p>
-        <p>Phone: <a href="tel:+918374500905">+91 83745 00905</a></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/santhosh-kumar-bagathi-56a2b6116" target="_blank" rel="noopener">Santhosh Kumar Bagathi</a></p>
-        <p>Office Hours: Monday to Friday, 9:00 AM to 6:00 PM</p>
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Hetrocades</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        Your Trusted Partner for Business Solutions
       </div>
     </div>
-  </section>
+  </footer><!-- End Footer -->
 
-  <!-- Enquiry Section -->
-  <section>
-    <div class="section-header" onclick="toggleSection(this)" id="enquiry-header">
-      <h2 class="section-title">Business Enquiry</h2>
-      <span class="toggle-icon">+</span>
+  <!-- Confirmation Modal -->
+  <div id="confirmationModal" class="confirmation-modal">
+    <div class="modal-content">
+      <h3>Enquiry Submitted Successfully</h3>
+      <p>Thank you for contacting Hetrocades. We have received your enquiry and our team will get back to you within 24 hours.</p>
+      <p>For urgent matters, please call us at <a href="tel:+918374500905">+91 83745 00905</a>.</p>
+      <button class="modal-close" onclick="closeModal()">Close</button>
     </div>
-    <div class="section-content" id="enquiry">
-      <!-- FormSubmit.co Form - Replace YOUR_EMAIL below -->
-      <form action="https://formsubmit.co/santhosh_kumar_b@icloud.com" method="POST" id="enquiryForm">
-        <input type="hidden" name="_subject" value="New Enquiry from Hetrocades">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next" value="https://hetrocades.online/#enquiry">
-        <input type="hidden" name="_captcha" value="false">
-        
-        <div>
-          <label for="name">Full Name*</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-        <div>
-          <label for="email">Email Address*</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div>
-          <label for="phone">Contact Number*</label>
-          <input type="tel" id="phone" name="phone" required>
-        </div>
-        <div>
-          <label for="service">Service Interested In*</label>
-          <select id="service" name="service" required>
-            <option value="">Select a service</option>
-            <option value="Compliances">Labour & Industrial Compliances</option>
-            <option value="Interior Design">Interior Design Services</option>
-            <option value="Investment Advisory">Investment Advisory</option>
-            <option value="Bank Loan">Bank Loan Assistance</option>
-            <option value="Other">Other Services</option>
-          </select>
-        </div>
-        <div>
-          <label for="message">Your Enquiry*</label>
-          <textarea id="message" name="message" rows="4" required></textarea>
-        </div>
-        <button type="submit">Submit Enquiry</button>
-      </form>
-      
-      <div id="successMessage" class="success-message">
-        Thank you for your enquiry. We have received your details and will contact you shortly.
-      </div>
-    </div>
-  </section>
-</main>
-
-<!-- Confirmation Modal -->
-<div id="confirmationModal" class="confirmation-modal">
-  <div class="modal-content">
-    <h3>Enquiry Submitted Successfully</h3>
-    <p>Thank you for contacting Hetrocades. We have received your enquiry and our team will get back to you within 24 hours.</p>
-    <p>For urgent matters, please call us at <a href="tel:+918374500905">+91 83745 00905</a>.</p>
-    <button class="modal-close" onclick="closeModal()">Close</button>
   </div>
-</div>
 
-<footer>
-  <p>&copy; 2025 Hetrocades. All rights reserved.</p>
-  <p>Your Trusted Partner for Business Solutions</p>
-</footer>
-
-<script>
-  // Enhanced toggle function
-  function toggleSection(element, smooth = true) {
-    const targetId = element.nextElementSibling.id;
-    const content = element.nextElementSibling;
-    const icon = element.querySelector('.toggle-icon');
-    
-    // Toggle active class
-    content.classList.toggle('active');
-    icon.classList.toggle('active');
-    icon.textContent = content.classList.contains('active') ? '−' : '+';
-    
-    // Update URL hash
-    if(content.classList.contains('active')) {
-      history.pushState(null, null, `#${targetId}`);
-    }
-    
-    // Update active nav link
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.classList.remove('active-nav');
-      if(link.getAttribute('href') === `#${targetId}`) {
-        link.classList.add('active-nav');
-      }
-    });
-    
-    // Smooth scroll if not triggered by nav click
-    if(smooth && content.classList.contains('active')) {
-      content.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }
-
-  // Handle nav link clicks
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href').substring(1);
-      const header = document.getElementById(`${targetId}-header`);
-      
-      // Close all sections first
-      document.querySelectorAll('.section-content').forEach(section => {
-        if(section.id !== targetId && section.classList.contains('active')) {
-          const parentHeader = section.previousElementSibling;
-          toggleSection(parentHeader, false);
-        }
-      });
-      
-      // Open target section
-      if(header) {
-        const content = header.nextElementSibling;
-        if(!content.classList.contains('active')) {
-          toggleSection(header, true);
-        } else {
-          content.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }
-    });
-  });
-
-  // Form submission handler
-  document.getElementById('enquiryForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Show confirmation modal immediately
-    document.getElementById('confirmationModal').style.display = 'flex';
-    
-    // Submit the form data
-    const formData = new FormData(this);
-    fetch(this.action, {
-      method: 'POST',
-      body: formData,
-      headers: {
-        'Accept': 'application/json'
-      }
-    })
-    .then(response => {
-      if(response.ok) {
-        // Show success message
-        document.getElementById('successMessage').style.display = 'block';
-        this.reset();
-      } else {
-        throw new Error('Form submission failed');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      alert('There was an error submitting your enquiry. Please try again or contact us directly at +91 83745 00905.');
-    });
-  });
-
-  function closeModal() {
-    document.getElementById('confirmationModal').style.display = 'none';
-  }
-
-  // Check URL hash on load
-  document.addEventListener('DOMContentLoaded', function() {
-    // Open home section by default
-    if(!window.location.hash || window.location.hash === '#home') {
-      document.querySelector('.section-header').click();
-    }
-    
-    // Open section based on URL hash
-    if(window.location.hash && window.location.hash !== '#home') {
-      const targetId = window.location.hash.substring(1);
-      const header = document.getElementById(`${targetId}-header`);
-      if(header) {
-        toggleSection(header, false);
-      }
-    }
-    
-    // Highlight active nav link
-    const currentHash = window.location.hash || '#compliances';
-    document.querySelectorAll('.nav-link').forEach(link => {
-      if(link.getAttribute('href') === currentHash) {
-        link.classList.add('active-nav');
-      }
-    });
-  });
-
-  // Close modal when clicking outside
-  window.onclick = function(event) {
-    const modal = document.getElementById('confirmationModal');
-    if(event.target == modal) {
-      modal.style.display = 'none';
-    }
-  }
-</script>
-
-</body>
-</html>
+  <!-- Vendor JS Files -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/js/glightbox.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/isotope-layout/3.0.6/isotope.pkgd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/swiper/8.0.7/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.
