@@ -3,7 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hetrocades - Your Trusted Business Solutions Partner</title>
+  <title>Hetrocades - Your Trusted Business Solutions Partner</title>/* Success Message Styles - Add this before </style> */
+.form-success {
+  display: none;
+  background: #e8f5e9;
+  padding: 2rem;
+  border-radius: 8px;
+  border-left: 4px solid #2e7d32;
+  margin: 2rem auto;
+  max-width: 500px;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+/* Add this if not already present */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
   <style>
     * {
       box-sizing: border-box;
@@ -465,54 +482,76 @@
   </section>
 
   <!-- Enquiry Section -->
-  <section>
-    <div class="section-header" onclick="toggleSection(this)" id="enquiry-header">
-      <h2 class="section-title">Business Enquiry</h2>
-      <span class="toggle-icon">+</span>
-    </div>
-    <div class="section-content" id="enquiry">
-      <!-- FormSubmit.co Form - Replace YOUR_EMAIL below -->
-      <form action="https://formsubmit.co/santhosh_kumar_b@icloud.com" method="POST" id="enquiryForm">
-        <input type="hidden" name="_subject" value="New Enquiry from Hetrocades">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next" value="https://hetrocades.online/#enquiry">
-        <input type="hidden" name="_captcha" value="false">
-        
-        <div>
-          <label for="name">Full Name*</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-        <div>
-          <label for="email">Email Address*</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div>
-          <label for="phone">Contact Number*</label>
-          <input type="tel" id="phone" name="phone" required>
-        </div>
-        <div>
-          <label for="service">Service Interested In*</label>
-          <select id="service" name="service" required>
-            <option value="">Select a service</option>
-            <option value="Compliances">Labour & Industrial Compliances</option>
-            <option value="Interior Design">Interior Design Services</option>
-            <option value="Investment Advisory">Investment Advisory</option>
-            <option value="Bank Loan">Bank Loan Assistance</option>
-            <option value="Other">Other Services</option>
-          </select>
-        </div>
-        <div>
-          <label for="message">Your Enquiry*</label>
-          <textarea id="message" name="message" rows="4" required></textarea>
-        </div>
-        <button type="submit">Submit Enquiry</button>
-      </form>
-      
-      <div id="successMessage" class="success-message">
-        Thank you for your enquiry. We have received your details and will contact you shortly.
+  <!-- Updated Enquiry Section -->
+<section>
+  <div class="section-header" onclick="toggleSection(this)" id="enquiry-header">
+    <h2 class="section-title">Business Enquiry</h2>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="section-content" id="enquiry">
+    <form id="hetrocadesForm" action="https://formspree.io/f/xrbqjard" method="POST">
+      <div>
+        <label for="name">Full Name*</label>
+        <input type="text" id="name" name="name" required>
       </div>
+      <div>
+        <label for="email">Email*</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div>
+        <label for="phone">Phone*</label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+      <div>
+        <label for="service">Service Needed*</label>
+        <select id="service" name="service" required>
+          <option value="">Select service</option>
+          <option value="Compliances">Labour & Industrial Compliances</option>
+          <option value="Interior Design">Interior Design</option>
+          <option value="Investment Advisory">Investment Advisory</option>
+          <option value="Bank Loan">Bank Loan Assistance</option>
+        </select>
+      </div>
+      <div>
+        <label for="message">Message*</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+      </div>
+      <button type="submit">Submit Enquiry</button>
+    </form>
+    
+    <div id="formSuccess" class="form-success">
+      <h3>Thank You For Your Enquiry!</h3>
+      <p>We've received your details and will contact you shortly.</p>
+      <p>For immediate assistance, please call <a href="tel:+918374500905">+91 83745 00905</a></p>
     </div>
-  </section>
+  </div>
+</section>
+
+<script>
+  // Add this script right before </body>
+  document.getElementById('hetrocadesForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      
+      if (response.ok) {
+        document.getElementById('formSuccess').style.display = 'block';
+        form.style.display = 'none';
+        document.getElementById('formSuccess').scrollIntoView({ behavior: 'smooth' });
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (error) {
+      alert('Error submitting form. Please email us directly at santhosh_kumar_b@icloud.com');
+    }
+  });
+</script>
 </main>
 
 <!-- Confirmation Modal -->
