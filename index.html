@@ -19,47 +19,37 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/swiper/8.0.7/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
   <style>
     :root {
       --blue: #0d47a1;
       --light-blue: #e3f2fd;
+      --dark-blue: #0b3d8a;
       --white: #fff;
-      --dark: #222;
       --light-gray: #f8f9fa;
-      --gray: #6c757d;
       --dark-gray: #343a40;
-      --green: #2e7d32;
-      --light-green: #e8f5e9;
-      --primary-font: 'Poppins', sans-serif;
-      --secondary-font: 'Roboto', sans-serif;
     }
-
+    
     body {
-      font-family: var(--primary-font);
-      color: var(--dark);
-      background-color: var(--white);
+      font-family: "Open Sans", sans-serif;
+      color: #444444;
     }
-
+    
     a {
       color: var(--blue);
       text-decoration: none;
     }
-
+    
     a:hover {
-      color: #1565c0;
+      color: var(--dark-blue);
       text-decoration: none;
     }
-
+    
     h1, h2, h3, h4, h5, h6 {
-      font-family: var(--primary-font);
+      font-family: "Poppins", sans-serif;
     }
-
+    
     /*--------------------------------------------------------------
     # Header
     --------------------------------------------------------------*/
@@ -70,7 +60,7 @@
       padding: 15px 0;
       box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
     }
-
+    
     #header .logo {
       font-size: 28px;
       margin: 0;
@@ -79,22 +69,22 @@
       font-weight: 700;
       letter-spacing: 1px;
     }
-
+    
     #header .logo a {
-      color: var(--dark);
+      color: #111;
     }
-
+    
     #header .logo img {
       max-height: 40px;
     }
-
+    
     /*--------------------------------------------------------------
     # Navigation Menu
     --------------------------------------------------------------*/
     .navbar {
       padding: 0;
     }
-
+    
     .navbar ul {
       margin: 0;
       padding: 0;
@@ -102,37 +92,33 @@
       list-style: none;
       align-items: center;
     }
-
+    
     .navbar li {
       position: relative;
     }
-
-    .navbar a,
-    .navbar a:focus {
+    
+    .navbar a, .navbar a:focus {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 10px 15px;
-      font-size: 15px;
-      color: var(--dark);
+      color: #111;
       white-space: nowrap;
       transition: 0.3s;
+      font-size: 14px;
+      font-weight: 500;
     }
-
-    .navbar a i,
-    .navbar a:focus i {
+    
+    .navbar a i, .navbar a:focus i {
       font-size: 12px;
       line-height: 0;
       margin-left: 5px;
     }
-
-    .navbar a:hover,
-    .navbar .active,
-    .navbar .active:focus,
-    .navbar li:hover>a {
+    
+    .navbar a:hover, .navbar .active, .navbar .active:focus, .navbar li:hover>a {
       color: var(--blue);
     }
-
+    
     .navbar .dropdown ul {
       display: block;
       position: absolute;
@@ -148,148 +134,30 @@
       transition: 0.3s;
       border-radius: 4px;
     }
-
+    
     .navbar .dropdown ul li {
       min-width: 200px;
     }
-
+    
     .navbar .dropdown ul a {
       padding: 10px 20px;
       text-transform: none;
     }
-
+    
     .navbar .dropdown ul a i {
       font-size: 12px;
     }
-
-    .navbar .dropdown ul a:hover,
-    .navbar .dropdown ul .active:hover,
-    .navbar .dropdown ul li:hover>a {
+    
+    .navbar .dropdown ul a:hover, .navbar .dropdown ul .active:hover, .navbar .dropdown ul li:hover>a {
       color: var(--blue);
     }
-
+    
     .navbar .dropdown:hover>ul {
       opacity: 1;
       top: 100%;
       visibility: visible;
     }
-
-    .navbar .dropdown .dropdown ul {
-      top: 0;
-      left: calc(100% - 30px);
-      visibility: hidden;
-    }
-
-    .navbar .dropdown .dropdown:hover>ul {
-      opacity: 1;
-      top: 0;
-      left: 100%;
-      visibility: visible;
-    }
-
-    /* Mobile Navigation */
-    .mobile-nav-toggle {
-      color: var(--dark);
-      font-size: 28px;
-      cursor: pointer;
-      display: none;
-      line-height: 0;
-      transition: 0.5s;
-    }
-
-    @media (max-width: 991px) {
-      .mobile-nav-toggle {
-        display: block;
-      }
-
-      .navbar ul {
-        display: none;
-      }
-    }
-
-    .navbar-mobile {
-      position: fixed;
-      overflow: hidden;
-      top: 0;
-      right: 0;
-      left: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.9);
-      transition: 0.3s;
-      z-index: 999;
-    }
-
-    .navbar-mobile .mobile-nav-toggle {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-    }
-
-    .navbar-mobile ul {
-      display: block;
-      position: absolute;
-      top: 55px;
-      right: 15px;
-      bottom: 15px;
-      left: 15px;
-      padding: 10px 0;
-      background-color: var(--white);
-      overflow-y: auto;
-      transition: 0.3s;
-    }
-
-    .navbar-mobile a,
-    .navbar-mobile a:focus {
-      padding: 10px 20px;
-      font-size: 15px;
-      color: var(--dark);
-    }
-
-    .navbar-mobile a:hover,
-    .navbar-mobile .active,
-    .navbar-mobile li:hover>a {
-      color: var(--blue);
-    }
-
-    .navbar-mobile .getstarted,
-    .navbar-mobile .getstarted:focus {
-      margin: 15px;
-    }
-
-    .navbar-mobile .dropdown ul {
-      position: static;
-      display: none;
-      margin: 10px 20px;
-      padding: 10px 0;
-      z-index: 99;
-      opacity: 1;
-      visibility: visible;
-      background: var(--white);
-      box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
-    }
-
-    .navbar-mobile .dropdown ul li {
-      min-width: 200px;
-    }
-
-    .navbar-mobile .dropdown ul a {
-      padding: 10px 20px;
-    }
-
-    .navbar-mobile .dropdown ul a i {
-      font-size: 12px;
-    }
-
-    .navbar-mobile .dropdown ul a:hover,
-    .navbar-mobile .dropdown ul .active:hover,
-    .navbar-mobile .dropdown ul li:hover>a {
-      color: var(--blue);
-    }
-
-    .navbar-mobile .dropdown>.dropdown-active {
-      display: block;
-    }
-
+    
     /*--------------------------------------------------------------
     # Hero Section
     --------------------------------------------------------------*/
@@ -301,7 +169,7 @@
       position: relative;
       padding: 0;
     }
-
+    
     #hero:before {
       content: "";
       background: rgba(0, 0, 0, 0.6);
@@ -311,17 +179,11 @@
       left: 0;
       right: 0;
     }
-
+    
     #hero .container {
       padding-top: 110px;
     }
-
-    @media (max-width: 992px) {
-      #hero .container {
-        padding-top: 98px;
-      }
-    }
-
+    
     #hero h1 {
       margin: 0;
       font-size: 48px;
@@ -330,15 +192,15 @@
       color: var(--white);
       text-transform: uppercase;
     }
-
+    
     #hero h2 {
-      color: rgba(255, 255, 255, 0.9);
+      color: #eee;
       margin: 10px 0 0 0;
-      font-size: 22px;
+      font-size: 24px;
     }
-
+    
     #hero .btn-get-started {
-      font-family: var(--primary-font);
+      font-family: "Roboto", sans-serif;
       text-transform: uppercase;
       font-weight: 500;
       font-size: 14px;
@@ -350,20 +212,270 @@
       margin-top: 30px;
       color: var(--white);
       background: var(--blue);
-      border: 2px solid var(--blue);
     }
-
+    
     #hero .btn-get-started:hover {
-      background: transparent;
+      background: var(--dark-blue);
+    }
+    
+    /*--------------------------------------------------------------
+    # Sections General
+    --------------------------------------------------------------*/
+    section {
+      padding: 60px 0;
+      overflow: hidden;
+    }
+    
+    .section-title {
+      text-align: center;
+      padding-bottom: 30px;
+    }
+    
+    .section-title h2 {
+      font-size: 32px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      position: relative;
+      color: #111;
+    }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: var(--blue);
+      bottom: 0;
+      left: calc(50% - 25px);
+    }
+    
+    /*--------------------------------------------------------------
+    # Services
+    --------------------------------------------------------------*/
+    .services .icon-box {
+      text-align: center;
+      border: 1px solid #e2eefd;
+      padding: 80px 20px;
+      transition: all ease-in-out 0.3s;
+      background: var(--white);
+    }
+    
+    .services .icon-box .icon {
+      margin: 0 auto;
+      width: 64px;
+      height: 64px;
+      background: #f1f6fe;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      transition: ease-in-out 0.3s;
+    }
+    
+    .services .icon-box .icon i {
+      color: var(--blue);
+      font-size: 28px;
+    }
+    
+    .services .icon-box h4 {
+      font-weight: 700;
+      margin-bottom: 15px;
+      font-size: 24px;
+    }
+    
+    .services .icon-box h4 a {
+      color: #111;
+      transition: ease-in-out 0.3s;
+    }
+    
+    .services .icon-box p {
+      line-height: 24px;
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+    
+    .services .icon-box:hover {
       border-color: var(--white);
+      box-shadow: 0px 0 25px 0 rgba(16, 110, 234, 0.1);
     }
-
-    @media (min-width: 1024px) {
-      #hero {
-        background-attachment: fixed;
-      }
+    
+    .services .icon-box:hover h4 a {
+      color: var(--blue);
     }
-
+    
+    /*--------------------------------------------------------------
+    # Contact
+    --------------------------------------------------------------*/
+    .contact .info {
+      width: 100%;
+      background: var(--white);
+    }
+    
+    .contact .info i {
+      font-size: 20px;
+      color: var(--blue);
+      float: left;
+      width: 44px;
+      height: 44px;
+      background: #e3f2fd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50px;
+      transition: all 0.3s ease-in-out;
+    }
+    
+    .contact .info h4 {
+      padding: 0 0 0 60px;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #111;
+    }
+    
+    .contact .info p {
+      padding: 0 0 0 60px;
+      margin-bottom: 0;
+      font-size: 14px;
+      color: #444444;
+    }
+    
+    .contact .info .email, .contact .info .phone {
+      margin-top: 40px;
+    }
+    
+    .contact .php-email-form {
+      width: 100%;
+      background: var(--white);
+    }
+    
+    .contact .php-email-form .form-group {
+      padding-bottom: 8px;
+    }
+    
+    .contact .php-email-form .error-message {
+      display: none;
+      color: var(--white);
+      background: #ed3c0d;
+      text-align: left;
+      padding: 15px;
+      font-weight: 600;
+    }
+    
+    .contact .php-email-form .error-message br+br {
+      margin-top: 25px;
+    }
+    
+    .contact .php-email-form .sent-message {
+      display: none;
+      color: var(--white);
+      background: #18d26e;
+      text-align: center;
+      padding: 15px;
+      font-weight: 600;
+    }
+    
+    .contact .php-email-form .loading {
+      display: none;
+      background: var(--white);
+      text-align: center;
+      padding: 15px;
+    }
+    
+    .contact .php-email-form .loading:before {
+      content: "";
+      display: inline-block;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      margin: 0 10px -6px 0;
+      border: 3px solid #18d26e;
+      border-top-color: #eee;
+      animation: animate-loading 1s linear infinite;
+    }
+    
+    .contact .php-email-form input, .contact .php-email-form textarea, .contact .php-email-form select {
+      border-radius: 0;
+      box-shadow: none;
+      font-size: 14px;
+      border-radius: 4px;
+    }
+    
+    .contact .php-email-form input:focus, .contact .php-email-form textarea:focus, .contact .php-email-form select:focus {
+      border-color: var(--blue);
+    }
+    
+    .contact .php-email-form input {
+      height: 44px;
+    }
+    
+    .contact .php-email-form textarea {
+      padding: 10px 12px;
+    }
+    
+    .contact .php-email-form button[type="submit"] {
+      background: var(--blue);
+      border: 0;
+      padding: 10px 30px;
+      color: var(--white);
+      transition: 0.4s;
+      border-radius: 4px;
+    }
+    
+    .contact .php-email-form button[type="submit"]:hover {
+      background: var(--dark-blue);
+    }
+    
+    /*--------------------------------------------------------------
+    # Footer
+    --------------------------------------------------------------*/
+    #footer {
+      background: #0d1935;
+      padding: 30px 0;
+      color: var(--white);
+      font-size: 14px;
+    }
+    
+    #footer .copyright {
+      text-align: center;
+    }
+    
+    #footer .credits {
+      padding-top: 10px;
+      text-align: center;
+      font-size: 13px;
+      color: #a8a8a8;
+    }
+    
+    /*--------------------------------------------------------------
+    # Modal
+    --------------------------------------------------------------*/
+    .modal-content {
+      border-radius: 10px;
+      border: none;
+    }
+    
+    .modal-header {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    
+    .modal-body {
+      padding: 30px;
+    }
+    
+    .modal-footer {
+      border-top: none;
+      padding-top: 0;
+    }
+    
+    /*--------------------------------------------------------------
+    # Responsive
+    --------------------------------------------------------------*/
     @media (max-width: 768px) {
       #hero {
         height: 100vh;
@@ -380,447 +492,6 @@
         line-height: 24px;
       }
     }
-
-    /*--------------------------------------------------------------
-    # Sections General
-    --------------------------------------------------------------*/
-    section {
-      padding: 60px 0;
-      overflow: hidden;
-    }
-
-    .section-title {
-      text-align: center;
-      padding-bottom: 30px;
-    }
-
-    .section-title h2 {
-      font-size: 32px;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      padding-bottom: 20px;
-      position: relative;
-      color: var(--dark);
-    }
-
-    .section-title h2::before {
-      content: '';
-      position: absolute;
-      display: block;
-      width: 120px;
-      height: 1px;
-      background: #ddd;
-      bottom: 1px;
-      left: calc(50% - 60px);
-    }
-
-    .section-title h2::after {
-      content: '';
-      position: absolute;
-      display: block;
-      width: 40px;
-      height: 3px;
-      background: var(--blue);
-      bottom: 0;
-      left: calc(50% - 20px);
-    }
-
-    .section-title p {
-      margin-bottom: 0;
-    }
-
-    /*--------------------------------------------------------------
-    # Services
-    --------------------------------------------------------------*/
-    .services .icon-box {
-      text-align: center;
-      border: 1px solid #ebebeb;
-      padding: 80px 20px;
-      transition: all ease-in-out 0.3s;
-      background: var(--white);
-    }
-
-    .services .icon-box .icon {
-      margin: 0 auto;
-      width: 64px;
-      height: 64px;
-      background: var(--light-blue);
-      border-radius: 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      transition: 0.3s;
-    }
-
-    .services .icon-box .icon i {
-      color: var(--blue);
-      font-size: 28px;
-      transition: ease-in-out 0.3s;
-    }
-
-    .services .icon-box h4 {
-      font-weight: 700;
-      margin-bottom: 15px;
-      font-size: 24px;
-    }
-
-    .services .icon-box h4 a {
-      color: var(--dark);
-      transition: ease-in-out 0.3s;
-    }
-
-    .services .icon-box p {
-      line-height: 24px;
-      font-size: 14px;
-      margin-bottom: 0;
-    }
-
-    .services .icon-box:hover {
-      border-color: var(--white);
-      box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
-    }
-
-    .services .icon-box:hover h4 a,
-    .services .icon-box:hover .icon i {
-      color: var(--blue);
-    }
-
-    .services .icon-box:hover .icon {
-      background: var(--blue);
-    }
-
-    .services .icon-box:hover .icon i {
-      color: var(--white);
-    }
-
-    /* Service Details */
-    .service-details {
-      padding: 40px;
-      background: var(--white);
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .service-details h3 {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      color: var(--dark);
-    }
-
-    .service-details ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .service-details ul li {
-      padding: 10px 0;
-      display: flex;
-      align-items: center;
-    }
-
-    .service-details ul i {
-      font-size: 20px;
-      margin-right: 8px;
-      color: var(--blue);
-    }
-
-    .service-highlight {
-      background: var(--light-green);
-      padding: 20px;
-      border-left: 4px solid var(--green);
-      margin: 20px 0;
-      font-style: italic;
-    }
-
-    /*--------------------------------------------------------------
-    # About
-    --------------------------------------------------------------*/
-    .about .content h3 {
-      font-weight: 700;
-      font-size: 26px;
-      color: var(--dark);
-    }
-
-    .about .content ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .about .content ul li {
-      padding-bottom: 10px;
-    }
-
-    .about .content ul i {
-      font-size: 20px;
-      padding-right: 2px;
-      color: var(--blue);
-    }
-
-    .about .content p:last-child {
-      margin-bottom: 0;
-    }
-
-    /*--------------------------------------------------------------
-    # Contact
-    --------------------------------------------------------------*/
-    .contact .info {
-      width: 100%;
-      background: var(--white);
-    }
-
-    .contact .info i {
-      font-size: 20px;
-      color: var(--blue);
-      float: left;
-      width: 44px;
-      height: 44px;
-      background: #e3f2fd;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50px;
-      transition: all 0.3s ease-in-out;
-    }
-
-    .contact .info h4 {
-      padding: 0 0 0 60px;
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 5px;
-      color: var(--dark);
-    }
-
-    .contact .info p {
-      padding: 0 0 0 60px;
-      margin-bottom: 0;
-      font-size: 14px;
-      color: var(--gray);
-    }
-
-    .contact .info .email,
-    .contact .info .phone {
-      margin-top: 40px;
-    }
-
-    .contact .info .email:hover i,
-    .contact .info .address:hover i,
-    .contact .info .phone:hover i {
-      background: var(--blue);
-      color: var(--white);
-    }
-
-    .contact .php-email-form {
-      width: 100%;
-      background: var(--white);
-    }
-
-    .contact .php-email-form .form-group {
-      padding-bottom: 8px;
-    }
-
-    .contact .php-email-form .error-message {
-      display: none;
-      color: var(--white);
-      background: #ed3c0d;
-      text-align: left;
-      padding: 15px;
-      font-weight: 600;
-    }
-
-    .contact .php-email-form .error-message br+br {
-      margin-top: 25px;
-    }
-
-    .contact .php-email-form .sent-message {
-      display: none;
-      color: var(--white);
-      background: #18d26e;
-      text-align: center;
-      padding: 15px;
-      font-weight: 600;
-    }
-
-    .contact .php-email-form .loading {
-      display: none;
-      background: var(--white);
-      text-align: center;
-      padding: 15px;
-    }
-
-    .contact .php-email-form .loading:before {
-      content: "";
-      display: inline-block;
-      border-radius: 50%;
-      width: 24px;
-      height: 24px;
-      margin: 0 10px -6px 0;
-      border: 3px solid #18d26e;
-      border-top-color: #eee;
-      animation: animate-loading 1s linear infinite;
-    }
-
-    .contact .php-email-form input,
-    .contact .php-email-form textarea,
-    .contact .php-email-form select {
-      border-radius: 4px;
-      box-shadow: none;
-      font-size: 14px;
-    }
-
-    .contact .php-email-form input:focus,
-    .contact .php-email-form textarea:focus,
-    .contact .php-email-form select:focus {
-      border-color: var(--blue);
-    }
-
-    .contact .php-email-form input,
-    .contact .php-email-form select {
-      height: 44px;
-    }
-
-    .contact .php-email-form textarea {
-      padding: 10px 12px;
-    }
-
-    .contact .php-email-form button[type=submit] {
-      background: var(--blue);
-      border: 0;
-      padding: 10px 24px;
-      color: var(--white);
-      transition: 0.4s;
-      border-radius: 4px;
-    }
-
-    .contact .php-email-form button[type=submit]:hover {
-      background: #1565c0;
-    }
-
-    /* Success Modal */
-    .confirmation-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background: var(--white);
-      padding: 30px;
-      border-radius: 8px;
-      max-width: 500px;
-      text-align: center;
-      animation: fadeIn 0.3s ease;
-    }
-
-    .modal-content h3 {
-      color: var(--blue);
-      margin-bottom: 15px;
-    }
-
-    .modal-content p {
-      margin-bottom: 20px;
-    }
-
-    .modal-close {
-      background: var(--blue);
-      color: var(--white);
-      border: none;
-      padding: 8px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .modal-close:hover {
-      background: #1565c0;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    /*--------------------------------------------------------------
-    # Footer
-    --------------------------------------------------------------*/
-    #footer {
-      background: var(--dark);
-      color: var(--white);
-      font-size: 14px;
-      text-align: center;
-      padding: 30px 0;
-    }
-
-    #footer h3 {
-      font-size: 36px;
-      font-weight: 700;
-      color: var(--white);
-      position: relative;
-      padding: 0;
-      margin: 0 0 15px 0;
-    }
-
-    #footer p {
-      font-size: 15;
-      font-style: italic;
-      padding: 0;
-      margin: 0 0 40px 0;
-    }
-
-    #footer .copyright {
-      margin: 0 0 5px 0;
-    }
-
-    #footer .credits {
-      font-size: 13px;
-    }
-
-    /*--------------------------------------------------------------
-    # Responsive Media Queries
-    --------------------------------------------------------------*/
-    @media (max-width: 768px) {
-      .navbar-mobile .dropdown .dropdown ul {
-        position: static;
-        display: none;
-        margin: 10px 20px;
-        padding: 10px 0;
-        z-index: 99;
-        opacity: 1;
-        visibility: visible;
-        background: var(--white);
-        box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
-      }
-
-      .navbar-mobile .dropdown .dropdown ul li {
-        min-width: 200px;
-      }
-
-      .navbar-mobile .dropdown .dropdown ul a {
-        padding: 10px 20px;
-      }
-
-      .navbar-mobile .dropdown .dropdown ul a i {
-        font-size: 12px;
-      }
-
-      .navbar-mobile .dropdown .dropdown ul a:hover,
-      .navbar-mobile .dropdown .dropdown ul .active:hover,
-      .navbar-mobile .dropdown .dropdown ul li:hover>a {
-        color: var(--blue);
-      }
-
-      .navbar-mobile .dropdown .dropdown>.dropdown-active {
-        display: block;
-      }
-    }
   </style>
 </head>
 
@@ -829,16 +500,15 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
       <h1 class="logo me-auto"><a href="index.html">Hetrocades</a></h1>
-
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#compliances">Labour & Industrial Compliances</a></li>
-              <li><a href="#interior-design">Interior Design Services</a></li>
+              <li><a href="#compliances">Compliances</a></li>
+              <li><a href="#interior-design">Interior Design</a></li>
               <li><a href="#investment-advisory">Investment Advisory</a></li>
-              <li><a href="#bank-loan">Bank Loan Assistance</a></li>
+              <li><a href="#bank-loan">Bank Loan</a></li>
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
@@ -846,107 +516,71 @@
           <li><a class="nav-link scrollto" href="#enquiry">Enquiry</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+      </nav>
     </div>
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
   <section id="hero">
     <div class="hero-container">
-      <h1>Your Trusted Business Solutions Partner</h1>
-      <h2>Comprehensive services tailored to your business needs</h2>
-      <a href="#enquiry" class="btn-get-started scrollto">Get Started</a>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+            <h1>Your Trusted Business Solutions Partner</h1>
+            <h2>Comprehensive services for all your business needs</h2>
+            <div class="d-flex">
+              <a href="#enquiry" class="btn-get-started scrollto">Get Started</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section><!-- End Hero -->
 
   <main id="main">
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
-      <div class="container" data-aos="fade-up">
-
+    <section id="services" class="services section-bg">
+      <div class="container">
         <div class="section-title">
           <h2>Our Services</h2>
-          <p>We offer comprehensive business solutions to help your company thrive</p>
+          <p>We offer comprehensive business solutions tailored to your specific needs</p>
         </div>
 
         <div class="row">
-          <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon-box iconbox-blue" id="compliances">
-              <div class="icon">
-                <i class="bx bxs-briefcase"></i>
-              </div>
-              <h4><a href="">Labour & Industrial Compliances</a></h4>
-              <ul class="services-list">
-                <li><i class="bx bx-check"></i> EPFO Registrations</li>
-                <li><i class="bx bx-check"></i> DSC (Digital Signature Certificates)</li>
-                <li><i class="bx bx-check"></i> eSign Activation</li>
-                <li><i class="bx bx-check"></i> Professional Tax (PT) Law</li>
-                <li><i class="bx bx-check"></i> Gratuity Law Compliance</li>
-                <li><i class="bx bx-check"></i> Employee State Insurance (ESI)</li>
-                <li><i class="bx bx-check"></i> CLRA Compliance</li>
-                <li><i class="bx bx-check"></i> Shops & Establishment Compliance</li>
-                <li><i class="bx bx-check"></i> Payroll Processing</li>
-              </ul>
-              <div class="service-highlight">
-                Comprehensive compliance solutions tailored to your business needs
-              </div>
+          <div class="col-lg-6">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-file-earmark-check"></i></div>
+              <h4 class="title"><a href="#compliances">Labour & Industrial Compliances</a></h4>
+              <p class="description">
+                EPFO Registrations, DSC, eSign Activation, Professional Tax, Gratuity Law, ESI, CLRA, S&E Compliance, Payroll Processing
+              </p>
             </div>
           </div>
-
-          <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon-box iconbox-orange" id="interior-design">
-              <div class="icon">
-                <i class="bx bxs-home"></i>
-              </div>
-              <h4><a href="">Interior Design Services</a></h4>
-              <ul class="services-list">
-                <li><i class="bx bx-check"></i> Residential Space Planning</li>
-                <li><i class="bx bx-check"></i> Commercial Interior Design</li>
-                <li><i class="bx bx-check"></i> 3D Visualization</li>
-                <li><i class="bx bx-check"></i> Material Selection Assistance</li>
-                <li><i class="bx bx-check"></i> Project Management</li>
-              </ul>
-              <div class="service-highlight">
-                Turnkey solutions from concept to execution
-              </div>
+          <div class="col-lg-6">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-house-door"></i></div>
+              <h4 class="title"><a href="#interior-design">Interior Design Services</a></h4>
+              <p class="description">
+                Residential Space Planning, Commercial Interior Design, 3D Visualization, Material Selection, Project Management
+              </p>
             </div>
           </div>
-
-          <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon-box iconbox-pink" id="investment-advisory">
-              <div class="icon">
-                <i class="bx bxs-bar-chart-alt-2"></i>
-              </div>
-              <h4><a href="">Investment Advisory Services</a></h4>
-              <ul class="services-list">
-                <li><i class="bx bx-check"></i> SEBI Registered Investment Advice</li>
-                <li><i class="bx bx-check"></i> Portfolio Management</li>
-                <li><i class="bx bx-check"></i> Retirement Planning</li>
-                <li><i class="bx bx-check"></i> Tax-Saving Investment Strategies</li>
-                <li><i class="bx bx-check"></i> Wealth Management</li>
-              </ul>
-              <div class="service-highlight">
-                Certified SEBI Advisor for personalized financial solutions
-              </div>
+          <div class="col-lg-6">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-graph-up"></i></div>
+              <h4 class="title"><a href="#investment-advisory">Investment Advisory</a></h4>
+              <p class="description">
+                SEBI Registered Advice, Portfolio Management, Retirement Planning, Tax-Saving Strategies, Wealth Management
+              </p>
             </div>
           </div>
-
-          <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="400">
-            <div class="icon-box iconbox-teal" id="bank-loan">
-              <div class="icon">
-                <i class="bx bxs-bank"></i>
-              </div>
-              <h4><a href="">Bank Loan Assistance</a></h4>
-              <ul class="services-list">
-                <li><i class="bx bx-check"></i> Home Loan Processing</li>
-                <li><i class="bx bx-check"></i> Business Loan Facilitation</li>
-                <li><i class="bx bx-check"></i> Documentation Assistance</li>
-                <li><i class="bx bx-check"></i> Loan Eligibility Assessment</li>
-                <li><i class="bx bx-check"></i> Quick Approval Process</li>
-              </ul>
-              <div class="service-highlight">
-                Fast-track processing with high approval rates
-              </div>
+          <div class="col-lg-6">
+            <div class="icon-box">
+              <div class="icon"><i class="bi bi-bank"></i></div>
+              <h4 class="title"><a href="#bank-loan">Bank Loan Assistance</a></h4>
+              <p class="description">
+                Home Loan Processing, Business Loan Facilitation, Documentation Assistance, Eligibility Assessment, Quick Approval
+              </p>
             </div>
           </div>
         </div>
@@ -955,7 +589,7 @@
 
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
-      <div class="container" data-aos="fade-up">
+      <div class="container">
         <div class="section-title">
           <h2>About Us</h2>
         </div>
@@ -974,38 +608,36 @@
     </section><!-- End About Section -->
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container" data-aos="fade-up">
+    <section id="contact" class="contact section-bg">
+      <div class="container">
         <div class="section-title">
-          <h2>Contact Us</h2>
+          <h2>Contact</h2>
         </div>
 
         <div class="row">
-          <div class="col-lg-5 d-flex align-items-stretch">
-            <div class="info">
-              <div class="address">
-                <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
-                <p>Bangalore, India</p>
-              </div>
+          <div class="col-lg-6">
+            <div class="info-box mb-4">
+              <i class="bi bi-envelope"></i>
+              <h3>Email Us</h3>
+              <p><a href="mailto:santhosh_kumar_b@icloud.com">santhosh_kumar_b@icloud.com</a></p>
+            </div>
+          </div>
 
-              <div class="email">
-                <i class="bi bi-envelope"></i>
-                <h4>Email:</h4>
-                <p>santhosh_kumar_b@icloud.com</p>
-              </div>
+          <div class="col-lg-6">
+            <div class="info-box mb-4">
+              <i class="bi bi-telephone"></i>
+              <h3>Call Us</h3>
+              <p><a href="tel:+918374500905">+91 83745 00905</a></p>
+            </div>
+          </div>
+        </div>
 
-              <div class="phone">
-                <i class="bi bi-phone"></i>
-                <h4>Call:</h4>
-                <p>+91 83745 00905</p>
-              </div>
-
-              <div class="linkedin">
-                <i class="bi bi-linkedin"></i>
-                <h4>LinkedIn:</h4>
-                <p><a href="https://www.linkedin.com/in/santhosh-kumar-bagathi-56a2b6116" target="_blank">Santhosh Kumar Bagathi</a></p>
-              </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="info-box">
+              <i class="bi bi-linkedin"></i>
+              <h3>LinkedIn</h3>
+              <p><a href="https://www.linkedin.com/in/santhosh-kumar-bagathi-56a2b6116" target="_blank">Santhosh Kumar Bagathi</a></p>
             </div>
           </div>
         </div>
@@ -1014,7 +646,7 @@
 
     <!-- ======= Enquiry Section ======= -->
     <section id="enquiry" class="enquiry">
-      <div class="container" data-aos="fade-up">
+      <div class="container">
         <div class="section-title">
           <h2>Business Enquiry</h2>
           <p>Fill out the form below and our team will get back to you shortly</p>
@@ -1052,7 +684,9 @@
               <div class="form-group mt-3">
                 <textarea class="form-control" name="message" rows="5" placeholder="Your Enquiry" required></textarea>
               </div>
-              <div class="text-center mt-3"><button type="submit">Submit Enquiry</button></div>
+              <div class="text-center mt-3">
+                <button type="submit">Submit Enquiry</button>
+              </div>
             </form>
           </div>
         </div>
@@ -1064,7 +698,7 @@
   <footer id="footer">
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Hetrocades</span></strong>. All Rights Reserved
+        &copy; 2025 <strong><span>Hetrocades</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         Your Trusted Partner for Business Solutions
@@ -1072,20 +706,86 @@
     </div>
   </footer><!-- End Footer -->
 
-  <!-- Confirmation Modal -->
-  <div id="confirmationModal" class="confirmation-modal">
-    <div class="modal-content">
-      <h3>Enquiry Submitted Successfully</h3>
-      <p>Thank you for contacting Hetrocades. We have received your enquiry and our team will get back to you within 24 hours.</p>
-      <p>For urgent matters, please call us at <a href="tel:+918374500905">+91 83745 00905</a>.</p>
-      <button class="modal-close" onclick="closeModal()">Close</button>
+  <!-- Success Modal -->
+  <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Enquiry Submitted Successfully</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Thank you for contacting Hetrocades. We have received your enquiry and our team will get back to you within 24 hours.</p>
+          <p>For urgent matters, please call us at <a href="tel:+918374500905">+91 83745 00905</a>.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Vendor JS Files -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/js/glightbox.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/isotope-layout/3.0.6/isotope.pkgd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/swiper/8.0.7/swiper-bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script>
+    // Mobile nav toggle
+    $(document).ready(function(){
+      $('.mobile-nav-toggle').click(function(){
+        $('#navbar').toggleClass('navbar-mobile');
+        $(this).toggleClass('bi-list bi-x');
+      });
+      
+      // Smooth scrolling for navigation links
+      $('a.scrollto').on('click', function(e) {
+        if (this.hash !== "") {
+          e.preventDefault();
+          var hash = this.hash;
+          $('html, body').animate({
+            scrollTop: $(hash).offset().top - 70
+          }, 800, function(){
+            window.location.hash = hash;
+          });
+        }
+      });
+      
+      // Form submission handler
+      $('.php-email-form').submit(function(e){
+        e.preventDefault();
+        var form = $(this);
+        
+        // Show loading state
+        form.find('.loading').fadeIn();
+        form.find('.error-message').fadeOut();
+        
+        // Submit form via AJAX
+        $.ajax({
+          type: form.attr('method'),
+          url: form.attr('action'),
+          data: form.serialize(),
+          dataType: 'json',
+          success: function(data) {
+            form.find('.loading').fadeOut();
+            if(data.success) {
+              form.find('.sent-message').fadeIn();
+              form.trigger('reset');
+              
+              // Show success modal
+              var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+              successModal.show();
+            } else {
+              form.find('.error-message').html(data.message).fadeIn();
+            }
+          },
+          error: function(xhr, status, error) {
+            form.find('.loading').fadeOut();
+            form.find('.error-message').html('There was an error submitting your enquiry. Please try again.').fadeIn();
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
