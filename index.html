@@ -4,11 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hetrocades - Your Trusted Business Solutions Partner</title>
-  <style>.logo {
-  height: 50px;
-  width: auto;
-  margin-right: 1rem;
-}
+  <style>
+    .logo {
+      height: 50px;
+      width: auto;
+      margin-right: 1rem;
+    }
 
     * {
       box-sizing: border-box;
@@ -344,32 +345,69 @@
     html {
       scroll-behavior: smooth;
     }
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       header {
-        justify-content: center;
+        padding: 1rem;
+        flex-direction: column;
         text-align: center;
+      }
+      header h1 {
+        margin-bottom: 0.5rem;
       }
       nav {
-        margin-top: 0.5rem;
         width: 100%;
-        flex-direction: column;
-      }
-      .services-dropdown {
-        width: 100%;
-        margin: 0.5rem 0;
-      }
-      .services-menu {
-        position: static;
-        width: 100%;
+        margin-top: 1rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
       }
       nav a, .services-toggle {
-        margin: 0.3rem 0;
-        width: 100%;
-        text-align: center;
+        margin: 0.3rem;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+      }
+      .services-dropdown {
+        margin: 0.3rem;
+      }
+      .services-menu {
+        left: 50%;
+        transform: translateX(-50%);
       }
       main {
-        margin: 1rem;
+        margin: 1rem auto;
         padding: 0 0.5rem;
+        width: 95%;
+      }
+      .tagline {
+        font-size: 1.4rem;
+        margin-bottom: 1.5rem;
+      }
+      .section-header {
+        padding: 0.8rem;
+      }
+      h2.section-title {
+        font-size: 1.2rem;
+      }
+      .section-content {
+        padding: 0 0.5rem;
+      }
+      .section-content.active {
+        padding: 0.8rem;
+      }
+      .service-category {
+        padding: 0.8rem;
+      }
+      h3.sub-service-title {
+        font-size: 1.1rem;
+      }
+      ul.services-list {
+        font-size: 1rem;
+      }
+      .contact-info {
+        font-size: 1rem;
+      }
+      form {
+        padding: 0.8rem;
       }
       .modal-content {
         width: 90%;
@@ -391,7 +429,6 @@
     <h1>Hetrocades</h1>
   </div>
   <nav>
-
     <a href="#about" class="nav-link">About</a>
     <div class="services-dropdown">
       <button class="services-toggle">Services</button>
