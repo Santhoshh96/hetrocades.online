@@ -347,6 +347,36 @@
     html {
       scroll-behavior: smooth;
     }
+    .faq-item {
+  margin-bottom: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 5px;
+}
+
+.faq-question {
+  padding: 1rem;
+  background: #f8fafc;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  color: #0d47a1;
+}
+
+.faq-toggle { transition: transform 0.3s; }
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 1rem;
+  transition: max-height 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.faq-answer.active {
+  max-height: 500px;
+  padding: 1rem;
+  animation: fadeIn 0.5s ease;
+}
     @media (max-width: 768px) {
       header {
         padding: 1rem;
@@ -574,30 +604,27 @@
       </div>
     </div>
   </section>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How long does EPFO name correction take?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Typically 5-7 working days after document submission. We expedite approvals through direct EPFO portal filings."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What's included in your ₹999/sq.ft interior package?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Includes: 3D designs, modular furniture (basic finishes), flooring, painting, and electrical fittings. Excludes appliances and civil work."
-      }
-    }
-  ]
-}
-</script>
+<section>
+  <div class="section-header" onclick="toggleSection(this)" id="faq-header">
+    <h2 class="section-title">FAQs - Clear Your Doubts</h2>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="section-content" id="faq">
+    <div class="service-category">
+      <h3 class="sub-service-title">EPF & Compliance</h3>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFAQ(this)">
+          <span>How to correct EPF account name mismatch?</span>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-answer">
+          <p>We file <strong>Form 15G/H</strong> with Aadhaar/PAN proof. Typically resolves in <strong>5-7 working days</strong>.</p>
+        </div>
+      </div>
+      <!-- Add more FAQ items here -->
+    </div>
+  </div>
+</section>
   <!-- Enquiry Section -->
   <section>
     <div class="section-header" onclick="toggleSection(this)" id="enquiry-header">
@@ -721,7 +748,19 @@
       }
     });
   });
-
+function toggleFAQ(element) {
+  const answer = element.nextElementSibling;
+  const icon = element.querySelector('.faq-toggle');
+  
+  answer.classList.toggle('active');
+  icon.textContent = answer.classList.contains('active') ? '−' : '+';
+  
+  if(answer.classList.contains('active')) {
+    answer.style.display = 'block';
+  } else {
+    setTimeout(() => answer.style.display = 'none', 500);
+  }
+}
   // Form submission handler
   document.getElementById('enquiryForm').addEventListener('submit', function(e) {
     e.preventDefault();
