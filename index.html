@@ -912,6 +912,40 @@ function toggleFAQ(element) {
     setTimeout(() => answer.style.display = 'none', 500);
   }
 }
+    function toggleFAQ(element) {
+    const answer = element.nextElementSibling;
+    const icon = element.querySelector('.faq-toggle');
+    
+    answer.classList.toggle('active');
+    icon.textContent = answer.classList.contains('active') ? '−' : '+';
+    
+    if(answer.classList.contains('active')) {
+      answer.style.display = 'block';
+    } else {
+      setTimeout(() => answer.style.display = 'none', 500);
+    }
+  }
+
+  // NEW FUNCTION ADDED HERE
+  function openServices() {
+    // Open the Services dropdown
+    document.querySelector('.services-toggle').click();
+    
+    // Scroll to services section
+    setTimeout(() => {
+      document.querySelector('#compliances-header').scrollIntoView({ 
+        behavior: 'smooth' 
+      });
+      
+      // Open first service section (Compliances)
+      setTimeout(() => {
+        document.getElementById('compliances-header').click();
+      }, 500);
+    }, 100);
+  }
+
+  // Form submission handler (existing code continues below)
+  document.getElementById('enquiryForm').addEventListener('submit', function(e) {
   // Form submission handler
   document.getElementById('enquiryForm').addEventListener('submit', function(e) {
     e.preventDefault();
