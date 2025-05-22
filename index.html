@@ -899,19 +899,6 @@
       }
     });
   });
-function toggleFAQ(element) {
-  const answer = element.nextElementSibling;
-  const icon = element.querySelector('.faq-toggle');
-  
-  answer.classList.toggle('active');
-  icon.textContent = answer.classList.contains('active') ? '−' : '+';
-  
-  if(answer.classList.contains('active')) {
-    answer.style.display = 'block';
-  } else {
-    setTimeout(() => answer.style.display = 'none', 500);
-  }
-}
     function toggleFAQ(element) {
     const answer = element.nextElementSibling;
     const icon = element.querySelector('.faq-toggle');
