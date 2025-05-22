@@ -178,14 +178,6 @@
       background: rgba(255,255,255,0.3);
     }
     /* Services Dropdown Styles */
-    .services-dropdown.active-dropdown .services-toggle {
-  background: rgba(255,255,255,0.3);
-}
-
-.services-dropdown.active-dropdown .services-menu {
-  display: block;
-  animation: fadeIn 0.3s ease;
-}
     .services-dropdown {
       position: relative;
       display: inline-block;
@@ -936,32 +928,21 @@ function toggleFAQ(element) {
 
   // NEW FUNCTION ADDED HERE
   function openServices() {
-  // Prevent default anchor behavior
-  event.preventDefault();
-  
-  // Open the Services dropdown menu
-  const dropdown = document.querySelector('.services-dropdown');
-  const menu = document.querySelector('.services-menu');
-  menu.style.display = 'block';
-  
-  // Add hover effect to show it was clicked
-  dropdown.classList.add('active-dropdown');
-  setTimeout(() => {
-    dropdown.classList.remove('active-dropdown');
-  }, 1000);
-
-  // Scroll to and open the Compliances section (first service)
-  setTimeout(() => {
-    const compliancesHeader = document.getElementById('compliances-header');
-    if (!compliancesHeader.nextElementSibling.classList.contains('active')) {
-      compliancesHeader.click();
-    }
-    compliancesHeader.scrollIntoView({ 
-      behavior: 'smooth',
-      block: 'start'
-    });
-  }, 100);
-}
+    // Open the Services dropdown
+    document.querySelector('.services-toggle').click();
+    
+    // Scroll to services section
+    setTimeout(() => {
+      document.querySelector('#compliances-header').scrollIntoView({ 
+        behavior: 'smooth' 
+      });
+      
+      // Open first service section (Compliances)
+      setTimeout(() => {
+        document.getElementById('compliances-header').click();
+      }, 500);
+    }, 100);
+  }
 
   // Form submission handler (existing code continues below)
   document.getElementById('enquiryForm').addEventListener('submit', function(e) {
