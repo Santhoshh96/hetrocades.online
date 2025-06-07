@@ -1198,21 +1198,7 @@ document.getElementById('submit-documents').addEventListener('click', function()
   <p>Your Trusted Partner for Business Solutions</p>
 </footer>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-
-  const clientCredentials = {
-    "client1": { password: "password123", name: "ABC Corporation", rating: 65 },
-    "client2": { password: "secure456", name: "XYZ Enterprises", rating: 82 }
-  };
-
-  let documentStatus = {
-    epf: { uploaded: null, status: "Pending", comments: "" },
-    esi: { uploaded: null, status: "Pending", comments: "" },
-    pt: { uploaded: null, status: "Pending", comments: "" },
-    shop: { uploaded: null, status: "Pending", comments: "" }
-  };
-
-  function toggleSection(element, smooth = true) {
+  function toggleSection(element) {
     const targetId = element.nextElementSibling.id;
     const content = element.nextElementSibling;
     const icon = element.querySelector('.toggle-icon');
@@ -1232,178 +1218,22 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    if (smooth && content.classList.contains('active')) {
-      content.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    content.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  function toggleFAQ(element) {
-    const answer = element.nextElementSibling;
-    const icon = element.querySelector('.faq-toggle');
-    answer.classList.toggle('active');
-    icon.textContent = answer.classList.contains('active') ? '−' : '+';
-    if (answer.classList.contains('active')) {
-      answer.style.display = 'block';
-    } else {
-      setTimeout(() => answer.style.display = 'none', 500);
-    }
-  }
-
-  function loadClientData(clientId) {
-    const client = clientCredentials[clientId];
-    document.getElementById('rating-value').textContent = `${client.rating}%`;
-    document.getElementById('rating-fill').style.width = `${client.rating}%`;
-    updateStatusTable();
-  }
-
-  function updateStatusTable() {
-    const tableBody = document.getElementById('status-table-body');
-    tableBody.innerHTML = '';
-    const docTypes = [
-      { id: 'epf', name: 'EPF Monthly ECRs' },
-      { id: 'esi', name: 'ESI Returns' },
-      { id: 'pt', name: 'Professional Tax' },
-      { id: 'shop', name: 'Shops & Establishment' }
-    ];
-    docTypes.forEach(doc => {
-      const row = document.createElement('tr');
-      const status = documentStatus[doc.id];
-      row.innerHTML = `
-        <td>${doc.name}</td>
-        <td>${status.uploaded || 'Not uploaded'}</td>
-        <td>${status.status}</td>
-        <td>${status.comments}</td>
-      `;
-      tableBody.appendChild(row);
-    });
-  }
-
-  // Initialize navigation
-  const currentHash = window.location.hash || '#compliances';
-  const defaultHeader = document.querySelector('.section-header');
-  if (!window.location.hash || window.location.hash === '#home') {
-    if (defaultHeader) defaultHeader.click();
-  }
-  if (window.location.hash && window.location.hash !== '#home') {
-    const targetId = window.location.hash.substring(1);
-    const header = document.getElementById(`${targetId}-header`);
-    if (header) toggleSection(header, false);
-  }
-
-  document.querySelectorAll('.nav-link').forEach(link => {
-    if (link.getAttribute('href') === currentHash) {
-      link.classList.add('active-nav');
-    }
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href').substring(1);
-      const header = document.getElementById(`${targetId}-header`);
-      document.querySelectorAll('.section-content').forEach(section => {
-        if (section.id !== targetId && section.classList.contains('active')) {
-          toggleSection(section.previousElementSibling, false);
-        }
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.section-header').forEach(header => {
+      header.addEventListener('click', function () {
+        toggleSection(this);
       });
-      if (header) {
-        const content = header.nextElementSibling;
-        if (!content.classList.contains('active')) {
-          toggleSection(header, true);
-        } else {
-          content.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }
     });
-  });
 
-  // Client login modal
-  const loginBtn = document.querySelector('.client-login-btn');
-  const loginModal = document.getElementById('clientLoginModal');
-  if (loginBtn && loginModal) {
-    loginBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      loginModal.style.display = 'flex';
-    });
-  }
-
-  const loginForm = document.getElementById('clientLoginForm');
-  if (loginForm) {
-    loginForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const clientId = document.getElementById('clientId').value;
-      const password = document.getElementById('clientPassword').value;
-      if (clientCredentials[clientId] && clientCredentials[clientId].password === password) {
-        loginModal.style.display = 'none';
-        document.getElementById('client-portal-header').click();
-        loadClientData(clientId);
-      } else {
-        document.querySelector('.login-error').style.display = 'block';
-      }
-    });
-  }
-
-  ['epf', 'esi', 'pt', 'shop'].forEach(docType => {
-    const input = document.getElementById(`${docType}-returns`) ||
-                  document.getElementById(`${docType}-ecr`) ||
-                  document.getElementById(`${docType}-license`);
-    if (input) {
-      input.addEventListener('change', function (e) {
-        const file = e.target.files[0];
-        if (file) {
-          documentStatus[docType].uploaded = new Date().toLocaleDateString();
-          documentStatus[docType].status = "Uploaded (Pending Review)";
-          document.getElementById(`${docType}-status`).textContent = `File uploaded: ${file.name}`;
-          updateStatusTable();
-        }
-      });
+    // Optionally auto-open a section
+    const defaultHeader = document.getElementById('compliances-header');
+    if (defaultHeader) {
+      toggleSection(defaultHeader);
     }
   });
-
-  const submitButton = document.getElementById('submit-documents');
-  if (submitButton) {
-    submitButton.addEventListener('click', function () {
-      alert('Documents submitted for review. Our team will verify them and update your compliance rating.');
-      Object.keys(documentStatus).forEach(key => {
-        if (documentStatus[key].status === "Uploaded (Pending Review)") {
-          documentStatus[key].status = "Under Review";
-        }
-      });
-      updateStatusTable();
-    });
-  }
-
-  const enquiryForm = document.getElementById('enquiryForm');
-  if (enquiryForm) {
-    enquiryForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      document.getElementById('confirmationModal').style.display = 'flex';
-      const formData = new FormData(this);
-      fetch(this.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(response => {
-        if (response.ok) {
-          document.getElementById('successMessage').style.display = 'block';
-          this.reset();
-        } else {
-          throw new Error('Form submission failed');
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('There was an error submitting your enquiry. Please try again or contact us directly at +91 83745 00905.');
-      });
-    });
-  }
-
-  window.onclick = function (event) {
-    const modal = document.getElementById('confirmationModal');
-    if (event.target === modal) {
-      modal.style.display = 'none';
-    }
-  };
-
-});
 </script>
 </body>
 </html>
