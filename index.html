@@ -603,6 +603,75 @@
         padding: 1rem;
       }
     }
+    /* Add to your existing styles */
+.client-login-btn {
+  background: #ffab00;
+  color: #222 !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 4px;
+  margin-right: 1rem !important;
+}
+
+.client-login-btn:hover {
+  background: #ffc400 !important;
+  text-decoration: none !important;
+}
+
+.compliance-rating {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #e3f2fd;
+  border-radius: 5px;
+}
+
+.rating-bar {
+  height: 20px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.rating-fill {
+  height: 100%;
+  background: #4caf50;
+  width: 0%;
+  transition: width 0.5s;
+}
+
+.upload-item {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px dashed #0d47a1;
+  border-radius: 5px;
+}
+
+.upload-status {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.document-status table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.document-status th, .document-status td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.document-status th {
+  background: #0d47a1;
+  color: white;
+}
+
+.document-status tr:nth-child(even) {
+  background: #f2f2f2;
+}
   </style>
 </head>
 <body>
@@ -610,6 +679,112 @@
     if (window.location.pathname === '/' && !window.location.hash) {
       window.location.href = '/#home';
     }
+    // Add to your existing JavaScript
+
+// Client credentials (in a real app, this would be server-side)
+const clientCredentials = {
+  // Format: "clientId": { password: "password", name: "Client Name", rating: 75 }
+  "client1": { password: "password123", name: "ABC Corporation", rating: 65 },
+  "client2": { password: "secure456", name: "XYZ Enterprises", rating: 82 }
+};
+
+// Document status data
+let documentStatus = {
+  epf: { uploaded: null, status: "Pending", comments: "" },
+  esi: { uploaded: null, status: "Pending", comments: "" },
+  pt: { uploaded: null, status: "Pending", comments: "" },
+  shop: { uploaded: null, status: "Pending", comments: "" }
+};
+
+// Handle client login button click
+document.querySelector('.client-login-btn').addEventListener('click', function(e) {
+  e.preventDefault();
+  document.getElementById('clientLoginModal').style.display = 'flex';
+});
+
+// Handle login form submission
+document.getElementById('clientLoginForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const clientId = document.getElementById('clientId').value;
+  const password = document.getElementById('clientPassword').value;
+  
+  if (clientCredentials[clientId] && clientCredentials[clientId].password === password) {
+    // Successful login
+    document.getElementById('clientLoginModal').style.display = 'none';
+    document.getElementById('client-portal-header').click();
+    loadClientData(clientId);
+  } else {
+    // Failed login
+    document.querySelector('.login-error').style.display = 'block';
+  }
+});
+
+// Load client data after login
+function loadClientData(clientId) {
+  const client = clientCredentials[clientId];
+  
+  // Update rating display
+  document.getElementById('rating-value').textContent = `${client.rating}%`;
+  document.getElementById('rating-fill').style.width = `${client.rating}%`;
+  
+  // Update document status table
+  updateStatusTable();
+}
+
+// Update document status table
+function updateStatusTable() {
+  const tableBody = document.getElementById('status-table-body');
+  tableBody.innerHTML = '';
+  
+  const docTypes = [
+    { id: 'epf', name: 'EPF Monthly ECRs' },
+    { id: 'esi', name: 'ESI Returns' },
+    { id: 'pt', name: 'Professional Tax' },
+    { id: 'shop', name: 'Shops & Establishment' }
+  ];
+  
+  docTypes.forEach(doc => {
+    const row = document.createElement('tr');
+    const status = documentStatus[doc.id];
+    
+    row.innerHTML = `
+      <td>${doc.name}</td>
+      <td>${status.uploaded || 'Not uploaded'}</td>
+      <td>${status.status}</td>
+      <td>${status.comments}</td>
+    `;
+    
+    tableBody.appendChild(row);
+  });
+}
+
+// Handle document uploads
+['epf', 'esi', 'pt', 'shop'].forEach(docType => {
+  document.getElementById(`${docType}-returns` || `${docType}-ecr` || `${docType}-license`).addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      documentStatus[docType].uploaded = new Date().toLocaleDateString();
+      documentStatus[docType].status = "Uploaded (Pending Review)";
+      document.getElementById(`${docType}-status`).textContent = `File uploaded: ${file.name}`;
+      updateStatusTable();
+    }
+  });
+});
+
+// Handle document submission
+document.getElementById('submit-documents').addEventListener('click', function() {
+  // In a real implementation, this would send to server
+  alert('Documents submitted for review. Our team will verify them and update your compliance rating.');
+  
+  // Update statuses to "Under Review"
+  Object.keys(documentStatus).forEach(key => {
+    if (documentStatus[key].status === "Uploaded (Pending Review)") {
+      documentStatus[key].status = "Under Review";
+    }
+  });
+  
+  updateStatusTable();
+});
   </script>
 
 <header>
@@ -618,6 +793,7 @@
     <h1>Hetrocades</h1>
   </div>
   <nav>
+    <a href="#client-login" class="nav-link client-login-btn">Client Login</a>
     <div class="services-dropdown">
       <button class="services-toggle">Services</button>
       <div class="services-menu">
@@ -653,6 +829,75 @@
   </section>
   <section id="home">
     <div class="tagline">Your Trusted Business Solutions Partner</div>
+    <!-- Add this as a new section -->
+<section>
+  <div class="section-header" onclick="toggleSection(this)" id="client-portal-header">
+    <h2 class="section-title">Client Portal</h2>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="section-content" id="client-portal">
+    <div class="service-category">
+      <h3 class="sub-service-title">Your Compliance Dashboard</h3>
+      
+      <!-- Compliance Rating Display -->
+      <div class="compliance-rating">
+        <h4>Your Current Compliance Rating: <span id="rating-value">Loading...</span></h4>
+        <div class="rating-bar">
+          <div class="rating-fill" id="rating-fill"></div>
+        </div>
+      </div>
+      
+      <!-- Document Upload Section -->
+      <div class="document-upload">
+        <h4>Upload Compliance Documents</h4>
+        
+        <div class="upload-item">
+          <label>EPF Monthly ECRs</label>
+          <input type="file" id="epf-ecr" accept=".pdf,.jpg,.png">
+          <div class="upload-status" id="epf-status"></div>
+        </div>
+        
+        <div class="upload-item">
+          <label>ESI Returns</label>
+          <input type="file" id="esi-returns" accept=".pdf,.jpg,.png">
+          <div class="upload-status" id="esi-status"></div>
+        </div>
+        
+        <div class="upload-item">
+          <label>Professional Tax (PT)</label>
+          <input type="file" id="pt-returns" accept=".pdf,.jpg,.png">
+          <div class="upload-status" id="pt-status"></div>
+        </div>
+        
+        <div class="upload-item">
+          <label>Shops & Establishment</label>
+          <input type="file" id="shop-license" accept=".pdf,.jpg,.png">
+          <div class="upload-status" id="shop-status"></div>
+        </div>
+        
+        <button id="submit-documents">Submit Documents for Review</button>
+      </div>
+      
+      <!-- Document Status Table -->
+      <div class="document-status">
+        <h4>Document Status</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Document Type</th>
+              <th>Last Uploaded</th>
+              <th>Status</th>
+              <th>Comments</th>
+            </tr>
+          </thead>
+          <tbody id="status-table-body">
+            <!-- Will be populated by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
   </section>
   <!-- Compliances Section -->
   <section>
@@ -874,6 +1119,24 @@
 </main>
 
 <!-- Confirmation Modal -->
+  <!-- Add this near the confirmation modal -->
+<div id="clientLoginModal" class="confirmation-modal">
+  <div class="modal-content">
+    <h3>Client Portal Login</h3>
+    <form id="clientLoginForm">
+      <div>
+        <label for="clientId">Client ID</label>
+        <input type="text" id="clientId" name="clientId" required>
+      </div>
+      <div>
+        <label for="clientPassword">Password</label>
+        <input type="password" id="clientPassword" name="clientPassword" required>
+      </div>
+      <button type="submit">Login</button>
+      <p class="login-error" style="color: red; display: none;">Invalid credentials</p>
+    </form>
+  </div>
+</div>
 <div id="confirmationModal" class="confirmation-modal">
   <div class="modal-content">
     <h3>Enquiry Submitted Successfully</h3>
