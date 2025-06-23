@@ -672,175 +672,509 @@
 .document-status tr:nth-child(even) {
   background: #f2f2f2;
 }
+/* Admin Portal Styles */
+#admin-portal .service-category {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.client-search input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+#clientsTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#clientsTable th, #clientsTable td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#clientsTable th {
+  background-color: #0d47a1;
+  color: white;
+}
+
+#clientsTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#clientsTable button {
+  padding: 0.3rem 0.6rem;
+  margin-right: 0.3rem;
+  background: #0d47a1;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#clientsTable button:hover {
+  background: #1565c0;
+}
+
+#accountCredentials button {
+  padding: 0.5rem 1rem;
+  background: #0d47a1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#accountCredentials button:hover {
+  background: #1565c0;
+}
+#admin-documents-content a {
+  color: #0d47a1;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+#admin-documents-content a:hover {
+  color: #1565c0;
+  text-decoration: none;
+}
+
   </style>
 </head>
 <body>
   <script>
-    if (window.location.pathname === '/' && !window.location.hash) {
-      window.location.href = '/#home';
-    }
-    // Add to your existing JavaScript
+    // Admin credentials (change these in production!)
+    const ADMIN_USERNAME = "user_hetro";
+    const ADMIN_PASSWORD = "Friends@123";
 
-// Client credentials (in a real app, this would be server-side)
-const clientCredentials = {
-  // Format: "clientId": { password: "password", name: "Client Name", rating: 75 }
-  "client1": { password: "password123", name: "ABC Corporation", rating: 65 },
-  "client2": { password: "secure456", name: "XYZ Enterprises", rating: 82 }
-};
+    // Client database (stored in localStorage)
+    let clientsDB = JSON.parse(localStorage.getItem('hetrocades_clients')) || {};
 
-// Document status data
-let documentStatus = {
-  epf: { uploaded: null, status: "Pending", comments: "" },
-  esi: { uploaded: null, status: "Pending", comments: "" },
-  pt: { uploaded: null, status: "Pending", comments: "" },
-  shop: { uploaded: null, status: "Pending", comments: "" }
-};
-
-// Handle client login button click
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelector('.client-login-btn').addEventListener('click', function(e) {
-    e.preventDefault();
-    document.getElementById('clientLoginModal').style.display = 'flex';
-  });
-
-  document.getElementById('clientLoginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const clientId = document.getElementById('clientId').value;
-    const password = document.getElementById('clientPassword').value;
-
-    if (clientCredentials[clientId] && clientCredentials[clientId].password === password) {
-      document.getElementById('clientLoginModal').style.display = 'none';
-      document.getElementById('client-portal-header').click();
-      loadClientData(clientId);
-    } else {
-      document.querySelector('.login-error').style.display = 'block';
-    }
-  });
-
-  // Upload handlers...
-  ['epf', 'esi', 'pt', 'shop'].forEach(docType => {
-    const input = document.getElementById(`${docType}-returns`) ||
-                  document.getElementById(`${docType}-ecr`) ||
-                  document.getElementById(`${docType}-license`);
-    if (input) {
-      input.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-          documentStatus[docType].uploaded = new Date().toLocaleDateString();
-          documentStatus[docType].status = "Uploaded (Pending Review)";
-          document.getElementById(`${docType}-status`).textContent = `File uploaded: ${file.name}`;
-          updateStatusTable();
+    // Demo client credentials (for testing)
+    const clientCredentials = {
+      "HET-123456": { 
+        password: "password123", 
+        name: "ABC Corporation", 
+        rating: 65,
+        locations: ["Hyderabad", "Bangalore"],
+        documents: {
+          "Hyderabad": {
+            epf: { uploaded: "2024-05-15", status: "Approved", comments: "" },
+            esi: { uploaded: null, status: "Pending", comments: "" },
+            pt: { uploaded: "2024-05-10", status: "Under Review", comments: "Need updated license copy" },
+            shop: { uploaded: null, status: "Pending", comments: "" }
+          },
+          "Bangalore": {
+            epf: { uploaded: null, status: "Pending", comments: "" },
+            esi: { uploaded: "2024-05-18", status: "Approved", comments: "" },
+            pt: { uploaded: null, status: "Pending", comments: "" },
+            shop: { uploaded: "2024-05-20", status: "Approved", comments: "" }
+          }
         }
-      });
-    }
-  });
-
-  document.getElementById('submit-documents').addEventListener('click', function() {
-    alert('Documents submitted for review. Our team will verify them and update your compliance rating.');
-
-    Object.keys(documentStatus).forEach(key => {
-      if (documentStatus[key].status === "Uploaded (Pending Review)") {
-        documentStatus[key].status = "Under Review";
+      },
+      "HET-654321": { 
+        password: "secure456", 
+        name: "XYZ Enterprises", 
+        rating: 82,
+        locations: ["Bangalore"],
+        documents: {
+          "Bangalore": {
+            epf: { uploaded: "2024-05-12", status: "Approved", comments: "" },
+            esi: { uploaded: "2024-05-12", status: "Approved", comments: "" },
+            pt: { uploaded: "2024-05-14", status: "Approved", comments: "" },
+            shop: { uploaded: "2024-05-14", status: "Approved", comments: "" }
+          }
+        }
       }
+    };
+
+    // Current logged in client
+    let currentClient = null;
+    let currentLocation = null;
+
+    // ===== ADMIN FUNCTIONS =====
+    function generateClientAccount() {
+      const companyName = document.getElementById('companyName').value;
+      const contactName = document.getElementById('contactName').value;
+      const contactEmail = document.getElementById('contactEmail').value;
+      const contactPhone = document.getElementById('contactPhone').value;
+      const locations = document.getElementById('clientLocations').value.split(',').map(loc => loc.trim());
+
+      if (!companyName || !contactName || !contactEmail) {
+        alert("Please fill all required fields");
+        return;
+      }
+
+      const clientId = 'HET-' + Math.floor(100000 + Math.random() * 900000);
+      const password = generateSecurePassword();
+
+      // Initialize documents structure for each location
+      const documents = {};
+      locations.forEach(location => {
+        documents[location] = {
+          epf: { uploaded: null, status: "Pending", comments: "" },
+          esi: { uploaded: null, status: "Pending", comments: "" },
+          pt: { uploaded: null, status: "Pending", comments: "" },
+          shop: { uploaded: null, status: "Pending", comments: "" }
+        };
+      });
+
+      // Save to database
+      clientsDB[clientId] = {
+        company: companyName,
+        contact: contactName,
+        email: contactEmail,
+        phone: contactPhone,
+        password: password,
+        status: "Active",
+        complianceRating: 0,
+        locations: locations,
+        documents: documents
+      };
+
+      // Update localStorage
+      localStorage.setItem('hetrocades_clients', JSON.stringify(clientsDB));
+
+      // Also add to clientCredentials for login
+      clientCredentials[clientId] = { 
+        password: password, 
+        name: companyName, 
+        rating: 0,
+        locations: locations,
+        documents: documents
+      };
+
+      // Show credentials
+      document.getElementById('generatedClientId').textContent = clientId;
+      document.getElementById('generatedPassword').textContent = password;
+      document.getElementById('accountCredentials').style.display = 'block';
+      loadClientsTable();
+    }
+
+    function generateSecurePassword() {
+      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$%";
+      let password = "";
+      for (let i = 0; i < 10; i++) {
+        password += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return password;
+    }
+
+    function loadClientsTable() {
+      const tableBody = document.getElementById('clientsList');
+      tableBody.innerHTML = '';
+
+      for (const clientId in clientsDB) {
+        const client = clientsDB[clientId];
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${clientId}</td>
+          <td>${client.company}</td>
+          <td>${client.contact}</td>
+          <td>${client.status}</td>
+          <td>
+            <button onclick="viewClientDetails('${clientId}')">View</button>
+            <button onclick="resetClientPassword('${clientId}')">Reset</button>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      }
+    }
+
+    function resetClientPassword(clientId) {
+      if (confirm(`Reset password for ${clientId}?`)) {
+        const newPassword = generateSecurePassword();
+        clientsDB[clientId].password = newPassword;
+        localStorage.setItem('hetrocades_clients', JSON.stringify(clientsDB));
+        alert(`New password for ${clientId}: ${newPassword}`);
+      }
+    }
+
+    function viewClientDetails(clientId) {
+      const client = clientsDB[clientId] || clientCredentials[clientId];
+      const container = document.getElementById('admin-documents-content');
+      container.innerHTML = '';
+
+      client.locations.forEach(location => {
+        const locationDocs = client.documents[location];
+        const section = document.createElement('div');
+        section.innerHTML = `
+          <h4>${location}</h4>
+          <table style="width: 100%; border: 1px solid #ccc; margin-bottom: 1rem;">
+            <thead>
+              <tr>
+                <th>Document</th>
+                <th>Last Uploaded</th>
+                <th>Status</th>
+                <th>Comments</th>
+                <th>Compliance Till</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${Object.keys(locationDocs).map(docType => {
+                const doc = locationDocs[docType];
+                return `
+                  <tr>
+                    <td>${docType.toUpperCase()}</td>
+                    <td>${doc.uploaded ? doc.uploaded : '-'}</td>
+                    <td>
+                      <select onchange="updateDocStatus('${clientId}','${location}','${docType}', this.value)">
+                        <option value="Pending" ${doc.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                        <option value="Under Review" ${doc.status === 'Under Review' ? 'selected' : ''}>Under Review</option>
+                        <option value="Approved" ${doc.status === 'Approved' ? 'selected' : ''}>Approved</option>
+                      </select>
+                    </td>
+                    <td>
+                      <input type="text" value="${doc.comments || ''}" 
+                        onchange="updateDocComments('${clientId}','${location}','${docType}', this.value)" 
+                        style="width: 150px;">
+                    </td>
+                    <td>
+                      <input type="month" value="${doc.complianceTill || ''}" 
+                        onchange="updateComplianceTill('${clientId}','${location}','${docType}', this.value)">
+                    </td>
+                    <td>
+                      ${doc.fileUrl ? `<a href="${doc.fileUrl}" target="_blank" download>Download</a>` : '-'}
+                    </td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+        `;
+        container.appendChild(section);
+      });
+
+      document.getElementById('admin-client-documents').style.display = 'block';
+    }
+
+    function updateDocStatus(clientId, location, docType, newStatus) {
+      const client = clientsDB[clientId] || clientCredentials[clientId];
+      client.documents[location][docType].status = newStatus;
+      localStorage.setItem('hetrocades_clients', JSON.stringify(clientsDB));
+    }
+
+    function updateDocComments(clientId, location, docType, newComments) {
+      const client = clientsDB[clientId] || clientCredentials[clientId];
+      client.documents[location][docType].comments = newComments;
+      localStorage.setItem('hetrocades_clients', JSON.stringify(clientsDB));
+    }
+
+    function updateComplianceTill(clientId, location, docType, newTill) {
+      const client = clientsDB[clientId] || clientCredentials[clientId];
+      client.documents[location][docType].complianceTill = newTill;
+      localStorage.setItem('hetrocades_clients', JSON.stringify(clientsDB));
+    }
+
+    // ===== CLIENT FUNCTIONS =====
+    function handleClientLogin(e) {
+      e.preventDefault();
+      const clientId = document.getElementById('clientId').value;
+      const password = document.getElementById('clientPassword').value;
+
+      // Check both demo accounts and admin-created accounts
+      if (
+        (clientCredentials[clientId] && clientCredentials[clientId].password === password) ||
+        (clientsDB[clientId] && clientsDB[clientId].password === password)
+      ) {
+        // Successful login
+        document.getElementById('clientLoginModal').style.display = 'none';
+        document.querySelector('.login-error').style.display = 'none';
+
+        // Set current client
+        currentClient = clientId;
+        
+        // Open client portal
+        const header = document.getElementById('client-portal-header');
+        const content = document.getElementById('client-portal');
+        const icon = header.querySelector('.toggle-icon');
+        content.classList.add('active');
+        icon.textContent = '−';
+
+        // Load client data
+        const clientData = clientsDB[clientId] || clientCredentials[clientId];
+        updateClientDashboard(clientData);
+      } else {
+        // Failed login
+        document.querySelector('.login-error').style.display = 'block';
+      }
+    }
+
+    function updateClientDashboard(clientData) {
+      // Update welcome message
+      document.getElementById('client-welcome').innerHTML = `
+        <h3>Welcome, ${clientData.company}</h3>
+        <p>Your current compliance rating: <strong>${clientData.rating || 0}%</strong></p>
+      `;
+      
+      // Update rating bar
+      document.getElementById('rating-value').textContent = `${clientData.rating || 0}%`;
+      document.getElementById('rating-fill').style.width = `${clientData.rating || 0}%`;
+      
+      // Populate location selector
+      const locationSelect = document.getElementById('client-location');
+      locationSelect.innerHTML = '<option value="">Select your location</option>';
+      clientData.locations.forEach(location => {
+        locationSelect.innerHTML += `<option value="${location}">${location}</option>`;
+      });
+      
+      // Show client portal content
+      document.getElementById('client-portal-content').style.display = 'block';
+    }
+
+    function selectLocation() {
+      const location = document.getElementById('client-location').value;
+      if (!location) return;
+      
+      currentLocation = location;
+      const clientData = clientsDB[currentClient] || clientCredentials[currentClient];
+      
+      // Show location-specific compliance section
+      document.getElementById('location-compliance').classList.add('active');
+      
+      // Update document status table
+      updateDocumentStatusTable(clientData.documents[location]);
+      
+      // Show location-specific document requirements
+      const requirements = document.getElementById('location-requirements');
+      requirements.innerHTML = `
+        <h4>Document Requirements for ${location}:</h4>
+        <ul>
+          <li>EPF Monthly ECRs - Must be submitted by the 15th of each month</li>
+          <li>ESI Returns - Quarterly filings required</li>
+          <li>Professional Tax (PT) - Monthly returns</li>
+          <li>Shops & Establishment - Annual renewal</li>
+        </ul>
+        ${location === 'Hyderabad' ? 
+          '<p>Note: Hyderabad requires notarized copies of all documents.</p>' : 
+          '<p>Note: Bangalore accepts digital signatures on all filings.</p>'}
+      `;
+    }
+
+    function updateDocumentStatusTable(documents) {
+      const tableBody = document.getElementById('status-table-body');
+      tableBody.innerHTML = '';
+      
+      for (const docType in documents) {
+        const doc = documents[docType];
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${docType.toUpperCase()}</td>
+          <td>${doc.uploaded || 'Not Uploaded'}</td>
+          <td>${doc.status}</td>
+          <td>${doc.comments || '-'}</td>
+        `;
+        tableBody.appendChild(row);
+      }
+    }
+
+    function submitDocuments() {
+      if (!currentClient || !currentLocation) {
+        alert("Please select your location first");
+        return;
+      }
+      
+      // In a real app, you would upload files to a server here
+      alert(`Documents submitted for ${currentLocation} location. Our team will review them shortly.`);
+      
+      // Update status (simulating upload)
+      const clientData = clientsDB[currentClient] || clientCredentials[currentClient];
+      const epfFile = document.getElementById('epf-ecr').files[0];
+      const esiFile = document.getElementById('esi-returns').files[0];
+      const ptFile = document.getElementById('pt-returns').files[0];
+      const shopFile = document.getElementById('shop-license').files[0];
+      
+      const today = new Date().toISOString().split('T')[0];
+      
+      if (epfFile) {
+        clientData.documents[currentLocation].epf.uploaded = today;
+        clientData.documents[currentLocation].epf.status = "Under Review";
+        document.getElementById('epf-status').textContent = `Uploaded: ${today} (Under Review)`;
+      }
+      
+      if (esiFile) {
+        clientData.documents[currentLocation].esi.uploaded = today;
+        clientData.documents[currentLocation].esi.status = "Under Review";
+        document.getElementById('esi-status').textContent = `Uploaded: ${today} (Under Review)`;
+      }
+      
+      if (ptFile) {
+        clientData.documents[currentLocation].pt.uploaded = today;
+        clientData.documents[currentLocation].pt.status = "Under Review";
+        document.getElementById('pt-status').textContent = `Uploaded: ${today} (Under Review)`;
+      }
+      
+      if (shopFile) {
+        clientData.documents[currentLocation].shop.uploaded = today;
+        clientData.documents[currentLocation].shop.status = "Under Review";
+        document.getElementById('shop-status').textContent = `Uploaded: ${today} (Under Review)`;
+      }
+      
+      // Update localStorage
+      localStorage.setItem('hetrocades_clients', JSON.stringify(clientsDB));
+      
+      // Refresh status table
+      updateDocumentStatusTable(clientData.documents[currentLocation]);
+    }
+
+    // ===== UI FUNCTIONS =====
+    function openClientLogin() {
+      document.getElementById('clientLoginModal').style.display = 'flex';
+      document.getElementById('clientId').focus();
+    }
+
+    function closeModal() {
+      document.getElementById('clientLoginModal').style.display = 'none';
+      document.getElementById('confirmationModal').style.display = 'none';
+    }
+
+    function toggleFAQ(element) {
+      const answer = element.nextElementSibling;
+      const toggle = element.querySelector('.faq-toggle');
+      
+      if (answer.classList.contains('active')) {
+        answer.classList.remove('active');
+        toggle.textContent = '+';
+      } else {
+        answer.classList.add('active');
+        toggle.textContent = '−';
+      }
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load existing clients
+      if (localStorage.getItem('hetrocades_clients')) {
+        clientsDB = JSON.parse(localStorage.getItem('hetrocades_clients'));
+      }
+
+      // Set up event listeners
+      document.getElementById('clientLoginForm').addEventListener('submit', handleClientLogin);
+      document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', function() {
+          toggleFAQ(this);
+        });
+      });
+
+      document.getElementById('client-location').addEventListener('change', selectLocation);
+      document.getElementById('submit-documents').addEventListener('click', submitDocuments);
     });
-
-    updateStatusTable();
-  });
-});
-
-
-// Handle login form submission
-document.getElementById('clientLoginForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const clientId = document.getElementById('clientId').value;
-  const password = document.getElementById('clientPassword').value;
-  
-  if (clientCredentials[clientId] && clientCredentials[clientId].password === password) {
-    // Successful login
-    document.getElementById('clientLoginModal').style.display = 'none';
-    document.getElementById('client-portal-header').click();
-    loadClientData(clientId);
-  } else {
-    // Failed login
-    document.querySelector('.login-error').style.display = 'block';
-  }
-});
-
-// Load client data after login
-function loadClientData(clientId) {
-  const client = clientCredentials[clientId];
-  
-  // Update rating display
-  document.getElementById('rating-value').textContent = `${client.rating}%`;
-  document.getElementById('rating-fill').style.width = `${client.rating}%`;
-  
-  // Update document status table
-  updateStatusTable();
-}
-
-// Update document status table
-function updateStatusTable() {
-  const tableBody = document.getElementById('status-table-body');
-  tableBody.innerHTML = '';
-  
-  const docTypes = [
-    { id: 'epf', name: 'EPF Monthly ECRs' },
-    { id: 'esi', name: 'ESI Returns' },
-    { id: 'pt', name: 'Professional Tax' },
-    { id: 'shop', name: 'Shops & Establishment' }
-  ];
-  
-  docTypes.forEach(doc => {
-    const row = document.createElement('tr');
-    const status = documentStatus[doc.id];
-    
-    row.innerHTML = `
-      <td>${doc.name}</td>
-      <td>${status.uploaded || 'Not uploaded'}</td>
-      <td>${status.status}</td>
-      <td>${status.comments}</td>
-    `;
-    
-    tableBody.appendChild(row);
-  });
-}
-
-// Handle document uploads
-['epf', 'esi', 'pt', 'shop'].forEach(docType => {
-  document.getElementById(`${docType}-returns` || `${docType}-ecr` || `${docType}-license`).addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    if (file) {
-      documentStatus[docType].uploaded = new Date().toLocaleDateString();
-      documentStatus[docType].status = "Uploaded (Pending Review)";
-      document.getElementById(`${docType}-status`).textContent = `File uploaded: ${file.name}`;
-      updateStatusTable();
-    }
-  });
-});
-
-// Handle document submission
-document.getElementById('submit-documents').addEventListener('click', function() {
-  // In a real implementation, this would send to server
-  alert('Documents submitted for review. Our team will verify them and update your compliance rating.');
-  
-  // Update statuses to "Under Review"
-  Object.keys(documentStatus).forEach(key => {
-    if (documentStatus[key].status === "Uploaded (Pending Review)") {
-      documentStatus[key].status = "Under Review";
-    }
-  });
-  
-  updateStatusTable();
-});
   </script>
-
 <header>
   <div style="display: flex; align-items: center;">
     <img src="images/logoo.png" alt="Hetrocades Logo" class="logo" />
     <h1>Hetrocades</h1>
   </div>
   <nav>
-    <a href="#client-login" class="nav-link client-login-btn">Client Login</a>
+    <a href="#" id="adminLoginBtn" class="nav-link">Admin Portal</a>
+    <a href="#" onclick="openClientLogin(); return false;" class="nav-link client-login-btn">Client Login</a>
     <div class="services-dropdown">
       <button class="services-toggle">Services</button>
       <div class="services-menu">
@@ -866,7 +1200,6 @@ document.getElementById('submit-documents').addEventListener('click', function()
 </div>
 
 <main>
-  <main>
   <section id="about" class="about-section">
     <div class="about-content">
       <h2>About Hetrocades</h2>
@@ -877,75 +1210,6 @@ document.getElementById('submit-documents').addEventListener('click', function()
   <section id="home">
     <div class="tagline">Your Trusted Business Solutions Partner</div>
     <!-- Add this as a new section -->
-<section>
-  <div class="section-header"  id="client-portal-header">
-    <h2 class="section-title">Client Portal</h2>
-    <span class="toggle-icon">+</span>
-  </div>
-  <div class="section-content" id="client-portal">
-    <div class="service-category">
-      <h3 class="sub-service-title">Your Compliance Dashboard</h3>
-      
-      <!-- Compliance Rating Display -->
-      <div class="compliance-rating">
-        <h4>Your Current Compliance Rating: <span id="rating-value">Loading...</span></h4>
-        <div class="rating-bar">
-          <div class="rating-fill" id="rating-fill"></div>
-        </div>
-      </div>
-      
-      <!-- Document Upload Section -->
-      <div class="document-upload">
-        <h4>Upload Compliance Documents</h4>
-        
-        <div class="upload-item">
-          <label>EPF Monthly ECRs</label>
-          <input type="file" id="epf-ecr" accept=".pdf,.jpg,.png">
-          <div class="upload-status" id="epf-status"></div>
-        </div>
-        
-        <div class="upload-item">
-          <label>ESI Returns</label>
-          <input type="file" id="esi-returns" accept=".pdf,.jpg,.png">
-          <div class="upload-status" id="esi-status"></div>
-        </div>
-        
-        <div class="upload-item">
-          <label>Professional Tax (PT)</label>
-          <input type="file" id="pt-returns" accept=".pdf,.jpg,.png">
-          <div class="upload-status" id="pt-status"></div>
-        </div>
-        
-        <div class="upload-item">
-          <label>Shops & Establishment</label>
-          <input type="file" id="shop-license" accept=".pdf,.jpg,.png">
-          <div class="upload-status" id="shop-status"></div>
-        </div>
-        
-        <button id="submit-documents">Submit Documents for Review</button>
-      </div>
-      
-      <!-- Document Status Table -->
-      <div class="document-status">
-        <h4>Document Status</h4>
-        <table>
-          <thead>
-            <tr>
-              <th>Document Type</th>
-              <th>Last Uploaded</th>
-              <th>Status</th>
-              <th>Comments</th>
-            </tr>
-          </thead>
-          <tbody id="status-table-body">
-            <!-- Will be populated by JavaScript -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</section>
-  </section>
   <!-- Compliances Section -->
   <section>
     <div class="section-header" id="compliances-header">
@@ -1057,133 +1321,249 @@ document.getElementById('submit-documents').addEventListener('click', function()
     </div>
   </section>
 <section>
-  <div class="section-header"  id="faq-header">
+  <div class="section-header" id="faq-header">
     <h2 class="section-title">FAQs - Clear Your Doubts</h2>
-    <span class="toggle-icon">+</span>
   </div>
-  <div class="section-content" id="faq">
+  <div class="section-content active" id="faq" style="max-height: none; overflow: visible; padding: 1rem;">
     <div class="service-category">
       <h3 class="sub-service-title">EPF & Compliance</h3>
       <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)">
+        <div class="faq-question">
           <span>How to correct EPF account name mismatch?</span>
-          <span class="faq-toggle">+</span>
         </div>
-        <div class="faq-answer">
+        <div class="faq-answer active" style="max-height: none; overflow: visible; padding: 1rem;">
           <p>We file <strong>Form 15G/H</strong> with Aadhaar/PAN proof. Typically resolves in <strong>5-7 working days</strong>.</p>
         </div>
       </div>
-   <h3 class="sub-service-title">EPF Timing & Process FAQs</h3>
-  
-  <!-- 1. UAN Delinking -->
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggleFAQ(this)">
-      <span> When should I delink a wrong UAN from my mobile?</span>
-      <span class="faq-toggle">+</span>
-    </div>
-    <div class="faq-answer">
-      <p><strong>Immediately</strong> if you're not receiving OTPs or see incorrect details.<br>
-      <em>Process:</em> Go to your member portal ,you could see delink option click on it and follow the next steps as suggested by portal. NOTE: D-Link will only work If you are not genuinely worked in the mentioned company or no contributions made by the employer.</p>
-    </div>
-  </div>
 
-  <!-- 2. Form 13 Transfer -->
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggleFAQ(this)">
-      <span> Best time to submit EPF Form 13 for transfer?</span>
-      <span class="faq-toggle">+</span>
-    </div>
-    <div class="faq-answer">
-      <p><strong>Within 6 months</strong> of job change.<br>
-      <em>Why?</em> Avoids interest loss and simplifies tracking.</p>
-    </div>
-  </div>
+      <h3 class="sub-service-title">EPF Timing & Process FAQs</h3>
 
-  <!-- 3. EDLI Claim -->
-  <div class="faq-item">
-    <div class="faq-question" onclick="toggleFAQ(this)">
-      <span> When to claim EDLI insurance after death?</span>
-      <span class="faq-toggle">+</span>
-    </div>
-    <div class="faq-answer">
-      <p><strong>Within 3 years</strong> of member's death.<br>
-      <em>Fast-track:</em> Weekdays 10AM-3PM have quicker approvals.</p>
-    </div>
-  </div>
-      <!-- Add more FAQ items here -->
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>When should I delink a wrong UAN from my mobile?</span>
+        </div>
+        <div class="faq-answer active" style="max-height: none; overflow: visible; padding: 1rem;">
+          <p><strong>Immediately</strong> if you're not receiving OTPs or see incorrect details.<br>
+          <em>Process:</em> Go to your member portal ,you could see delink option click on it and follow the next steps as suggested by portal. NOTE: D-Link will only work If you are not genuinely worked in the mentioned company or no contributions made by the employer.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Best time to submit EPF Form 13 for transfer?</span>
+        </div>
+        <div class="faq-answer active" style="max-height: none; overflow: visible; padding: 1rem;">
+          <p><strong>Within 6 months</strong> of job change.<br>
+          <em>Why?</em> Avoids interest loss and simplifies tracking.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>When to claim EDLI insurance after death?</span>
+        </div>
+        <div class="faq-answer active" style="max-height: none; overflow: visible; padding: 1rem;">
+          <p><strong>Within 3 years</strong> of member's death.<br>
+          <em>Fast-track:</em> Weekdays 10AM-3PM have quicker approvals.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
-  <!-- Enquiry Section -->
-  <section>
-    <div class="section-header" onclick="toggleSection(this)" id="enquiry-header">
-      <h2 class="section-title">Business Enquiry</h2>
-      <span class="toggle-icon">+</span>
+ <section>
+  <div class="section-header" id="enquiry-header">
+    <h2 class="section-title">Business Enquiry</h2>
+  </div>
+  <div class="section-content active" id="enquiry" style="max-height: none; overflow: visible; padding: 1rem;">
+    <form action="https://formsubmit.co/santhosh_kumar_b@icloud.com" method="POST" id="enquiryForm">
+      <input type="hidden" name="_subject" value="New Enquiry from Hetrocades">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://hetrocades.online/#enquiry">
+      <input type="hidden" name="_captcha" value="false">
+
+      <div>
+        <label for="name">Full Name*</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div>
+        <label for="email">Email Address*</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div>
+        <label for="phone">Contact Number*</label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+      <div>
+        <label for="service">Service Interested In*</label>
+        <select id="service" name="service" required>
+          <option value="">Select a service</option>
+          <option value="Compliances">Labour & Industrial Compliances</option>
+          <option value="Interior Design">Interior Design Services</option>
+          <option value="Investment Advisory">Investment Advisory</option>
+          <option value="Bank Loan">Bank Loan Assistance</option>
+          <option value="Other">Other Services</option>
+        </select>
+      </div>
+      <div>
+        <label for="message">Your Enquiry*</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+      </div>
+      <button type="submit">Submit Enquiry</button>
+    </form>
+
+    <div id="successMessage" class="success-message">
+      Thank you for your enquiry. We have received your details and will contact you shortly.
     </div>
-    <div class="section-content" id="enquiry">
-      <!-- FormSubmit.co Form - Replace YOUR_EMAIL below -->
-      <form action="https://formsubmit.co/santhosh_kumar_b@icloud.com" method="POST" id="enquiryForm">
-        <input type="hidden" name="_subject" value="New Enquiry from Hetrocades">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next" value="https://hetrocades.online/#enquiry">
-        <input type="hidden" name="_captcha" value="false">
+  </div>
+</section>
+<!-- Client Portal Section -->
+<section>
+  <div class="section-header" id="client-portal-header">
+    <h2 class="section-title">Client Portal</h2>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="section-content" id="client-portal">
+    <div id="client-portal-content" style="display: none;">
+      <div class="client-welcome" id="client-welcome"></div>
+      
+      <div class="compliance-rating">
+        <h4>Your Compliance Status</h4>
+        <div>
+          <span id="rating-value">0%</span>
+          <div class="rating-bar">
+            <div class="rating-fill" id="rating-fill"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="location-selector">
+        <label for="client-location">Select Location:</label>
+        <select id="client-location">
+          <option value="">Select your location</option>
+        </select>
+      </div>
+      
+      <div class="location-compliance" id="location-compliance">
+        <div class="document-requirements" id="location-requirements"></div>
         
+        <h4>Document Status</h4>
+        <div class="document-status">
+          <table>
+            <thead>
+              <tr>
+                <th>Document</th>
+                <th>Last Uploaded</th>
+                <th>Status</th>
+                <th>Comments</th>
+              </tr>
+            </thead>
+            <tbody id="status-table-body"></tbody>
+          </table>
+        </div>
+        
+        <h4 style="margin-top: 20px;">Upload Documents</h4>
+        <div class="upload-item">
+          <label>EPF Monthly ECRs</label>
+          <input type="file" id="epf-ecr">
+          <div class="upload-status" id="epf-status">Not uploaded</div>
+        </div>
+        
+        <div class="upload-item">
+          <label>ESI Returns</label>
+          <input type="file" id="esi-returns">
+          <div class="upload-status" id="esi-status">Not uploaded</div>
+        </div>
+        
+        <div class="upload-item">
+          <label>Professional Tax Returns</label>
+          <input type="file" id="pt-returns">
+          <div class="upload-status" id="pt-status">Not uploaded</div>
+        </div>
+        
+        <div class="upload-item">
+          <label>Shops & Establishment License</label>
+          <input type="file" id="shop-license">
+          <div class="upload-status" id="shop-status">Not uploaded</div>
+        </div>
+        
+        <button id="submit-documents" style="margin-top: 15px;">Submit Documents</button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<!-- Admin Portal Section -->
+<section id="admin-section" style="display: none;">
+  <div class="section-header" id="admin-portal-header">
+    <h2 class="section-title">Client Management Portal</h2>
+    <span class="toggle-icon">+</span>
+  </div>
+  <div class="section-content" id="admin-portal">
+
+ <div class="service-category">
+      <h3>Generate New Client Account</h3>
+      <form id="clientAccountForm">
         <div>
-          <label for="name">Full Name*</label>
-          <input type="text" id="name" name="name" required>
+          <label for="companyName">Company Name*</label>
+          <input type="text" id="companyName" required>
         </div>
         <div>
-          <label for="email">Email Address*</label>
-          <input type="email" id="email" name="email" required>
+          <label for="contactName">Contact Person*</label>
+          <input type="text" id="contactName" required>
         </div>
         <div>
-          <label for="phone">Contact Number*</label>
-          <input type="tel" id="phone" name="phone" required>
+          <label for="contactEmail">Email Address*</label>
+          <input type="email" id="contactEmail" required>
         </div>
         <div>
-          <label for="service">Service Interested In*</label>
-          <select id="service" name="service" required>
-            <option value="">Select a service</option>
-            <option value="Compliances">Labour & Industrial Compliances</option>
-            <option value="Interior Design">Interior Design Services</option>
-            <option value="Investment Advisory">Investment Advisory</option>
-            <option value="Bank Loan">Bank Loan Assistance</option>
-            <option value="Other">Other Services</option>
-          </select>
+          <label for="contactPhone">Phone Number</label>
+          <input type="tel" id="contactPhone">
         </div>
-        <div>
-          <label for="message">Your Enquiry*</label>
-          <textarea id="message" name="message" rows="4" required></textarea>
-        </div>
-        <button type="submit">Submit Enquiry</button>
+        <button type="button" onclick="generateClientAccount()">Generate Account</button>
       </form>
       
-      <div id="successMessage" class="success-message">
-        Thank you for your enquiry. We have received your details and will contact you shortly.
+      <div id="accountCredentials" style="display: none; margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 5px;">
+        <h4>Generated Credentials:</h4>
+        <p><strong>Client ID:</strong> <span id="generatedClientId"></span></p>
+        <p><strong>Password:</strong> <span id="generatedPassword"></span></p>
+        <div style="margin-top: 15px;">
+          <button onclick="copyCredentialsToClipboard()" style="margin-right: 10px;">Copy Credentials</button>
+          <button onclick="emailCredentials()">Email to Client</button>
+        </div>
       </div>
-    </div>
-  </section>
-</main>
-
-<!-- Confirmation Modal -->
-  <!-- Add this near the confirmation modal -->
-<div id="clientLoginModal" class="confirmation-modal">
-  <div class="modal-content">
-    <h3>Client Portal Login</h3>
-    <form id="clientLoginForm">
-      <div>
-        <label for="clientId">Client ID</label>
-        <input type="text" id="clientId" name="clientId" required>
+      
+      <h3 style="margin-top: 30px;">Existing Clients</h3>
+      <div class="client-search">
+        <input type="text" id="clientSearch" placeholder="Search clients..." oninput="filterClients()">
       </div>
-      <div>
-        <label for="clientPassword">Password</label>
-        <input type="password" id="clientPassword" name="clientPassword" required>
-      </div>
-      <button type="submit">Login</button>
-      <p class="login-error" style="color: red; display: none;">Invalid credentials</p>
-    </form>
+      <table id="clientsTable" style="width: 100%; margin-top: 10px;">
+        <thead>
+          <tr>
+            <th>Client ID</th>
+            <th>Company</th>
+            <th>Contact</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="clientsList">
+          <!-- Will be populated by JavaScript -->
+        </tbody>
+      </table>
+<!-- Client Documents & Compliance Section -->
+<div id="admin-client-documents" style="margin-top: 2rem; display: none;">
+  <h3>Client Documents & Compliance Management</h3>
+  <div id="admin-documents-content">
+    <!-- Will be filled by JavaScript -->
   </div>
 </div>
+
+    </div>
+  </div>
+</section>
+<!-- Confirmation Modal -->
+  <!-- Add this near the confirmation modal -->
+<!-- Client Login Modal -->
 <div id="confirmationModal" class="confirmation-modal">
   <div class="modal-content">
     <h3>Enquiry Submitted Successfully</h3>
@@ -1198,40 +1578,98 @@ document.getElementById('submit-documents').addEventListener('click', function()
   <p>Your Trusted Partner for Business Solutions</p>
 </footer>
 <script>
-  function toggleSection(element) {
-    const content = element.nextElementSibling;
-    const icon = element.querySelector('.toggle-icon');
+// Main toggle function for all sections
+function toggleSection(element) {
+  const content = element.nextElementSibling;
+  const icon = element.querySelector('.toggle-icon');
+  const isActive = content.classList.contains('active');
 
-    const isActive = content.classList.contains('active');
+  // Close all
+  document.querySelectorAll('.section-content').forEach(section => section.classList.remove('active'));
+  document.querySelectorAll('.toggle-icon').forEach(i => {
+    i.classList.remove('active');
+    i.textContent = '+';
+  });
 
-    // Close all sections first
-    document.querySelectorAll('.section-content').forEach(section => {
-      section.classList.remove('active');
+  // Open clicked one
+  if (!isActive) {
+    content.classList.add('active');
+    icon.classList.add('active');
+    icon.textContent = '−';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Attach toggle to all section headers
+  document.querySelectorAll('.section-header').forEach(header => {
+    header.addEventListener('click', function () {
+      toggleSection(this);
     });
-    document.querySelectorAll('.toggle-icon').forEach(i => {
-      i.classList.remove('active');
-      i.textContent = '+';
-    });
+  });
 
-    // Toggle only the clicked one
-    if (!isActive) {
+  // Optional: Open default section
+  const defaultHeader = document.getElementById('compliances-header');
+  if (defaultHeader) toggleSection(defaultHeader);
+
+  // Admin login logic
+  document.getElementById('adminLoginBtn').addEventListener('click', function (e) {
+    e.preventDefault();
+    const username = prompt("Admin Username:");
+    const password = prompt("Admin Password:");
+
+    if (username === "hetrocades_admin" && password === "Friends@123") {
+      const section = document.getElementById('admin-section');
+      const content = document.getElementById('admin-portal');
+      const header = document.getElementById('admin-portal-header');
+      const icon = header.querySelector('.toggle-icon');
+
+      section.style.display = 'block';
+
+      document.querySelectorAll('.section-content').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.toggle-icon').forEach(i => {
+        i.classList.remove('active');
+        i.textContent = '+';
+      });
+
       content.classList.add('active');
       icon.classList.add('active');
       icon.textContent = '−';
+
+      document.getElementById('adminLoginBtn').style.display = 'none';
+
+      // ✅ Call this to populate users
+      if (typeof loadClientsTable === "function") {
+        loadClientsTable();
+      } else {
+        console.warn("loadClientsTable() not defined");
+      }
+
+    } else {
+      alert("Invalid admin credentials");
     }
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.section-header').forEach(header => {
-      header.addEventListener('click', function () {
-        toggleSection(this);
-      });
-    });
-
-    // Optionally open one by default
-    const defaultHeader = document.getElementById('compliances-header');
-    if (defaultHeader) toggleSection(defaultHeader);
   });
+});
 </script>
+<!-- Client Login Modal -->
+<div id="clientLoginModal" class="confirmation-modal">
+  <div class="modal-content">
+    <h3>Client Login</h3>
+    <form id="clientLoginForm">
+      <div>
+        <label for="clientId">Client ID</label>
+        <input type="text" id="clientId" required />
+      </div>
+      <div>
+        <label for="clientPassword">Password</label>
+        <input type="password" id="clientPassword" required />
+      </div>
+      <div class="login-error" style="color: red; display: none; margin-top: 0.5rem;">
+        Invalid Client ID or Password.
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <button class="modal-close" onclick="closeModal()">Close</button>
+  </div>
+</div>
 </body>
 </html>
